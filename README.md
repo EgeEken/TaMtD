@@ -3,11 +3,11 @@ Give a VLM Model a decoder, and you'll have to sample frames for a lifetime, Tea
 
 The idea for this project is to develop a new technique for video / image comprehension for VLM's where instead of going through this process of:
 
-```Encoded media file -> Media Decoder -> Vision Encoder -> LLM -> Output```
+```Encoded media file (decodable by media decoder) -> Media Decoder -> Vision Encoder -> Encoded vision tokens (decodable by LLM Decoder) -> LLM -> Output```
 
 We can instead just teach the VLM to decode the media file itself, and do this:
 
-```Encoded media file ->       TaMtD ViT Decoder         -> LLM -> Output```
+```Encoded media file (decodable by media decoder / TaMtD decoder) ->       TaMtD ViT Decoder         -> LLM -> Output```
 
 The core idea is that compressed media files for videos and images already have a lot of structure to them hidden somewhere in their bitstream, and they are made specifically to be decoded by a decoder algorithm and maintain all semantic visual information while cutting down the bit count. Meanwhile ViT's serve the purpose of extracting semantic information from uncompressed image matrices, and that is actually a much more difficult task than simply decoding compressed media files, so if we can teach a ViT to simultaneously decode and extract semantic information from compressed media files, we can skip the decoding step entirely which saves some overhead, and if this bitstream reading can be made efficient enough through a very high rate of tokenization, we can achieve video comprehension with full frame coverage, which is something that is completely impossible with the traditional approach.
 
