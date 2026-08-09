@@ -1,0 +1,4 @@
+manifest: data/cache/cifar10_smoke/manifest.jsonl
+codec: raw_rgb
+model: histogram
+seed: 42

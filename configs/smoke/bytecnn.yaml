@@ -1,0 +1,8 @@
+manifest: data/cache/cifar10_smoke/manifest.jsonl
+codec: raw_rgb
+model: bytecnn
+seed: 42
+epochs: 3
+batch_size: 64
+max_length: 4096
+device: auto
