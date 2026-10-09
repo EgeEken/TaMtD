@@ -1,0 +1,50 @@
+{
+  "model": "bytecnn",
+  "codec": "raw_rgb",
+  "seed": 42,
+  "git_sha": "a573812edb8c0162e6e3b03ca54c12c5c67bb35a",
+  "device": "cuda",
+  "epochs": 200,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0,
+  "max_length": null,
+  "train_samples": 128,
+  "validation_samples": 128,
+  "parameter_count": 135178,
+  "best_validation_accuracy": 1.0,
+  "selected_epoch": 145,
+  "final_validation_accuracy": 0.9921875,
+  "test_loss": 0.21779827401041985,
+  "test_accuracy": 1.0,
+  "test_evaluations": 1,
+  "training_wall_time_seconds": 37.287306999991415,
+  "examples_per_second": 686.560710860827,
+  "peak_vram_mb": 131.52001953125,
+  "codec_metadata": {
+    "channels": 3,
+    "height": 32,
+    "mode": "RGB",
+    "width": 32
+  },
+  "final_train_loss": 0.16214624792337418,
+  "final_train_accuracy": 0.9609375,
+  "train_truncation": {
+    "max_length": null,
+    "truncated_samples": 0,
+    "truncation_percent": 0.0,
+    "mean_retained_fraction": 1.0
+  },
+  "test_truncation": {
+    "max_length": null,
+    "truncated_samples": 0,
+    "truncation_percent": 0.0,
+    "mean_retained_fraction": 1.0
+  },
+  "evaluation_truncation": {
+    "max_length": null,
+    "truncated_samples": 0,
+    "truncation_percent": 0.0,
+    "mean_retained_fraction": 1.0
+  }
+}

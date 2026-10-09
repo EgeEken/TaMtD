@@ -1,0 +1,82 @@
+{
+  "jpeg_q1": {
+    "codec_metadata": {
+      "format": "JPEG",
+      "optimize": false,
+      "progressive": false,
+      "quality": 1,
+      "subsampling": 2
+    },
+    "count": 11000,
+    "max_bytes": 687,
+    "mean_bytes": 654.5800909090909,
+    "mean_compression_ratio": 4.693541491469707,
+    "mean_mse": 922.7291281530207,
+    "mean_psnr_db": 18.48006130495732,
+    "median_bytes": 654.0,
+    "p95_bytes": 666.0,
+    "p99_bytes": 672.0,
+    "ratio_of_mean_bytes": 4.69308499091923,
+    "valid_jpeg_count": 11000
+  },
+  "jpeg_q60": {
+    "codec_metadata": {
+      "format": "JPEG",
+      "optimize": false,
+      "progressive": false,
+      "quality": 60,
+      "subsampling": 2
+    },
+    "count": 11000,
+    "max_bytes": 995,
+    "mean_bytes": 853.2247272727273,
+    "mean_compression_ratio": 3.609451460786177,
+    "mean_mse": 90.67613135736639,
+    "mean_psnr_db": 28.555873779311696,
+    "median_bytes": 855.0,
+    "p95_bytes": 918.0,
+    "p99_bytes": 942.0,
+    "ratio_of_mean_bytes": 3.600458240139654,
+    "valid_jpeg_count": 11000
+  },
+  "jpeg_q80": {
+    "codec_metadata": {
+      "format": "JPEG",
+      "optimize": false,
+      "progressive": false,
+      "quality": 80,
+      "subsampling": 2
+    },
+    "count": 11000,
+    "max_bytes": 1164,
+    "mean_bytes": 959.7905454545455,
+    "mean_compression_ratio": 3.2134693798370355,
+    "mean_mse": 54.960884061466565,
+    "mean_psnr_db": 30.73026651009854,
+    "median_bytes": 963.0,
+    "p95_bytes": 1051.0,
+    "p99_bytes": 1084.0,
+    "ratio_of_mean_bytes": 3.200698334182003,
+    "valid_jpeg_count": 11000
+  },
+  "jpeg_q95": {
+    "codec_metadata": {
+      "format": "JPEG",
+      "optimize": false,
+      "progressive": false,
+      "quality": 95,
+      "subsampling": 2
+    },
+    "count": 11000,
+    "max_bytes": 1638,
+    "mean_bytes": 1298.7592727272727,
+    "mean_compression_ratio": 2.3824998227753675,
+    "mean_mse": 19.488074486385692,
+    "mean_psnr_db": 35.23311429972372,
+    "median_bytes": 1307.0,
+    "p95_bytes": 1461.0,
+    "p99_bytes": 1517.0,
+    "ratio_of_mean_bytes": 2.365334411471872,
+    "valid_jpeg_count": 11000
+  }
+}
