@@ -1,0 +1,43 @@
+condition,codec_family,checkpoint,stage,available,incremental_median_ms,incremental_p95_ms,incremental_mean_ms,cumulative_median_ms,cumulative_p95_ms,full_decode_median_ms,percent_of_full_decode,representation_serialized_bytes
+pbc_compression_store,pbc,Parsed PBC instruction fields,store_body_parse,True,1.7909,4.033229999999995,2.0222633684210525,1.7909,4.033229999999995,4.6392,38.60363855837213,9997
+pbc_compression_store,pbc,Canonical PBC IR,canonical_ir_build,True,0.2553,0.70195,0.3091061052631579,2.0766,4.341889999999998,4.6392,44.76202793585101,19865
+pbc_compression_store,pbc,Patch application and RGB render,patch_application_render,True,2.1719,4.560819999999997,2.4451404210526317,4.460100000000001,8.282229999999991,4.6392,96.13942058975687,196608
+pbc_compression_store,pbc,Decoded RGB,full_store_decode,True,4.6392,9.876309999999995,5.165429052631579,4.6392,9.876309999999995,4.6392,100.0,196608
+pbc_compression_forced_lzma,pbc,Bare PBC STORE body,forced_lzma_unpack,True,0.125,0.35847999999999947,0.14362673684210528,0.125,0.35847999999999947,4.7634,2.624176008733258,3861
+pbc_compression_forced_lzma,pbc,Parsed PBC instruction fields,store_body_parse,True,1.7909,4.033229999999995,2.0222633684210525,1.8968999999999998,4.376459999999999,4.7634,39.82239576772893,9997
+pbc_compression_forced_lzma,pbc,Canonical PBC IR,canonical_ir_build,True,0.2553,0.70195,0.3091061052631579,2.225,4.594469999999999,4.7634,46.71033295545199,19865
+pbc_compression_forced_lzma,pbc,Patch application and RGB render,patch_application_render,True,2.1719,4.560819999999997,2.4451404210526317,4.5992999999999995,8.429459999999994,4.7634,96.55498173573497,196608
+pbc_compression_forced_lzma,pbc,Decoded RGB,full_lzma_decode,True,4.7634,9.068829999999991,5.208107578947368,4.7634,9.068829999999991,4.7634,100.0,196608
+pbc_balanced_store,pbc,Parsed PBC instruction fields,store_body_parse,True,3.7774,9.720129999999997,4.622591157894736,3.7774,9.720129999999997,7.337,51.48425787106447,14553
+pbc_balanced_store,pbc,Canonical PBC IR,canonical_ir_build,True,0.3504,0.8544399999999999,0.41071810526315794,4.2044,10.091849999999996,7.337,57.304075235109714,29170
+pbc_balanced_store,pbc,Patch application and RGB render,patch_application_render,True,2.1635,4.349189999999999,2.430264842105263,6.7712,12.746809999999996,7.337,92.2884012539185,196608
+pbc_balanced_store,pbc,Decoded RGB,full_store_decode,True,7.337,14.618049999999998,7.968656210526316,7.337,14.618049999999998,7.337,100.0,196608
+pbc_balanced_forced_lzma,pbc,Bare PBC STORE body,forced_lzma_unpack,True,0.2359,0.8431499999999985,0.3238442105263158,0.2359,0.8431499999999985,7.6437,3.0862017085966222,8806
+pbc_balanced_forced_lzma,pbc,Parsed PBC instruction fields,store_body_parse,True,3.7774,9.720129999999997,4.622591157894736,4.0149,10.379819999999997,7.6437,52.52560932532674,14553
+pbc_balanced_forced_lzma,pbc,Canonical PBC IR,canonical_ir_build,True,0.3504,0.8544399999999999,0.41071810526315794,4.4348,10.753859999999996,7.6437,58.01902220128996,29170
+pbc_balanced_forced_lzma,pbc,Patch application and RGB render,patch_application_render,True,2.1635,4.349189999999999,2.430264842105263,7.012499999999999,13.370919999999996,7.6437,91.74221908238155,196608
+pbc_balanced_forced_lzma,pbc,Decoded RGB,full_lzma_decode,True,7.6437,14.498519999999985,8.412839157894737,7.6437,14.498519999999985,7.6437,100.0,196608
+pbc_quality_store,pbc,Parsed PBC instruction fields,store_body_parse,True,8.2662,16.25262,8.967539578947369,8.2662,16.25262,11.9363,69.25261596977288,24114
+pbc_quality_store,pbc,Canonical PBC IR,canonical_ir_build,True,0.4653,1.0649799999999985,0.5214673684210527,8.7431,17.10565,11.9363,73.24799142112715,48426
+pbc_quality_store,pbc,Patch application and RGB render,patch_application_render,True,2.0632,4.535679999999999,2.371315157894737,11.0235,19.86966,11.9363,92.352739123514,196608
+pbc_quality_store,pbc,Decoded RGB,full_store_decode,True,11.9363,21.68621,12.65301705263158,11.9363,21.68621,11.9363,100.0,196608
+pbc_quality_forced_lzma,pbc,Bare PBC STORE body,forced_lzma_unpack,True,0.6286,1.6162699999999999,0.7389471578947369,0.6286,1.6162699999999999,12.3909,5.07307782324125,23891
+pbc_quality_forced_lzma,pbc,Parsed PBC instruction fields,store_body_parse,True,8.2662,16.25262,8.967539578947369,8.9673,17.506929999999986,12.3909,72.37004575938793,24114
+pbc_quality_forced_lzma,pbc,Canonical PBC IR,canonical_ir_build,True,0.4653,1.0649799999999985,0.5214673684210527,9.4116,18.312019999999976,12.3909,75.95574171367697,48426
+pbc_quality_forced_lzma,pbc,Patch application and RGB render,patch_application_render,True,2.0632,4.535679999999999,2.371315157894737,11.5782,21.293769999999995,12.3909,93.4411543955645,196608
+pbc_quality_forced_lzma,pbc,Decoded RGB,full_lzma_decode,True,12.3909,22.618719999999986,13.375374736842105,12.3909,22.618719999999986,12.3909,100.0,196608
+jpeg_q1,jpeg,JPEG quantized DCT coefficients,jpeg_file_to_coefficients,True,0.3381,0.7829699999999996,0.4114227368421053,0.3381,0.7829699999999996,0.3737,90.47364195879048,3150
+jpeg_q1,jpeg,RGB reconstruction from coefficients,jpeg_coefficients_to_rgb,False,,,,,,0.3737,,
+jpeg_q1,jpeg,Decoded RGB,jpeg_full_rgb_decode,True,0.3737,0.73242,0.4163667368421053,0.3737,0.73242,0.3737,100.0,196608
+jpeg_q5,jpeg,JPEG quantized DCT coefficients,jpeg_file_to_coefficients,True,0.3512,0.7594099999999999,0.415404,0.3512,0.7594099999999999,0.388,90.51546391752578,4139
+jpeg_q5,jpeg,RGB reconstruction from coefficients,jpeg_coefficients_to_rgb,False,,,,,,0.388,,
+jpeg_q5,jpeg,Decoded RGB,jpeg_full_rgb_decode,True,0.388,0.7898599999999999,0.45238526315789473,0.388,0.7898599999999999,0.388,100.0,196608
+jpeg_q10,jpeg,JPEG quantized DCT coefficients,jpeg_file_to_coefficients,True,0.3571,0.8073199999999997,0.42701852631578946,0.3571,0.8073199999999997,0.3973,89.8817014850239,5872
+jpeg_q10,jpeg,RGB reconstruction from coefficients,jpeg_coefficients_to_rgb,False,,,,,,0.3973,,
+jpeg_q10,jpeg,Decoded RGB,jpeg_full_rgb_decode,True,0.3973,0.7810699999999999,0.44963073684210525,0.3973,0.7810699999999999,0.3973,100.0,196608
+jpeg_q60,jpeg,JPEG quantized DCT coefficients,jpeg_file_to_coefficients,True,0.4032,0.9242299999999998,0.47131915789473683,0.4032,0.9242299999999998,0.4422,91.18046132971507,15602
+jpeg_q60,jpeg,RGB reconstruction from coefficients,jpeg_coefficients_to_rgb,False,,,,,,0.4422,,
+jpeg_q60,jpeg,Decoded RGB,jpeg_full_rgb_decode,True,0.4422,0.8619799999999997,0.5034745263157895,0.4422,0.8619799999999997,0.4422,100.0,196608
+jpeg_q80,jpeg,JPEG quantized DCT coefficients,jpeg_file_to_coefficients,True,0.446,0.8873899999999995,0.5032831578947368,0.446,0.8873899999999995,0.4741,94.07298038388525,21436
+jpeg_q80,jpeg,RGB reconstruction from coefficients,jpeg_coefficients_to_rgb,False,,,,,,0.4741,,
+jpeg_q80,jpeg,Decoded RGB,jpeg_full_rgb_decode,True,0.4741,0.9562999999999999,0.5467250526315789,0.4741,0.9562999999999999,0.4741,100.0,196608

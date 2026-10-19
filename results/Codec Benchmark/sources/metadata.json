@@ -1,0 +1,28 @@
+{
+  "crop_resize": "EXIF transpose, center crop, Pillow BICUBIC fit, centering=(0.5, 0.5)",
+  "dataset": "local PBC training_set natural-image calibration set",
+  "excluded_filenames": [
+    "googlewiki.png",
+    "mario64.png",
+    "monet.jpg",
+    "monkey.png",
+    "ratedistortion.png"
+  ],
+  "image_count": 95,
+  "output_mode": "RGB",
+  "output_size": [
+    256,
+    256
+  ],
+  "pillow_version": "11.3.0",
+  "requested_limit": 100,
+  "selection": "lexicographically sorted relative paths (casefold, then exact); exclude listed filenames, then take first --limit files",
+  "source_images_are_lossless_png_copies_of_preprocessed_pixels": true,
+  "source_manifest": "manifest.jsonl",
+  "source_root": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\Image Processing\\Probabilistic Brush Compression\\New Demo\\HF Space\\PBC\\training_set",
+  "supported_extensions": [
+    ".jpg",
+    ".jpeg",
+    ".png"
+  ]
+}

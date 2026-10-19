@@ -12,4 +12,8 @@ __pycache__/
 data/cache/
 data/raw/
 results/raw/
+results/Codec Benchmark/decoded_previews/
+results/Codec Benchmark/smoke/
+results/Codec Benchmark/sources/*.png
+results/Codec Benchmark/visual_comparison_grid.png
 *.pt

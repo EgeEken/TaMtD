@@ -5,7 +5,6 @@ import math
 import os
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -33,7 +32,7 @@ def resolve_pbc_root(pbc_root: str | os.PathLike[str] | None = None) -> Path:
 
 def _load_pbc(pbc_root: Path):
     if "NUMBA_CACHE_DIR" not in os.environ:
-        cache_dir = Path(tempfile.gettempdir()) / "tamtd-numba-cache"
+        cache_dir = Path(__file__).resolve().parents[3] / "data" / "cache" / "tamtd-numba-cache"
         cache_dir.mkdir(parents=True, exist_ok=True)
         os.environ["NUMBA_CACHE_DIR"] = str(cache_dir)
     if str(pbc_root) not in sys.path:
@@ -56,40 +55,54 @@ def _git_state(root: Path) -> dict[str, Any]:
         "pbc_git_branch": None,
         "pbc_worktree_dirty": None,
         "pbc_status_check_timed_out": False,
+        "pbc_status_error": None,
     }
+    git_dir = root / ".git"
     try:
+        git = ["git", "-c", "safe.directory=*", "--git-dir", str(git_dir), "--work-tree", str(root)]
         sha = subprocess.run(
-            ["git", "-c", "safe.directory=*", "-C", str(root), "rev-parse", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=True,
+            [*git, "rev-parse", "HEAD"], capture_output=True, text=True, check=True
         )
         branch = subprocess.run(
-            ["git", "-c", "safe.directory=*", "-C", str(root), "branch", "--show-current"],
-            capture_output=True,
-            text=True,
-            check=True,
+            [*git, "branch", "--show-current"], capture_output=True, text=True, check=True
         )
-        status = subprocess.run(
-            ["git", "-c", "safe.directory=*", "-C", str(root), "status", "--porcelain"],
-            capture_output=True,
-            text=True,
-            check=True,
-            timeout=5,
-        )
-    except subprocess.TimeoutExpired:
-        state["pbc_worktree_dirty"] = True
-        state["pbc_status_check_timed_out"] = True
-        return state
     except (OSError, subprocess.CalledProcessError):
         return state
     state.update(
         {
             "pbc_git_sha": sha.stdout.strip() or None,
             "pbc_git_branch": branch.stdout.strip() or None,
-            "pbc_worktree_dirty": bool(status.stdout.strip()),
         }
     )
+    try:
+        status = subprocess.run(
+            [*git, "status", "--porcelain"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        )
+        state["pbc_worktree_dirty"] = bool(status.stdout.strip())
+    except subprocess.TimeoutExpired:
+        state["pbc_worktree_dirty"] = True
+        state["pbc_status_check_timed_out"] = True
+    except (OSError, subprocess.CalledProcessError) as error:
+        state["pbc_status_error"] = (
+            error.stderr.strip() if isinstance(error, subprocess.CalledProcessError) else str(error)
+        )
+        try:
+            untracked = subprocess.run(
+                ["git", "ls-files", "--others", "--exclude-standard"],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                check=True,
+                timeout=10,
+            )
+            if untracked.stdout.strip():
+                state["pbc_worktree_dirty"] = True
+        except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            pass
     return state
 
 
@@ -187,6 +200,66 @@ class PBCCodecPair:
                 filters=self.pbc_class._LZMA_FILTERS,
             )
         raise ValueError(f"unknown PBC entropy method {method}")
+
+    def decode(self, data: bytes) -> Image.Image:
+        return self.pbc_class.decompress(data).image.convert("RGB")
+
+
+class PBCStandardCodec(CodecAdapter):
+    def __init__(
+        self,
+        pbc_root: str | os.PathLike[str] | None = None,
+        preset: str = "balanced",
+        config: dict[str, Any] | None = None,
+    ) -> None:
+        self.pbc_root = resolve_pbc_root(pbc_root)
+        self.pbc_class, self.config_class = _load_pbc(self.pbc_root)
+        preset_factory = getattr(self.config_class, preset, None)
+        if not callable(preset_factory):
+            raise ValueError(f"unknown PBC preset: {preset}")
+        defaults = dict(preset_factory().__dict__)
+        if defaults.get("learned_filler_model_path"):
+            defaults["learned_filler_model_path"] = str(
+                (self.pbc_root / defaults["learned_filler_model_path"]).resolve()
+            )
+        self.preset = preset
+        self.config_values = {**defaults, **(config or {})}
+        if self.config_values.get("learned_filler_model_path"):
+            model_path = Path(self.config_values["learned_filler_model_path"])
+            if not model_path.is_absolute():
+                self.config_values["learned_filler_model_path"] = str(
+                    (self.pbc_root / model_path).resolve()
+                )
+        self.git_state = _git_state(self.pbc_root)
+        self.name = f"pbc_{preset}"
+
+    def encode(self, image: Image.Image) -> EncodedSample:
+        result = self.pbc_class.compress(
+            image.convert("RGB"), config=self.config_class(**self.config_values)
+        )
+        data = bytes(result.data)
+        if data[:4] != self.pbc_class.MAGIC or len(data) < 6:
+            raise ValueError("PBC3 returned an invalid framed stream")
+        mse = None if result.mse is None else float(result.mse)
+        psnr = None if mse is None else (
+            float("inf") if mse == 0 else 10.0 * math.log10((255.0**2) / mse)
+        )
+        entropy = data[5]
+        return EncodedSample(
+            data,
+            self.name,
+            {
+                **self.git_state,
+                "codec_family": "pbc",
+                "format": "PBC3",
+                "pbc_preset": self.preset,
+                "pbc_config": dict(self.config_values),
+                "pbc_outer_lzma_enabled": bool(self.config_values.get("use_lzma", False)),
+                "pbc_entropy_mode": "lzma" if entropy == self.pbc_class.ENTROPY_LZMA else "store",
+                "pbc_mse": mse,
+                "pbc_psnr_db": psnr,
+            },
+        )
 
     def decode(self, data: bytes) -> Image.Image:
         return self.pbc_class.decompress(data).image.convert("RGB")

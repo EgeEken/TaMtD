@@ -27,6 +27,7 @@ class JPEGCodec(CodecAdapter):
             data,
             self.name,
             {
+                "codec_family": "jpeg",
                 "format": "JPEG",
                 "quality": self.quality,
                 "progressive": False,

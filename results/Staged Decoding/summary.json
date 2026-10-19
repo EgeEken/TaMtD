@@ -1,0 +1,1339 @@
+{
+  "conditions": [
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_compression_store",
+      "entropy_mode": "store",
+      "full_decode_ms": {
+        "mean": 5.165429052631579,
+        "median": 4.6392,
+        "p95": 9.876309999999995
+      },
+      "full_decode_stage": "full_store_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "compression",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 4441.757894736842,
+          "median": 3867.0
+        },
+        "representation_array_bytes": {
+          "mean": 43973.55789473684,
+          "median": 39656.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 5093.4631578947365,
+          "median": 4366.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 21804.23157894737,
+          "median": 19865.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.3091061052631579,
+          "median": 0.2553,
+          "p95": 0.70195
+        },
+        "canonical_ir_serialize": {
+          "mean": 10.968466736842105,
+          "median": 7.8728,
+          "p95": 27.30596
+        },
+        "full_store_decode": {
+          "mean": 5.165429052631579,
+          "median": 4.6392,
+          "p95": 9.876309999999995
+        },
+        "patch_application_render": {
+          "mean": 2.4451404210526317,
+          "median": 2.1719,
+          "p95": 4.560819999999997
+        },
+        "store_body_parse": {
+          "mean": 2.0222633684210525,
+          "median": 1.7909,
+          "p95": 4.033229999999995
+        }
+      }
+    },
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "entropy_mode": "forced_lzma",
+      "full_decode_ms": {
+        "mean": 5.208107578947368,
+        "median": 4.7634,
+        "p95": 9.068829999999991
+      },
+      "full_decode_stage": "full_lzma_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "compression",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 3436.7157894736843,
+          "median": 2975.0
+        },
+        "representation_array_bytes": {
+          "mean": 43973.55789473684,
+          "median": 39656.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 5093.4631578947365,
+          "median": 4366.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 21804.23157894737,
+          "median": 19865.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.3091061052631579,
+          "median": 0.2553,
+          "p95": 0.70195
+        },
+        "canonical_ir_serialize": {
+          "mean": 10.968466736842105,
+          "median": 7.8728,
+          "p95": 27.30596
+        },
+        "forced_lzma_unpack": {
+          "mean": 0.14362673684210528,
+          "median": 0.125,
+          "p95": 0.35847999999999947
+        },
+        "full_lzma_decode": {
+          "mean": 5.208107578947368,
+          "median": 4.7634,
+          "p95": 9.068829999999991
+        },
+        "patch_application_render": {
+          "mean": 2.4451404210526317,
+          "median": 2.1719,
+          "p95": 4.560819999999997
+        },
+        "store_body_parse": {
+          "mean": 2.0222633684210525,
+          "median": 1.7909,
+          "p95": 4.033229999999995
+        }
+      }
+    },
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_store",
+      "entropy_mode": "store",
+      "full_decode_ms": {
+        "mean": 7.968656210526316,
+        "median": 7.337,
+        "p95": 14.618049999999998
+      },
+      "full_decode_stage": "full_store_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "balanced",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 10609.578947368422,
+          "median": 8812.0
+        },
+        "representation_array_bytes": {
+          "mean": 104334.44210526315,
+          "median": 85924.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 6249.757894736842,
+          "median": 5521.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 33777.347368421055,
+          "median": 29170.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.41071810526315794,
+          "median": 0.3504,
+          "p95": 0.8544399999999999
+        },
+        "canonical_ir_serialize": {
+          "mean": 33.86926484210526,
+          "median": 19.8727,
+          "p95": 124.09298999999984
+        },
+        "full_store_decode": {
+          "mean": 7.968656210526316,
+          "median": 7.337,
+          "p95": 14.618049999999998
+        },
+        "patch_application_render": {
+          "mean": 2.430264842105263,
+          "median": 2.1635,
+          "p95": 4.349189999999999
+        },
+        "store_body_parse": {
+          "mean": 4.622591157894736,
+          "median": 3.7774,
+          "p95": 9.720129999999997
+        }
+      }
+    },
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "entropy_mode": "forced_lzma",
+      "full_decode_ms": {
+        "mean": 8.412839157894737,
+        "median": 7.6437,
+        "p95": 14.498519999999985
+      },
+      "full_decode_stage": "full_lzma_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "balanced",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 6917.2947368421055,
+          "median": 5198.0
+        },
+        "representation_array_bytes": {
+          "mean": 104334.44210526315,
+          "median": 85924.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 6249.757894736842,
+          "median": 5521.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 33777.347368421055,
+          "median": 29170.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.41071810526315794,
+          "median": 0.3504,
+          "p95": 0.8544399999999999
+        },
+        "canonical_ir_serialize": {
+          "mean": 33.86926484210526,
+          "median": 19.8727,
+          "p95": 124.09298999999984
+        },
+        "forced_lzma_unpack": {
+          "mean": 0.3238442105263158,
+          "median": 0.2359,
+          "p95": 0.8431499999999985
+        },
+        "full_lzma_decode": {
+          "mean": 8.412839157894737,
+          "median": 7.6437,
+          "p95": 14.498519999999985
+        },
+        "patch_application_render": {
+          "mean": 2.430264842105263,
+          "median": 2.1635,
+          "p95": 4.349189999999999
+        },
+        "store_body_parse": {
+          "mean": 4.622591157894736,
+          "median": 3.7774,
+          "p95": 9.720129999999997
+        }
+      }
+    },
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_quality_store",
+      "entropy_mode": "store",
+      "full_decode_ms": {
+        "mean": 12.65301705263158,
+        "median": 11.9363,
+        "p95": 21.68621
+      },
+      "full_decode_stage": "full_store_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "quality",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 25637.673684210527,
+          "median": 23897.0
+        },
+        "representation_array_bytes": {
+          "mean": 204134.27368421052,
+          "median": 186656.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 7104.58947368421,
+          "median": 6116.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 55447.768421052635,
+          "median": 48426.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.5214673684210527,
+          "median": 0.4653,
+          "p95": 1.0649799999999985
+        },
+        "canonical_ir_serialize": {
+          "mean": 73.40993747368421,
+          "median": 60.6121,
+          "p95": 159.46248
+        },
+        "full_store_decode": {
+          "mean": 12.65301705263158,
+          "median": 11.9363,
+          "p95": 21.68621
+        },
+        "patch_application_render": {
+          "mean": 2.371315157894737,
+          "median": 2.0632,
+          "p95": 4.535679999999999
+        },
+        "store_body_parse": {
+          "mean": 8.967539578947369,
+          "median": 8.2662,
+          "p95": 16.25262
+        }
+      }
+    },
+    {
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "entropy_mode": "forced_lzma",
+      "full_decode_ms": {
+        "mean": 13.375374736842105,
+        "median": 12.3909,
+        "p95": 22.618719999999986
+      },
+      "full_decode_stage": "full_lzma_decode",
+      "jpeg_quality": null,
+      "pbc_preset": "quality",
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 15639.01052631579,
+          "median": 13752.0
+        },
+        "representation_array_bytes": {
+          "mean": 204134.27368421052,
+          "median": 186656.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 7104.58947368421,
+          "median": 6116.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 55447.768421052635,
+          "median": 48426.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "canonical_ir_build": {
+          "mean": 0.5214673684210527,
+          "median": 0.4653,
+          "p95": 1.0649799999999985
+        },
+        "canonical_ir_serialize": {
+          "mean": 73.40993747368421,
+          "median": 60.6121,
+          "p95": 159.46248
+        },
+        "forced_lzma_unpack": {
+          "mean": 0.7389471578947369,
+          "median": 0.6286,
+          "p95": 1.6162699999999999
+        },
+        "full_lzma_decode": {
+          "mean": 13.375374736842105,
+          "median": 12.3909,
+          "p95": 22.618719999999986
+        },
+        "patch_application_render": {
+          "mean": 2.371315157894737,
+          "median": 2.0632,
+          "p95": 4.535679999999999
+        },
+        "store_body_parse": {
+          "mean": 8.967539578947369,
+          "median": 8.2662,
+          "p95": 16.25262
+        }
+      }
+    },
+    {
+      "codec_family": "jpeg",
+      "condition": "jpeg_q1",
+      "entropy_mode": null,
+      "full_decode_ms": {
+        "mean": 0.4163667368421053,
+        "median": 0.3737,
+        "p95": 0.73242
+      },
+      "full_decode_stage": "jpeg_full_rgb_decode",
+      "jpeg_quality": 1,
+      "pbc_preset": null,
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 1911.0315789473684,
+          "median": 1866.0
+        },
+        "representation_array_bytes": {
+          "mean": 196864.0,
+          "median": 196864.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 1848.0,
+          "median": 1848.0
+        },
+        "representation_native_array_bytes": {
+          "mean": 393728.0,
+          "median": 393728.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 3246.978947368421,
+          "median": 3150.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "jpeg_canonical_ir_build": {
+          "mean": 0.07714673684210527,
+          "median": 0.0708,
+          "p95": 0.14754999999999993
+        },
+        "jpeg_file_to_coefficients": {
+          "mean": 0.4114227368421053,
+          "median": 0.3381,
+          "p95": 0.7829699999999996
+        },
+        "jpeg_full_rgb_decode": {
+          "mean": 0.4163667368421053,
+          "median": 0.3737,
+          "p95": 0.73242
+        },
+        "jpeg_ir_serialize": {
+          "mean": 4.110008210526316,
+          "median": 3.8173,
+          "p95": 6.931769999999999
+        }
+      }
+    },
+    {
+      "codec_family": "jpeg",
+      "condition": "jpeg_q5",
+      "entropy_mode": null,
+      "full_decode_ms": {
+        "mean": 0.45238526315789473,
+        "median": 0.388,
+        "p95": 0.7898599999999999
+      },
+      "full_decode_stage": "jpeg_full_rgb_decode",
+      "jpeg_quality": 5,
+      "pbc_preset": null,
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 2276.0526315789475,
+          "median": 2215.0
+        },
+        "representation_array_bytes": {
+          "mean": 196864.0,
+          "median": 196864.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 1848.0,
+          "median": 1848.0
+        },
+        "representation_native_array_bytes": {
+          "mean": 393728.0,
+          "median": 393728.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 4284.38947368421,
+          "median": 4139.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "jpeg_canonical_ir_build": {
+          "mean": 0.07930126315789474,
+          "median": 0.0707,
+          "p95": 0.1628799999999997
+        },
+        "jpeg_file_to_coefficients": {
+          "mean": 0.415404,
+          "median": 0.3512,
+          "p95": 0.7594099999999999
+        },
+        "jpeg_full_rgb_decode": {
+          "mean": 0.45238526315789473,
+          "median": 0.388,
+          "p95": 0.7898599999999999
+        },
+        "jpeg_ir_serialize": {
+          "mean": 5.881726105263158,
+          "median": 5.5875,
+          "p95": 10.106979999999998
+        }
+      }
+    },
+    {
+      "codec_family": "jpeg",
+      "condition": "jpeg_q10",
+      "entropy_mode": null,
+      "full_decode_ms": {
+        "mean": 0.44963073684210525,
+        "median": 0.3973,
+        "p95": 0.7810699999999999
+      },
+      "full_decode_stage": "jpeg_full_rgb_decode",
+      "jpeg_quality": 10,
+      "pbc_preset": null,
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 3034.442105263158,
+          "median": 2919.0
+        },
+        "representation_array_bytes": {
+          "mean": 196864.0,
+          "median": 196864.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 1849.0,
+          "median": 1849.0
+        },
+        "representation_native_array_bytes": {
+          "mean": 393728.0,
+          "median": 393728.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 6113.8,
+          "median": 5872.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "jpeg_canonical_ir_build": {
+          "mean": 0.08276463157894737,
+          "median": 0.0714,
+          "p95": 0.17848999999999998
+        },
+        "jpeg_file_to_coefficients": {
+          "mean": 0.42701852631578946,
+          "median": 0.3571,
+          "p95": 0.8073199999999997
+        },
+        "jpeg_full_rgb_decode": {
+          "mean": 0.44963073684210525,
+          "median": 0.3973,
+          "p95": 0.7810699999999999
+        },
+        "jpeg_ir_serialize": {
+          "mean": 8.894313894736843,
+          "median": 8.0693,
+          "p95": 15.810589999999985
+        }
+      }
+    },
+    {
+      "codec_family": "jpeg",
+      "condition": "jpeg_q60",
+      "entropy_mode": null,
+      "full_decode_ms": {
+        "mean": 0.5034745263157895,
+        "median": 0.4422,
+        "p95": 0.8619799999999997
+      },
+      "full_decode_stage": "jpeg_full_rgb_decode",
+      "jpeg_quality": 60,
+      "pbc_preset": null,
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 8042.8421052631575,
+          "median": 7785.0
+        },
+        "representation_array_bytes": {
+          "mean": 196864.0,
+          "median": 196864.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 1849.0,
+          "median": 1849.0
+        },
+        "representation_native_array_bytes": {
+          "mean": 393728.0,
+          "median": 393728.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 15578.6,
+          "median": 15602.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "jpeg_canonical_ir_build": {
+          "mean": 0.08313663157894736,
+          "median": 0.0709,
+          "p95": 0.20013999999999987
+        },
+        "jpeg_file_to_coefficients": {
+          "mean": 0.47131915789473683,
+          "median": 0.4032,
+          "p95": 0.9242299999999998
+        },
+        "jpeg_full_rgb_decode": {
+          "mean": 0.5034745263157895,
+          "median": 0.4422,
+          "p95": 0.8619799999999997
+        },
+        "jpeg_ir_serialize": {
+          "mean": 23.921214105263157,
+          "median": 22.3099,
+          "p95": 45.62064999999999
+        }
+      }
+    },
+    {
+      "codec_family": "jpeg",
+      "condition": "jpeg_q80",
+      "entropy_mode": null,
+      "full_decode_ms": {
+        "mean": 0.5467250526315789,
+        "median": 0.4741,
+        "p95": 0.9562999999999999
+      },
+      "full_decode_stage": "jpeg_full_rgb_decode",
+      "jpeg_quality": 80,
+      "pbc_preset": null,
+      "sample_count": 95,
+      "size_bytes": {
+        "encoded_bytes": {
+          "mean": 11717.189473684211,
+          "median": 11461.0
+        },
+        "representation_array_bytes": {
+          "mean": 196864.0,
+          "median": 196864.0
+        },
+        "representation_metadata_bytes": {
+          "mean": 1849.0,
+          "median": 1849.0
+        },
+        "representation_native_array_bytes": {
+          "mean": 393728.0,
+          "median": 393728.0
+        },
+        "representation_serialized_bytes": {
+          "mean": 21428.242105263158,
+          "median": 21436.0
+        },
+        "rgb_bytes": {
+          "mean": 196608.0,
+          "median": 196608.0
+        }
+      },
+      "stage_timings_ms": {
+        "jpeg_canonical_ir_build": {
+          "mean": 0.08430042105263157,
+          "median": 0.0721,
+          "p95": 0.17415999999999995
+        },
+        "jpeg_file_to_coefficients": {
+          "mean": 0.5032831578947368,
+          "median": 0.446,
+          "p95": 0.8873899999999995
+        },
+        "jpeg_full_rgb_decode": {
+          "mean": 0.5467250526315789,
+          "median": 0.4741,
+          "p95": 0.9562999999999999
+        },
+        "jpeg_ir_serialize": {
+          "mean": 33.13591347368421,
+          "median": 30.9357,
+          "p95": 66.50606999999997
+        }
+      }
+    }
+  ],
+  "stages": [
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_store",
+      "cumulative_median_ms": 1.7909,
+      "cumulative_p95_ms": 4.033229999999995,
+      "full_decode_median_ms": 4.6392,
+      "incremental_mean_ms": 2.0222633684210525,
+      "incremental_median_ms": 1.7909,
+      "incremental_p95_ms": 4.033229999999995,
+      "percent_of_full_decode": 38.60363855837213,
+      "representation_serialized_bytes": 9997,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_store",
+      "cumulative_median_ms": 2.0766,
+      "cumulative_p95_ms": 4.341889999999998,
+      "full_decode_median_ms": 4.6392,
+      "incremental_mean_ms": 0.3091061052631579,
+      "incremental_median_ms": 0.2553,
+      "incremental_p95_ms": 0.70195,
+      "percent_of_full_decode": 44.76202793585101,
+      "representation_serialized_bytes": 19865,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_store",
+      "cumulative_median_ms": 4.460100000000001,
+      "cumulative_p95_ms": 8.282229999999991,
+      "full_decode_median_ms": 4.6392,
+      "incremental_mean_ms": 2.4451404210526317,
+      "incremental_median_ms": 2.1719,
+      "incremental_p95_ms": 4.560819999999997,
+      "percent_of_full_decode": 96.13942058975687,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_store",
+      "cumulative_median_ms": 4.6392,
+      "cumulative_p95_ms": 9.876309999999995,
+      "full_decode_median_ms": 4.6392,
+      "incremental_mean_ms": 5.165429052631579,
+      "incremental_median_ms": 4.6392,
+      "incremental_p95_ms": 9.876309999999995,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_store_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "Bare PBC STORE body",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "cumulative_median_ms": 0.125,
+      "cumulative_p95_ms": 0.35847999999999947,
+      "full_decode_median_ms": 4.7634,
+      "incremental_mean_ms": 0.14362673684210528,
+      "incremental_median_ms": 0.125,
+      "incremental_p95_ms": 0.35847999999999947,
+      "percent_of_full_decode": 2.624176008733258,
+      "representation_serialized_bytes": 3861,
+      "stage": "forced_lzma_unpack"
+    },
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "cumulative_median_ms": 1.8968999999999998,
+      "cumulative_p95_ms": 4.376459999999999,
+      "full_decode_median_ms": 4.7634,
+      "incremental_mean_ms": 2.0222633684210525,
+      "incremental_median_ms": 1.7909,
+      "incremental_p95_ms": 4.033229999999995,
+      "percent_of_full_decode": 39.82239576772893,
+      "representation_serialized_bytes": 9997,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "cumulative_median_ms": 2.225,
+      "cumulative_p95_ms": 4.594469999999999,
+      "full_decode_median_ms": 4.7634,
+      "incremental_mean_ms": 0.3091061052631579,
+      "incremental_median_ms": 0.2553,
+      "incremental_p95_ms": 0.70195,
+      "percent_of_full_decode": 46.71033295545199,
+      "representation_serialized_bytes": 19865,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "cumulative_median_ms": 4.5992999999999995,
+      "cumulative_p95_ms": 8.429459999999994,
+      "full_decode_median_ms": 4.7634,
+      "incremental_mean_ms": 2.4451404210526317,
+      "incremental_median_ms": 2.1719,
+      "incremental_p95_ms": 4.560819999999997,
+      "percent_of_full_decode": 96.55498173573497,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_compression_forced_lzma",
+      "cumulative_median_ms": 4.7634,
+      "cumulative_p95_ms": 9.068829999999991,
+      "full_decode_median_ms": 4.7634,
+      "incremental_mean_ms": 5.208107578947368,
+      "incremental_median_ms": 4.7634,
+      "incremental_p95_ms": 9.068829999999991,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_lzma_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_store",
+      "cumulative_median_ms": 3.7774,
+      "cumulative_p95_ms": 9.720129999999997,
+      "full_decode_median_ms": 7.337,
+      "incremental_mean_ms": 4.622591157894736,
+      "incremental_median_ms": 3.7774,
+      "incremental_p95_ms": 9.720129999999997,
+      "percent_of_full_decode": 51.48425787106447,
+      "representation_serialized_bytes": 14553,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_store",
+      "cumulative_median_ms": 4.2044,
+      "cumulative_p95_ms": 10.091849999999996,
+      "full_decode_median_ms": 7.337,
+      "incremental_mean_ms": 0.41071810526315794,
+      "incremental_median_ms": 0.3504,
+      "incremental_p95_ms": 0.8544399999999999,
+      "percent_of_full_decode": 57.304075235109714,
+      "representation_serialized_bytes": 29170,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_store",
+      "cumulative_median_ms": 6.7712,
+      "cumulative_p95_ms": 12.746809999999996,
+      "full_decode_median_ms": 7.337,
+      "incremental_mean_ms": 2.430264842105263,
+      "incremental_median_ms": 2.1635,
+      "incremental_p95_ms": 4.349189999999999,
+      "percent_of_full_decode": 92.2884012539185,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_store",
+      "cumulative_median_ms": 7.337,
+      "cumulative_p95_ms": 14.618049999999998,
+      "full_decode_median_ms": 7.337,
+      "incremental_mean_ms": 7.968656210526316,
+      "incremental_median_ms": 7.337,
+      "incremental_p95_ms": 14.618049999999998,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_store_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "Bare PBC STORE body",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "cumulative_median_ms": 0.2359,
+      "cumulative_p95_ms": 0.8431499999999985,
+      "full_decode_median_ms": 7.6437,
+      "incremental_mean_ms": 0.3238442105263158,
+      "incremental_median_ms": 0.2359,
+      "incremental_p95_ms": 0.8431499999999985,
+      "percent_of_full_decode": 3.0862017085966222,
+      "representation_serialized_bytes": 8806,
+      "stage": "forced_lzma_unpack"
+    },
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "cumulative_median_ms": 4.0149,
+      "cumulative_p95_ms": 10.379819999999997,
+      "full_decode_median_ms": 7.6437,
+      "incremental_mean_ms": 4.622591157894736,
+      "incremental_median_ms": 3.7774,
+      "incremental_p95_ms": 9.720129999999997,
+      "percent_of_full_decode": 52.52560932532674,
+      "representation_serialized_bytes": 14553,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "cumulative_median_ms": 4.4348,
+      "cumulative_p95_ms": 10.753859999999996,
+      "full_decode_median_ms": 7.6437,
+      "incremental_mean_ms": 0.41071810526315794,
+      "incremental_median_ms": 0.3504,
+      "incremental_p95_ms": 0.8544399999999999,
+      "percent_of_full_decode": 58.01902220128996,
+      "representation_serialized_bytes": 29170,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "cumulative_median_ms": 7.012499999999999,
+      "cumulative_p95_ms": 13.370919999999996,
+      "full_decode_median_ms": 7.6437,
+      "incremental_mean_ms": 2.430264842105263,
+      "incremental_median_ms": 2.1635,
+      "incremental_p95_ms": 4.349189999999999,
+      "percent_of_full_decode": 91.74221908238155,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_balanced_forced_lzma",
+      "cumulative_median_ms": 7.6437,
+      "cumulative_p95_ms": 14.498519999999985,
+      "full_decode_median_ms": 7.6437,
+      "incremental_mean_ms": 8.412839157894737,
+      "incremental_median_ms": 7.6437,
+      "incremental_p95_ms": 14.498519999999985,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_lzma_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_store",
+      "cumulative_median_ms": 8.2662,
+      "cumulative_p95_ms": 16.25262,
+      "full_decode_median_ms": 11.9363,
+      "incremental_mean_ms": 8.967539578947369,
+      "incremental_median_ms": 8.2662,
+      "incremental_p95_ms": 16.25262,
+      "percent_of_full_decode": 69.25261596977288,
+      "representation_serialized_bytes": 24114,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_store",
+      "cumulative_median_ms": 8.7431,
+      "cumulative_p95_ms": 17.10565,
+      "full_decode_median_ms": 11.9363,
+      "incremental_mean_ms": 0.5214673684210527,
+      "incremental_median_ms": 0.4653,
+      "incremental_p95_ms": 1.0649799999999985,
+      "percent_of_full_decode": 73.24799142112715,
+      "representation_serialized_bytes": 48426,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_store",
+      "cumulative_median_ms": 11.0235,
+      "cumulative_p95_ms": 19.86966,
+      "full_decode_median_ms": 11.9363,
+      "incremental_mean_ms": 2.371315157894737,
+      "incremental_median_ms": 2.0632,
+      "incremental_p95_ms": 4.535679999999999,
+      "percent_of_full_decode": 92.352739123514,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_store",
+      "cumulative_median_ms": 11.9363,
+      "cumulative_p95_ms": 21.68621,
+      "full_decode_median_ms": 11.9363,
+      "incremental_mean_ms": 12.65301705263158,
+      "incremental_median_ms": 11.9363,
+      "incremental_p95_ms": 21.68621,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_store_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "Bare PBC STORE body",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "cumulative_median_ms": 0.6286,
+      "cumulative_p95_ms": 1.6162699999999999,
+      "full_decode_median_ms": 12.3909,
+      "incremental_mean_ms": 0.7389471578947369,
+      "incremental_median_ms": 0.6286,
+      "incremental_p95_ms": 1.6162699999999999,
+      "percent_of_full_decode": 5.07307782324125,
+      "representation_serialized_bytes": 23891,
+      "stage": "forced_lzma_unpack"
+    },
+    {
+      "available": true,
+      "checkpoint": "Parsed PBC instruction fields",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "cumulative_median_ms": 8.9673,
+      "cumulative_p95_ms": 17.506929999999986,
+      "full_decode_median_ms": 12.3909,
+      "incremental_mean_ms": 8.967539578947369,
+      "incremental_median_ms": 8.2662,
+      "incremental_p95_ms": 16.25262,
+      "percent_of_full_decode": 72.37004575938793,
+      "representation_serialized_bytes": 24114,
+      "stage": "store_body_parse"
+    },
+    {
+      "available": true,
+      "checkpoint": "Canonical PBC IR",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "cumulative_median_ms": 9.4116,
+      "cumulative_p95_ms": 18.312019999999976,
+      "full_decode_median_ms": 12.3909,
+      "incremental_mean_ms": 0.5214673684210527,
+      "incremental_median_ms": 0.4653,
+      "incremental_p95_ms": 1.0649799999999985,
+      "percent_of_full_decode": 75.95574171367697,
+      "representation_serialized_bytes": 48426,
+      "stage": "canonical_ir_build"
+    },
+    {
+      "available": true,
+      "checkpoint": "Patch application and RGB render",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "cumulative_median_ms": 11.5782,
+      "cumulative_p95_ms": 21.293769999999995,
+      "full_decode_median_ms": 12.3909,
+      "incremental_mean_ms": 2.371315157894737,
+      "incremental_median_ms": 2.0632,
+      "incremental_p95_ms": 4.535679999999999,
+      "percent_of_full_decode": 93.4411543955645,
+      "representation_serialized_bytes": 196608,
+      "stage": "patch_application_render"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "pbc",
+      "condition": "pbc_quality_forced_lzma",
+      "cumulative_median_ms": 12.3909,
+      "cumulative_p95_ms": 22.618719999999986,
+      "full_decode_median_ms": 12.3909,
+      "incremental_mean_ms": 13.375374736842105,
+      "incremental_median_ms": 12.3909,
+      "incremental_p95_ms": 22.618719999999986,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "full_lzma_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "JPEG quantized DCT coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q1",
+      "cumulative_median_ms": 0.3381,
+      "cumulative_p95_ms": 0.7829699999999996,
+      "full_decode_median_ms": 0.3737,
+      "incremental_mean_ms": 0.4114227368421053,
+      "incremental_median_ms": 0.3381,
+      "incremental_p95_ms": 0.7829699999999996,
+      "percent_of_full_decode": 90.47364195879048,
+      "representation_serialized_bytes": 3150,
+      "stage": "jpeg_file_to_coefficients"
+    },
+    {
+      "available": false,
+      "checkpoint": "RGB reconstruction from coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q1",
+      "cumulative_median_ms": null,
+      "cumulative_p95_ms": null,
+      "full_decode_median_ms": 0.3737,
+      "incremental_mean_ms": null,
+      "incremental_median_ms": null,
+      "incremental_p95_ms": null,
+      "percent_of_full_decode": null,
+      "representation_serialized_bytes": null,
+      "stage": "jpeg_coefficients_to_rgb"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q1",
+      "cumulative_median_ms": 0.3737,
+      "cumulative_p95_ms": 0.73242,
+      "full_decode_median_ms": 0.3737,
+      "incremental_mean_ms": 0.4163667368421053,
+      "incremental_median_ms": 0.3737,
+      "incremental_p95_ms": 0.73242,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "jpeg_full_rgb_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "JPEG quantized DCT coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q5",
+      "cumulative_median_ms": 0.3512,
+      "cumulative_p95_ms": 0.7594099999999999,
+      "full_decode_median_ms": 0.388,
+      "incremental_mean_ms": 0.415404,
+      "incremental_median_ms": 0.3512,
+      "incremental_p95_ms": 0.7594099999999999,
+      "percent_of_full_decode": 90.51546391752578,
+      "representation_serialized_bytes": 4139,
+      "stage": "jpeg_file_to_coefficients"
+    },
+    {
+      "available": false,
+      "checkpoint": "RGB reconstruction from coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q5",
+      "cumulative_median_ms": null,
+      "cumulative_p95_ms": null,
+      "full_decode_median_ms": 0.388,
+      "incremental_mean_ms": null,
+      "incremental_median_ms": null,
+      "incremental_p95_ms": null,
+      "percent_of_full_decode": null,
+      "representation_serialized_bytes": null,
+      "stage": "jpeg_coefficients_to_rgb"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q5",
+      "cumulative_median_ms": 0.388,
+      "cumulative_p95_ms": 0.7898599999999999,
+      "full_decode_median_ms": 0.388,
+      "incremental_mean_ms": 0.45238526315789473,
+      "incremental_median_ms": 0.388,
+      "incremental_p95_ms": 0.7898599999999999,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "jpeg_full_rgb_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "JPEG quantized DCT coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q10",
+      "cumulative_median_ms": 0.3571,
+      "cumulative_p95_ms": 0.8073199999999997,
+      "full_decode_median_ms": 0.3973,
+      "incremental_mean_ms": 0.42701852631578946,
+      "incremental_median_ms": 0.3571,
+      "incremental_p95_ms": 0.8073199999999997,
+      "percent_of_full_decode": 89.8817014850239,
+      "representation_serialized_bytes": 5872,
+      "stage": "jpeg_file_to_coefficients"
+    },
+    {
+      "available": false,
+      "checkpoint": "RGB reconstruction from coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q10",
+      "cumulative_median_ms": null,
+      "cumulative_p95_ms": null,
+      "full_decode_median_ms": 0.3973,
+      "incremental_mean_ms": null,
+      "incremental_median_ms": null,
+      "incremental_p95_ms": null,
+      "percent_of_full_decode": null,
+      "representation_serialized_bytes": null,
+      "stage": "jpeg_coefficients_to_rgb"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q10",
+      "cumulative_median_ms": 0.3973,
+      "cumulative_p95_ms": 0.7810699999999999,
+      "full_decode_median_ms": 0.3973,
+      "incremental_mean_ms": 0.44963073684210525,
+      "incremental_median_ms": 0.3973,
+      "incremental_p95_ms": 0.7810699999999999,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "jpeg_full_rgb_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "JPEG quantized DCT coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q60",
+      "cumulative_median_ms": 0.4032,
+      "cumulative_p95_ms": 0.9242299999999998,
+      "full_decode_median_ms": 0.4422,
+      "incremental_mean_ms": 0.47131915789473683,
+      "incremental_median_ms": 0.4032,
+      "incremental_p95_ms": 0.9242299999999998,
+      "percent_of_full_decode": 91.18046132971507,
+      "representation_serialized_bytes": 15602,
+      "stage": "jpeg_file_to_coefficients"
+    },
+    {
+      "available": false,
+      "checkpoint": "RGB reconstruction from coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q60",
+      "cumulative_median_ms": null,
+      "cumulative_p95_ms": null,
+      "full_decode_median_ms": 0.4422,
+      "incremental_mean_ms": null,
+      "incremental_median_ms": null,
+      "incremental_p95_ms": null,
+      "percent_of_full_decode": null,
+      "representation_serialized_bytes": null,
+      "stage": "jpeg_coefficients_to_rgb"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q60",
+      "cumulative_median_ms": 0.4422,
+      "cumulative_p95_ms": 0.8619799999999997,
+      "full_decode_median_ms": 0.4422,
+      "incremental_mean_ms": 0.5034745263157895,
+      "incremental_median_ms": 0.4422,
+      "incremental_p95_ms": 0.8619799999999997,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "jpeg_full_rgb_decode"
+    },
+    {
+      "available": true,
+      "checkpoint": "JPEG quantized DCT coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q80",
+      "cumulative_median_ms": 0.446,
+      "cumulative_p95_ms": 0.8873899999999995,
+      "full_decode_median_ms": 0.4741,
+      "incremental_mean_ms": 0.5032831578947368,
+      "incremental_median_ms": 0.446,
+      "incremental_p95_ms": 0.8873899999999995,
+      "percent_of_full_decode": 94.07298038388525,
+      "representation_serialized_bytes": 21436,
+      "stage": "jpeg_file_to_coefficients"
+    },
+    {
+      "available": false,
+      "checkpoint": "RGB reconstruction from coefficients",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q80",
+      "cumulative_median_ms": null,
+      "cumulative_p95_ms": null,
+      "full_decode_median_ms": 0.4741,
+      "incremental_mean_ms": null,
+      "incremental_median_ms": null,
+      "incremental_p95_ms": null,
+      "percent_of_full_decode": null,
+      "representation_serialized_bytes": null,
+      "stage": "jpeg_coefficients_to_rgb"
+    },
+    {
+      "available": true,
+      "checkpoint": "Decoded RGB",
+      "codec_family": "jpeg",
+      "condition": "jpeg_q80",
+      "cumulative_median_ms": 0.4741,
+      "cumulative_p95_ms": 0.9562999999999999,
+      "full_decode_median_ms": 0.4741,
+      "incremental_mean_ms": 0.5467250526315789,
+      "incremental_median_ms": 0.4741,
+      "incremental_p95_ms": 0.9562999999999999,
+      "percent_of_full_decode": 100.0,
+      "representation_serialized_bytes": 196608,
+      "stage": "jpeg_full_rgb_decode"
+    }
+  ]
+}
