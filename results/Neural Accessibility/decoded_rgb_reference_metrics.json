@@ -1,0 +1,30 @@
+[
+  {
+    "condition": "pbc_compression",
+    "test_accuracy": 0.7332484076433121
+  },
+  {
+    "condition": "pbc_balanced",
+    "test_accuracy": 0.8045859872611465
+  },
+  {
+    "condition": "pbc_quality",
+    "test_accuracy": 0.8180891719745222
+  },
+  {
+    "condition": "jpeg_q10",
+    "test_accuracy": 0.8109554140127389
+  },
+  {
+    "condition": "jpeg_q20",
+    "test_accuracy": 0.8163057324840765
+  },
+  {
+    "condition": "jpeg_q60",
+    "test_accuracy": 0.8229299363057325
+  },
+  {
+    "condition": "jpeg_q80",
+    "test_accuracy": 0.8239490445859873
+  }
+]

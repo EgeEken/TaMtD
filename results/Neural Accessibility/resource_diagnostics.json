@@ -1,0 +1,100 @@
+[
+  {
+    "condition": "jpeg_q80",
+    "representation": "jpeg_dct_ir",
+    "started_at": "2026-10-20T20:28:34+02:00",
+    "finished_at": "2026-10-20T20:31:29+02:00",
+    "wall_seconds": 174.212030900002,
+    "child_pid": 8340,
+    "exit_code": 0,
+    "result_written": true,
+    "completed_successfully": true,
+    "stopped_for_low_disk": false,
+    "workers": 0,
+    "pin_memory": false,
+    "feature_mmap_mode": "read-only",
+    "free_before_bytes": 37325811712,
+    "minimum_free_during_child_bytes": 37307531264,
+    "free_immediately_after_exit_bytes": 37312491520,
+    "maximum_free_during_recovery_window_bytes": 37312491520,
+    "free_recovery_after_exit_bytes": 4960256,
+    "free_after_recovery_window_bytes": 37300015104,
+    "process_peak_working_set_bytes": null,
+    "process_peak_working_set_observed_bytes": 5267456,
+    "process_peak_working_set_status": "unavailable; Windows returned an implausible sub-64-MiB value while training was active",
+    "system_memory_start": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 14365413376,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 30111842304,
+      "commit_available_bytes": 11291717632
+    },
+    "system_commit_peak": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 10622144512,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 34174042112,
+      "commit_available_bytes": 7229517824
+    },
+    "system_memory_after_exit": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 14403104768,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 30148231168,
+      "commit_available_bytes": 11255328768
+    },
+    "pagefile_size_start_bytes": 7392186368,
+    "pagefile_size_peak_bytes": 7392186368,
+    "pagefile_size_after_exit_bytes": 7392186368,
+    "gpu_peak_vram_mb": 91.9619140625
+  },
+  {
+    "condition": "original_rgb",
+    "representation": "decoded_rgb_reference",
+    "started_at": "2026-10-20T20:31:29+02:00",
+    "finished_at": "2026-10-20T20:52:08+02:00",
+    "wall_seconds": 1239.3899832000025,
+    "child_pid": 37620,
+    "exit_code": 0,
+    "result_written": true,
+    "completed_successfully": true,
+    "stopped_for_low_disk": false,
+    "workers": 0,
+    "pin_memory": false,
+    "feature_mmap_mode": null,
+    "free_before_bytes": 37300011008,
+    "minimum_free_during_child_bytes": 37204340736,
+    "free_immediately_after_exit_bytes": 37226053632,
+    "maximum_free_during_recovery_window_bytes": 37226602496,
+    "free_recovery_after_exit_bytes": 22261760,
+    "free_after_recovery_window_bytes": 37225893888,
+    "process_peak_working_set_bytes": null,
+    "process_peak_working_set_observed_bytes": 5279744,
+    "process_peak_working_set_status": "unavailable; Windows returned an implausible sub-64-MiB value while training was active",
+    "system_memory_start": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 14399483904,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 30150721536,
+      "commit_available_bytes": 11252838400
+    },
+    "system_commit_peak": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 10402988032,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 36920414208,
+      "commit_available_bytes": 4483145728
+    },
+    "system_memory_after_exit": {
+      "physical_total_bytes": 34011373568,
+      "physical_available_bytes": 15669362688,
+      "commit_limit_bytes": 41403559936,
+      "commit_used_bytes": 28607086592,
+      "commit_available_bytes": 12796473344
+    },
+    "pagefile_size_start_bytes": 7392186368,
+    "pagefile_size_peak_bytes": 7392186368,
+    "pagefile_size_after_exit_bytes": 7392186368,
+    "gpu_peak_vram_mb": 331.595703125
+  }
+]

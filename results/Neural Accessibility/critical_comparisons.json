@@ -1,0 +1,197 @@
+{
+  "pbc_entropy_control": {
+    "pbc_compression": {
+      "lzma_test_accuracy": 0.18878980891719746,
+      "store_test_accuracy": 0.3551592356687898,
+      "accuracy_delta_store_minus_lzma": 0.16636942675159236,
+      "semantic_accessibility_delta_store_minus_lzma": 0.2627237980285657,
+      "lzma_to_store_median_ms": 0.125,
+      "fraction_full_decode_percent": 2.624176008733258
+    },
+    "pbc_balanced": {
+      "lzma_test_accuracy": 0.18089171974522292,
+      "store_test_accuracy": 0.39490445859872614,
+      "accuracy_delta_store_minus_lzma": 0.21401273885350322,
+      "semantic_accessibility_delta_store_minus_lzma": 0.3037425420357983,
+      "lzma_to_store_median_ms": 0.2359,
+      "fraction_full_decode_percent": 3.0862017085966222
+    },
+    "pbc_quality": {
+      "lzma_test_accuracy": 0.15847133757961784,
+      "store_test_accuracy": 0.40611464968152866,
+      "accuracy_delta_store_minus_lzma": 0.24764331210191082,
+      "semantic_accessibility_delta_store_minus_lzma": 0.34486428951569986,
+      "lzma_to_store_median_ms": 0.6286,
+      "fraction_full_decode_percent": 5.07307782324125
+    }
+  },
+  "pbc_parsed_to_canonical": {
+    "pbc_compression": {
+      "parsed_test_accuracy": 0.5024203821656051,
+      "canonical_test_accuracy": 0.575031847133758,
+      "accuracy_delta_canonical_minus_parsed": 0.07261146496815285,
+      "semantic_accessibility_delta_canonical_minus_parsed": 0.11466505733252863,
+      "additional_canonical_ir_build_ms": 0.2553
+    },
+    "pbc_balanced": {
+      "parsed_test_accuracy": 0.52,
+      "canonical_test_accuracy": 0.5681528662420382,
+      "accuracy_delta_canonical_minus_parsed": 0.048152866242038184,
+      "semantic_accessibility_delta_canonical_minus_parsed": 0.06834207195805453,
+      "additional_canonical_ir_build_ms": 0.3504
+    },
+    "pbc_quality": {
+      "parsed_test_accuracy": 0.5123566878980892,
+      "canonical_test_accuracy": 0.5684076433121019,
+      "accuracy_delta_canonical_minus_parsed": 0.056050955414012726,
+      "semantic_accessibility_delta_canonical_minus_parsed": 0.07805570338832712,
+      "additional_canonical_ir_build_ms": 0.4653
+    }
+  },
+  "jpeg_bytes_to_dct": {
+    "jpeg_q10": {
+      "file_bytes_test_accuracy": 0.3556687898089172,
+      "dct_ir_test_accuracy": 0.7589808917197453,
+      "accuracy_delta_dct_minus_file_bytes": 0.40331210191082806,
+      "semantic_accessibility_delta_dct_minus_file_bytes": 0.5672818491309801,
+      "file_to_coefficients_ms": 0.3571,
+      "canonical_ir_build_ms": 0.0714,
+      "file_to_dct_ir_ms": 0.4285,
+      "full_rgb_decode_ms": 0.3973,
+      "fraction_full_decode_percent": 107.85300780266802
+    },
+    "jpeg_q20": {
+      "file_bytes_test_accuracy": 0.36713375796178344,
+      "dct_ir_test_accuracy": 0.7472611464968153,
+      "accuracy_delta_dct_minus_file_bytes": 0.38012738853503186,
+      "semantic_accessibility_delta_dct_minus_file_bytes": 0.5306775742486218,
+      "file_to_coefficients_ms": null,
+      "canonical_ir_build_ms": null,
+      "file_to_dct_ir_ms": 0.4461,
+      "full_rgb_decode_ms": 0.2029,
+      "fraction_full_decode_percent": 219.86200098570725
+    },
+    "jpeg_q60": {
+      "file_bytes_test_accuracy": 0.32331210191082804,
+      "dct_ir_test_accuracy": 0.7650955414012739,
+      "accuracy_delta_dct_minus_file_bytes": 0.44178343949044585,
+      "semantic_accessibility_delta_dct_minus_file_bytes": 0.611101321585903,
+      "file_to_coefficients_ms": 0.4032,
+      "canonical_ir_build_ms": 0.0709,
+      "file_to_dct_ir_ms": 0.4741,
+      "full_rgb_decode_ms": 0.4422,
+      "fraction_full_decode_percent": 107.21393034825871
+    },
+    "jpeg_q80": {
+      "file_bytes_test_accuracy": 0.30012738853503185,
+      "dct_ir_test_accuracy": 0.7663694267515924,
+      "accuracy_delta_dct_minus_file_bytes": 0.4662420382165605,
+      "semantic_accessibility_delta_dct_minus_file_bytes": 0.6440260425831427,
+      "file_to_coefficients_ms": 0.446,
+      "canonical_ir_build_ms": 0.0721,
+      "file_to_dct_ir_ms": 0.5181,
+      "full_rgb_decode_ms": 0.4741,
+      "fraction_full_decode_percent": 109.28074245939675
+    }
+  },
+  "best_intermediate_under_full_decode": {
+    "pbc_compression": {
+      "condition": "pbc_compression",
+      "codec_family": "pbc",
+      "representation": "pbc_canonical_ir",
+      "model_family": "pbc_instruction_set",
+      "test_accuracy": 0.575031847133758,
+      "best_validation_accuracy": 0.6071805702217529,
+      "decoded_rgb_reference_accuracy": 0.7332484076433121,
+      "semantic_accessibility": 0.7501508750754375,
+      "cumulative_preprocessing_ms": 2.1712,
+      "fraction_full_decode": 45.58088760129319,
+      "representation_bytes": 71745,
+      "bpp": 0.6172150966034232
+    },
+    "pbc_balanced": {
+      "condition": "pbc_balanced",
+      "codec_family": "pbc",
+      "representation": "pbc_canonical_ir",
+      "model_family": "pbc_instruction_set",
+      "test_accuracy": 0.5681528662420382,
+      "best_validation_accuracy": 0.6198521647307286,
+      "decoded_rgb_reference_accuracy": 0.8045859872611465,
+      "semantic_accessibility": 0.6644368107033086,
+      "cumulative_preprocessing_ms": 4.3637,
+      "fraction_full_decode": 57.088844407812964,
+      "representation_bytes": 171805,
+      "bpp": 1.3883311280354076
+    },
+    "pbc_quality": {
+      "condition": "pbc_quality",
+      "codec_family": "pbc",
+      "representation": "pbc_canonical_ir",
+      "model_family": "pbc_instruction_set",
+      "test_accuracy": 0.5684076433121019,
+      "best_validation_accuracy": 0.6061246040126715,
+      "decoded_rgb_reference_accuracy": 0.8180891719745222,
+      "semantic_accessibility": 0.6522973212701793,
+      "cumulative_preprocessing_ms": 9.3601,
+      "fraction_full_decode": 75.54011411600447,
+      "representation_bytes": 291485,
+      "bpp": 2.716713201150585
+    },
+    "jpeg_q10": {
+      "condition": "jpeg_q10",
+      "codec_family": "jpeg",
+      "representation": "jpeg_file_bytes",
+      "model_family": "byte_cnn",
+      "test_accuracy": 0.3556687898089172,
+      "best_validation_accuracy": 0.3717001055966209,
+      "decoded_rgb_reference_accuracy": 0.8109554140127389,
+      "semantic_accessibility": 0.3596129725855581,
+      "cumulative_preprocessing_ms": 0.0,
+      "fraction_full_decode": 0.0,
+      "representation_bytes": 3610,
+      "bpp": 0.4463273222560008
+    },
+    "jpeg_q20": {
+      "condition": "jpeg_q20",
+      "codec_family": "jpeg",
+      "representation": "jpeg_file_bytes",
+      "model_family": "byte_cnn",
+      "test_accuracy": 0.36713375796178344,
+      "best_validation_accuracy": 0.36747624076029567,
+      "decoded_rgb_reference_accuracy": 0.8163057324840765,
+      "semantic_accessibility": 0.372932598257158,
+      "cumulative_preprocessing_ms": 0.0,
+      "fraction_full_decode": 0.0,
+      "representation_bytes": 5273,
+      "bpp": 0.6499649100255945
+    },
+    "jpeg_q60": {
+      "condition": "jpeg_q60",
+      "codec_family": "jpeg",
+      "representation": "jpeg_file_bytes",
+      "model_family": "byte_cnn",
+      "test_accuracy": 0.32331210191082804,
+      "best_validation_accuracy": 0.337909186906019,
+      "decoded_rgb_reference_accuracy": 0.8229299363057325,
+      "semantic_accessibility": 0.3088986784140969,
+      "cumulative_preprocessing_ms": 0.0,
+      "fraction_full_decode": 0.0,
+      "representation_bytes": 10047,
+      "bpp": 1.232574513016556
+    },
+    "jpeg_q80": {
+      "condition": "jpeg_q80",
+      "codec_family": "jpeg",
+      "representation": "jpeg_file_bytes",
+      "model_family": "byte_cnn",
+      "test_accuracy": 0.30012738853503185,
+      "best_validation_accuracy": 0.31890179514255546,
+      "decoded_rgb_reference_accuracy": 0.8239490445859873,
+      "semantic_accessibility": 0.2764385007918353,
+      "cumulative_preprocessing_ms": 0.0,
+      "fraction_full_decode": 0.0,
+      "representation_bytes": 14648,
+      "bpp": 1.7983725440845715
+    }
+  }
+}

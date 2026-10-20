@@ -1,0 +1,39 @@
+{
+  "byte": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  },
+  "pbc": {
+    "epochs": 20,
+    "batch_size": 64,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  },
+  "jpeg_dct": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  },
+  "rgb": {
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 8
+  },
+  "augmentation": "none",
+  "checkpoint_selection": "highest validation accuracy; official validation test set evaluated once after selection",
+  "mixed_precision": true,
+  "workers": 0,
+  "byte_truncation": "disabled; each batch pads to its longest sequence rounded to 256 bytes"
+}

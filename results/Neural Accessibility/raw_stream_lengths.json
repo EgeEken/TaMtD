@@ -1,0 +1,92 @@
+{
+  "pbc_compression_lzma": {
+    "sample_count": 13394,
+    "minimum_bytes": 300,
+    "median_bytes": 4496.0,
+    "p95_bytes": 10364.149999999987,
+    "maximum_bytes": 33735,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "pbc_compression_store": {
+    "sample_count": 13394,
+    "minimum_bytes": 347,
+    "median_bytes": 6152.0,
+    "p95_bytes": 13069.699999999997,
+    "maximum_bytes": 40374,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "pbc_balanced_lzma": {
+    "sample_count": 13394,
+    "minimum_bytes": 345,
+    "median_bytes": 10143.5,
+    "p95_bytes": 23651.849999999984,
+    "maximum_bytes": 49765,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "pbc_balanced_store": {
+    "sample_count": 13394,
+    "minimum_bytes": 448,
+    "median_bytes": 16133.0,
+    "p95_bytes": 34687.89999999998,
+    "maximum_bytes": 63533,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "pbc_quality_lzma": {
+    "sample_count": 13394,
+    "minimum_bytes": 460,
+    "median_bytes": 22376.0,
+    "p95_bytes": 38076.14999999996,
+    "maximum_bytes": 63742,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "pbc_quality_store": {
+    "sample_count": 13394,
+    "minimum_bytes": 1083,
+    "median_bytes": 38035.5,
+    "p95_bytes": 57203.35,
+    "maximum_bytes": 83470,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "jpeg_q10": {
+    "sample_count": 13394,
+    "minimum_bytes": 1680,
+    "median_bytes": 3610.0,
+    "p95_bytes": 5104.0,
+    "maximum_bytes": 8987,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "jpeg_q20": {
+    "sample_count": 13394,
+    "minimum_bytes": 1729,
+    "median_bytes": 5273.0,
+    "p95_bytes": 7778.3499999999985,
+    "maximum_bytes": 13557,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "jpeg_q60": {
+    "sample_count": 13394,
+    "minimum_bytes": 1844,
+    "median_bytes": 10047.0,
+    "p95_bytes": 15306.699999999997,
+    "maximum_bytes": 25864,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  },
+  "jpeg_q80": {
+    "sample_count": 13394,
+    "minimum_bytes": 2138,
+    "median_bytes": 14648.0,
+    "p95_bytes": 22598.149999999987,
+    "maximum_bytes": 36558,
+    "truncation_cap_bytes": null,
+    "expected_truncated_samples": 0
+  }
+}

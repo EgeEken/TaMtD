@@ -1,0 +1,52 @@
+{
+  "seed": 42,
+  "stratified_subset": true,
+  "settings": {
+    "batch": 16,
+    "max_epochs": 60,
+    "target_accuracy": 0.9,
+    "learning_rate": 0.001
+  },
+  "models": {
+    "byte_cnn": {
+      "passed": true,
+      "target_accuracy": 0.9,
+      "best_train_accuracy": 0.9765625,
+      "epochs_run": 15,
+      "wall_seconds": 43.77146839996567,
+      "peak_vram_mb": 131.61572265625,
+      "parameter_count": 221226,
+      "samples": 128
+    },
+    "pbc_instruction_set": {
+      "passed": true,
+      "target_accuracy": 0.9,
+      "best_train_accuracy": 0.921875,
+      "epochs_run": 15,
+      "wall_seconds": 1.276699100038968,
+      "peak_vram_mb": 48.5205078125,
+      "parameter_count": 340138,
+      "samples": 128
+    },
+    "jpeg_dct_cnn": {
+      "passed": true,
+      "target_accuracy": 0.9,
+      "best_train_accuracy": 0.9765625,
+      "epochs_run": 15,
+      "wall_seconds": 2.9810671000159346,
+      "peak_vram_mb": 56.5439453125,
+      "parameter_count": 428426,
+      "samples": 128
+    },
+    "rgb_resnet18_style": {
+      "passed": true,
+      "target_accuracy": 0.9,
+      "best_train_accuracy": 0.90625,
+      "epochs_run": 19,
+      "wall_seconds": 19.267582200001925,
+      "peak_vram_mb": 193.72021484375,
+      "parameter_count": 2801450,
+      "samples": 128
+    }
+  }
+}

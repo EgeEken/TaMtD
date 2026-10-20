@@ -119,14 +119,14 @@ def parse_pbc_store_body(body: bytes, pair) -> dict[str, Any]:
     return {"header": header, "patches": patches}
 
 
-def measure_parsed_pbc_size(parsed: dict[str, Any]) -> dict[str, int]:
+def build_pbc_parsed_ir(parsed: dict[str, Any]) -> tuple[dict[str, Any], dict[str, np.ndarray]]:
     metadata = {
         "schema": "tamtd.pbc-parsed-fields",
         "schema_version": 1,
         "header": parsed["header"],
         "patches": [],
     }
-    arrays = {}
+    arrays: dict[str, np.ndarray] = {}
     for index, patch in enumerate(parsed["patches"]):
         prefix = f"patch_{index:03d}"
         names = {"mask": f"{prefix}_mask", "indices": f"{prefix}_indices"}
@@ -143,6 +143,11 @@ def measure_parsed_pbc_size(parsed: dict[str, Any]) -> dict[str, int]:
             }
             | {"grid_shape": list(patch["indices"].shape), "arrays": names}
         )
+    return metadata, arrays
+
+
+def measure_parsed_pbc_size(parsed: dict[str, Any]) -> dict[str, int]:
+    metadata, arrays = build_pbc_parsed_ir(parsed)
     return {
         "metadata_bytes": len(_metadata_bytes(metadata)),
         "array_bytes": sum(array.nbytes for array in arrays.values()),
