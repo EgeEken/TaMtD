@@ -1,0 +1,105 @@
+{
+  "condition": "pbc_quality",
+  "representation": "pbc_store_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 777,
+  "best_epoch": 7,
+  "epochs_run": 12,
+  "best_validation_accuracy": 0.4139387539598733,
+  "test_accuracy": 0.38420382165605094,
+  "training_wall_seconds": 5891.592378200032,
+  "examples_per_second": 17.357616317516378,
+  "peak_vram_mb": null,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.0966568993615646,
+      "validation_accuracy": 0.31784582893347413,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.8928734809964567,
+      "validation_accuracy": 0.28827877507919747,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.778514709195126,
+      "validation_accuracy": 0.38542766631467795,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.6807424932039838,
+      "validation_accuracy": 0.3843717001055966,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.568930169501458,
+      "validation_accuracy": 0.40232312565997885,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.4237314230873674,
+      "validation_accuracy": 0.3938753959873284,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.2256975876448497,
+      "validation_accuracy": 0.4139387539598733,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.014875685334961,
+      "validation_accuracy": 0.39704329461457233,
+      "learning_rate": 0.0004477357683661734
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.7995720519772775,
+      "validation_accuracy": 0.3833157338965153,
+      "learning_rate": 0.0003454915028125264
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.5982004063974605,
+      "validation_accuracy": 0.36747624076029567,
+      "learning_rate": 0.0002500000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.45147322159897857,
+      "validation_accuracy": 0.36219640971488914,
+      "learning_rate": 0.00016543469682057103
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.34207001505421797,
+      "validation_accuracy": 0.3727560718057022,
+      "learning_rate": 9.549150281252631e-05
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\pbc_quality__pbc_store_bytes__seed777.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cpu",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

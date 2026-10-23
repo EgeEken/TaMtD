@@ -1,0 +1,81 @@
+{
+  "condition": "pbc_quality",
+  "representation": "pbc_lzma_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 777,
+  "best_epoch": 3,
+  "epochs_run": 8,
+  "best_validation_accuracy": 0.18796198521647306,
+  "test_accuracy": 0.17044585987261146,
+  "training_wall_seconds": 2366.082517899922,
+  "examples_per_second": 28.813872502008667,
+  "peak_vram_mb": null,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.2582487981662425,
+      "validation_accuracy": 0.1446673706441394,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.170245007320459,
+      "validation_accuracy": 0.13833157338965152,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.1019072044737825,
+      "validation_accuracy": 0.18796198521647306,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.9922857170959953,
+      "validation_accuracy": 0.16684266103484688,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.8372868594080314,
+      "validation_accuracy": 0.17212249208025343,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.655681884923862,
+      "validation_accuracy": 0.17423442449841606,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.4657728495213997,
+      "validation_accuracy": 0.1583949313621964,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.2754164264113153,
+      "validation_accuracy": 0.1678986272439282,
+      "learning_rate": 0.0004477357683661734
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\pbc_quality__pbc_lzma_bytes__seed777.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cpu",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

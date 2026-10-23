@@ -1,0 +1,153 @@
+{
+  "condition": "jpeg_q60",
+  "representation": "jpeg_dct_ir",
+  "model_family": "jpeg_dct",
+  "model_name": "JPEGDCTNet",
+  "parameter_count": 428426,
+  "seed": 777,
+  "best_epoch": 19,
+  "epochs_run": 20,
+  "best_validation_accuracy": 0.7845828933474129,
+  "test_accuracy": 0.7658598726114649,
+  "training_wall_seconds": 97.38663409999572,
+  "examples_per_second": 1750.137496537705,
+  "peak_vram_mb": 91.9619140625,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5141991676228954,
+      "validation_accuracy": 0.518479408658923,
+      "learning_rate": 0.00029815325108927063
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1461846197303318,
+      "validation_accuracy": 0.6599788806758183,
+      "learning_rate": 0.00029265847744427303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.9759803314047838,
+      "validation_accuracy": 0.6927138331573389,
+      "learning_rate": 0.0002836509786282552
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.8571562063131666,
+      "validation_accuracy": 0.6906019007391764,
+      "learning_rate": 0.0002713525491562421
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.7645939327033298,
+      "validation_accuracy": 0.7434002111932418,
+      "learning_rate": 0.0002560660171779821
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.6874406780471435,
+      "validation_accuracy": 0.7497360084477297,
+      "learning_rate": 0.000238167787843871
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.597968187886934,
+      "validation_accuracy": 0.7127771911298838,
+      "learning_rate": 0.00021809857496093204
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5227333404485733,
+      "validation_accuracy": 0.747624076029567,
+      "learning_rate": 0.00019635254915624216
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.43965024147702897,
+      "validation_accuracy": 0.7740232312565998,
+      "learning_rate": 0.00017346516975603468
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.3655925895428607,
+      "validation_accuracy": 0.7676874340021119,
+      "learning_rate": 0.00015000000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.2986230872041657,
+      "validation_accuracy": 0.7708553326293559,
+      "learning_rate": 0.0001265348302439654
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.24381506481491827,
+      "validation_accuracy": 0.7708553326293559,
+      "learning_rate": 0.0001036474508437579
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.1959286935066175,
+      "validation_accuracy": 0.7708553326293559,
+      "learning_rate": 8.190142503906799e-05
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.15076586537498513,
+      "validation_accuracy": 0.7613516367476241,
+      "learning_rate": 6.183221215612905e-05
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.12639041920274502,
+      "validation_accuracy": 0.7803590285110876,
+      "learning_rate": 4.393398282201788e-05
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.10655908126229273,
+      "validation_accuracy": 0.7793030623020063,
+      "learning_rate": 2.86474508437579e-05
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.09605939995092676,
+      "validation_accuracy": 0.7793030623020063,
+      "learning_rate": 1.6349021371744834e-05
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.08905584634231642,
+      "validation_accuracy": 0.7803590285110876,
+      "learning_rate": 7.341522555726972e-06
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.08299597113366364,
+      "validation_accuracy": 0.7845828933474129,
+      "learning_rate": 1.8467489107293517e-06
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.07819316925590683,
+      "validation_accuracy": 0.7824709609292503,
+      "learning_rate": 0.0
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\jpeg_q60__jpeg_dct_ir__seed777.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  }
+}

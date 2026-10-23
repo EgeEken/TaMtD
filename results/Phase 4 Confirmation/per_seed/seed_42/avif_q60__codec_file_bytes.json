@@ -1,0 +1,75 @@
+{
+  "condition": "avif_q60",
+  "representation": "codec_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 42,
+  "best_epoch": 2,
+  "epochs_run": 7,
+  "best_validation_accuracy": 0.19852164730728616,
+  "test_accuracy": 0.16840764331210192,
+  "training_wall_seconds": 190.31672020000406,
+  "examples_per_second": 313.44592286641733,
+  "peak_vram_mb": 388.3037109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.212721800585919,
+      "validation_accuracy": 0.18373812038014783,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.1622608053491192,
+      "validation_accuracy": 0.19852164730728616,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.1479444438877926,
+      "validation_accuracy": 0.1805702217529039,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.1071823695208987,
+      "validation_accuracy": 0.19429778247096094,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.9690453856798775,
+      "validation_accuracy": 0.19429778247096094,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.7356241960476273,
+      "validation_accuracy": 0.1700105596620908,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.4949036705972332,
+      "validation_accuracy": 0.15205913410770855,
+      "learning_rate": 0.0005522642316338268
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\avif_q60__codec_file_bytes__seed42.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

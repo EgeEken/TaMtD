@@ -1,0 +1,93 @@
+{
+  "condition": "pbc_balanced",
+  "representation": "pbc_store_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 123,
+  "best_epoch": 5,
+  "epochs_run": 10,
+  "best_validation_accuracy": 0.4371700105596621,
+  "test_accuracy": 0.41044585987261145,
+  "training_wall_seconds": 2554.8079782000277,
+  "examples_per_second": 33.35671437038535,
+  "peak_vram_mb": null,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.0908055588606516,
+      "validation_accuracy": 0.28616684266103487,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.8828052849983334,
+      "validation_accuracy": 0.36430834213305174,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.7374744905437334,
+      "validation_accuracy": 0.38753959873284055,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.6271576283823517,
+      "validation_accuracy": 0.40021119324181625,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.4809405445856714,
+      "validation_accuracy": 0.4371700105596621,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.2806915701680608,
+      "validation_accuracy": 0.42872228088701164,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.0189382047950872,
+      "validation_accuracy": 0.41816261879619854,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.7609304487075752,
+      "validation_accuracy": 0.40971488912354803,
+      "learning_rate": 0.0004477357683661734
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5436457939633067,
+      "validation_accuracy": 0.39704329461457233,
+      "learning_rate": 0.0003454915028125264
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.36738032864429,
+      "validation_accuracy": 0.3801478352692714,
+      "learning_rate": 0.0002500000000000001
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\pbc_balanced__pbc_store_bytes__seed123.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cpu",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

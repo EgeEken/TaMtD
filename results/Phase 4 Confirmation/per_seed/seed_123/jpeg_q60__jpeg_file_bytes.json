@@ -1,0 +1,81 @@
+{
+  "condition": "jpeg_q60",
+  "representation": "jpeg_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 123,
+  "best_epoch": 3,
+  "epochs_run": 8,
+  "best_validation_accuracy": 0.34213305174234426,
+  "test_accuracy": 0.3230573248407643,
+  "training_wall_seconds": 183.1476598000154,
+  "examples_per_second": 372.2460886174767,
+  "peak_vram_mb": 305.7412109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.2057864410276844,
+      "validation_accuracy": 0.191129883843717,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.1344404813689937,
+      "validation_accuracy": 0.2502639915522703,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.9614203031900705,
+      "validation_accuracy": 0.34213305174234426,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.796257189170096,
+      "validation_accuracy": 0.32312565997888065,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.6740502212786725,
+      "validation_accuracy": 0.2713833157338965,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.517389503814502,
+      "validation_accuracy": 0.3146779303062302,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.3373058961607767,
+      "validation_accuracy": 0.3093980992608237,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.1303800492464615,
+      "validation_accuracy": 0.30623020063357975,
+      "learning_rate": 0.0004477357683661734
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\jpeg_q60__jpeg_file_bytes__seed123.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

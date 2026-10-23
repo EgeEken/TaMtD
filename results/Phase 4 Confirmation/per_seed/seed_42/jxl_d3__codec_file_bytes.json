@@ -1,0 +1,81 @@
+{
+  "condition": "jxl_d3",
+  "representation": "codec_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 42,
+  "best_epoch": 3,
+  "epochs_run": 8,
+  "best_validation_accuracy": 0.21647307286166842,
+  "test_accuracy": 0.20585987261146496,
+  "training_wall_seconds": 142.2164974999614,
+  "examples_per_second": 479.3817960537138,
+  "peak_vram_mb": 249.4912109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.2746732792812905,
+      "validation_accuracy": 0.13199577613516367,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.1965403615015546,
+      "validation_accuracy": 0.20802534318901794,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.133174506858659,
+      "validation_accuracy": 0.21647307286166842,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.049861844003942,
+      "validation_accuracy": 0.20802534318901794,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.8920819887782565,
+      "validation_accuracy": 0.19957761351636746,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.6662214189816797,
+      "validation_accuracy": 0.17845828933474128,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.4345562390054623,
+      "validation_accuracy": 0.1795142555438226,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.2028724645902449,
+      "validation_accuracy": 0.17212249208025343,
+      "learning_rate": 0.0004477357683661734
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\jxl_d3__codec_file_bytes__seed42.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

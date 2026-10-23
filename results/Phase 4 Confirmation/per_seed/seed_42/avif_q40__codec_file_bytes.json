@@ -1,0 +1,69 @@
+{
+  "condition": "avif_q40",
+  "representation": "codec_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 42,
+  "best_epoch": 1,
+  "epochs_run": 6,
+  "best_validation_accuracy": 0.20274551214361142,
+  "test_accuracy": 0.18394904458598726,
+  "training_wall_seconds": 124.25906519999262,
+  "examples_per_second": 411.4951284858293,
+  "peak_vram_mb": 247.6787109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.2069268914853652,
+      "validation_accuracy": 0.20274551214361142,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.152724262695026,
+      "validation_accuracy": 0.19746568109820486,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.1349708495691777,
+      "validation_accuracy": 0.17423442449841606,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.0343807195727464,
+      "validation_accuracy": 0.19429778247096094,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.7948814523357148,
+      "validation_accuracy": 0.17423442449841606,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.5724389425495706,
+      "validation_accuracy": 0.14889123548046462,
+      "learning_rate": 0.0006545084971874737
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\avif_q40__codec_file_bytes__seed42.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}

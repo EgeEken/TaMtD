@@ -1,0 +1,17 @@
+{
+  "pbc_compression": {
+    "validation_accuracy": 0.750791974656811
+  },
+  "pbc_balanced": {
+    "validation_accuracy": 0.82259767687434
+  },
+  "pbc_quality": {
+    "validation_accuracy": 0.8500527983104541
+  },
+  "jpeg_q10": {
+    "validation_accuracy": 0.8489968321013728
+  },
+  "jpeg_q60": {
+    "validation_accuracy": 0.8574445617740233
+  }
+}

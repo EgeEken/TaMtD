@@ -1,0 +1,153 @@
+{
+  "condition": "pbc_balanced",
+  "representation": "pbc_canonical_ir",
+  "model_family": "pbc",
+  "model_name": "PBCInstructionNet",
+  "parameter_count": 340266,
+  "seed": 123,
+  "best_epoch": 17,
+  "epochs_run": 20,
+  "best_validation_accuracy": 0.5987328405491025,
+  "test_accuracy": 0.5694267515923567,
+  "training_wall_seconds": 35.74756549997255,
+  "examples_per_second": 4767.877129986121,
+  "peak_vram_mb": 80.64990234375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.1598876867459933,
+      "validation_accuracy": 0.3041182682154171,
+      "learning_rate": 0.00029815325108927063
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.8904865034811096,
+      "validation_accuracy": 0.3632523759239704,
+      "learning_rate": 0.00029265847744427303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.7831076205378267,
+      "validation_accuracy": 0.3928194297782471,
+      "learning_rate": 0.0002836509786282552
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.681003161367467,
+      "validation_accuracy": 0.440337909186906,
+      "learning_rate": 0.0002713525491562421
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.5748896058023718,
+      "validation_accuracy": 0.5005279831045406,
+      "learning_rate": 0.0002560660171779821
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.4758480038896913,
+      "validation_accuracy": 0.470960929250264,
+      "learning_rate": 0.000238167787843871
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.3844453247744442,
+      "validation_accuracy": 0.5300950369588173,
+      "learning_rate": 0.00021809857496093204
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.326109924427754,
+      "validation_accuracy": 0.5522703273495249,
+      "learning_rate": 0.00019635254915624216
+    },
+    {
+      "epoch": 9,
+      "train_loss": 1.23827598587892,
+      "validation_accuracy": 0.5491024287222809,
+      "learning_rate": 0.00017346516975603468
+    },
+    {
+      "epoch": 10,
+      "train_loss": 1.1888045542706236,
+      "validation_accuracy": 0.5438225976768744,
+      "learning_rate": 0.00015000000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 1.1346432453616353,
+      "validation_accuracy": 0.5755015839493136,
+      "learning_rate": 0.0001265348302439654
+    },
+    {
+      "epoch": 12,
+      "train_loss": 1.0892647087392155,
+      "validation_accuracy": 0.5860612460401268,
+      "learning_rate": 0.0001036474508437579
+    },
+    {
+      "epoch": 13,
+      "train_loss": 1.0408956621264494,
+      "validation_accuracy": 0.5892291446673706,
+      "learning_rate": 8.190142503906799e-05
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.9981840809755161,
+      "validation_accuracy": 0.590285110876452,
+      "learning_rate": 6.183221215612905e-05
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.9596972332485291,
+      "validation_accuracy": 0.5966209081309398,
+      "learning_rate": 4.393398282201788e-05
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.9330294156572512,
+      "validation_accuracy": 0.5966209081309398,
+      "learning_rate": 2.86474508437579e-05
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.9048899158405267,
+      "validation_accuracy": 0.5987328405491025,
+      "learning_rate": 1.6349021371744834e-05
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.8887811833439621,
+      "validation_accuracy": 0.5945089757127772,
+      "learning_rate": 7.341522555726972e-06
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.8806476842710821,
+      "validation_accuracy": 0.5976768743400211,
+      "learning_rate": 1.8467489107293517e-06
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.8743925718907543,
+      "validation_accuracy": 0.5966209081309398,
+      "learning_rate": 0.0
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\pbc_balanced__pbc_canonical_ir__seed123.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 20,
+    "batch_size": 64,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  }
+}

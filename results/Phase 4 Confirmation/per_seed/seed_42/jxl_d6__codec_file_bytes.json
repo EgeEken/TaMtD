@@ -1,0 +1,87 @@
+{
+  "condition": "jxl_d6",
+  "representation": "codec_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 42,
+  "best_epoch": 4,
+  "epochs_run": 9,
+  "best_validation_accuracy": 0.23864836325237593,
+  "test_accuracy": 0.20382165605095542,
+  "training_wall_seconds": 111.03917560004629,
+  "examples_per_second": 690.729191616657,
+  "peak_vram_mb": 165.1162109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.258668388735098,
+      "validation_accuracy": 0.17845828933474128,
+      "learning_rate": 0.0009890738003669028
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.1637617047754594,
+      "validation_accuracy": 0.2133051742344245,
+      "learning_rate": 0.0009567727288213003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.1107220053812674,
+      "validation_accuracy": 0.21647307286166842,
+      "learning_rate": 0.0009045084971874737
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.9795577391803727,
+      "validation_accuracy": 0.23864836325237593,
+      "learning_rate": 0.0008345653031794292
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.7487223342225406,
+      "validation_accuracy": 0.21964097148891235,
+      "learning_rate": 0.00075
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.4852784050934977,
+      "validation_accuracy": 0.2006335797254488,
+      "learning_rate": 0.0006545084971874737
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.2377512335525491,
+      "validation_accuracy": 0.18796198521647306,
+      "learning_rate": 0.0005522642316338268
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.0346111429042588,
+      "validation_accuracy": 0.1900739176346357,
+      "learning_rate": 0.0004477357683661734
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.8580882440456005,
+      "validation_accuracy": 0.1689545934530095,
+      "learning_rate": 0.0003454915028125264
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\jxl_d6__codec_file_bytes__seed42.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  }
+}
