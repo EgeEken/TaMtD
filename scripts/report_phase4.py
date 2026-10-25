@@ -3,6 +3,7 @@ import json
 import math
 import statistics
 import subprocess
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -13,9 +14,13 @@ import numpy as np
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_DIR = PROJECT_ROOT / "results" / "Phase 4 Confirmation"
-PHASE3_DIR = PROJECT_ROOT / "results" / "Neural Accessibility"
-CACHE_ROOT = PROJECT_ROOT / "data" / "cache" / "neural_accessibility" / "imagenette_320"
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
+from tamtd.runtime import cache_root, results_root
+
+RESULTS_ROOT = results_root()
+OUTPUT_DIR = RESULTS_ROOT / "Phase 4 Confirmation"
+PHASE3_DIR = RESULTS_ROOT / "Neural Accessibility"
+CACHE_ROOT = cache_root() / "neural_accessibility" / "imagenette_320"
 PHASE4_CACHE = CACHE_ROOT / "phase4_streams"
 CHANCE = 0.1
 SEEDS = (42, 123, 777)
@@ -248,7 +253,7 @@ def _raw_byte_rows(phase3: dict, codec_summary: dict, core_rows: list[dict]) -> 
 
 
 def _preprocessing_times(timing: dict) -> dict[str, float]:
-    stage = _read_json(PROJECT_ROOT / "results" / "Staged Decoding" / "summary.json")
+    stage = _read_json(RESULTS_ROOT / "Staged Decoding" / "summary.json")
     conditions = {item["condition"]: item for item in stage["conditions"]}
     output = {}
     for preset in PBC_PRESETS:
@@ -532,7 +537,7 @@ def main() -> None:
     phase3 = _phase3_rows()
     per_seed, lookup = _condition_rows(phase3)
     summary = _confirmation_summary(per_seed, lookup)
-    codec_summary_rows = list(csv.DictReader((PROJECT_ROOT / "results/Codec Benchmark/summary.csv").open(encoding="utf-8", newline="")))
+    codec_summary_rows = list(csv.DictReader((RESULTS_ROOT / "Codec Benchmark/summary.csv").open(encoding="utf-8", newline="")))
     codec_summary = {row["codec_id"]: row for row in codec_summary_rows}
     core_rows = _read_jsonl(CACHE_ROOT / "codec_manifest.jsonl")
     raw = _raw_byte_rows(phase3, codec_summary, core_rows)

@@ -1,0 +1,160 @@
+{
+  "schema": "tamtd.byte-batching-diagnostic.v1",
+  "diagnostic_only": true,
+  "phase4_result_replacement": false,
+  "condition": "pbc_quality/pbc_store_bytes",
+  "seed": 20261025,
+  "device": "cuda",
+  "sample_count": 512,
+  "epochs": 1,
+  "test_accuracy": null,
+  "checkpoint_written": false,
+  "training_loss": 2.3107376098632812,
+  "training_wall_seconds": 47.52823400008492,
+  "examples_per_second": 10.772544168148245,
+  "microbatch_count": 17,
+  "optimizer_update_sample_distribution": {
+    "32": 16
+  },
+  "fixed_batch_reference": {
+    "batch_size": 32,
+    "shuffle_seed": 20261025,
+    "padding": {
+      "sample_count": 512,
+      "batch_count": 16,
+      "true_total_input_bytes": 18234932,
+      "padded_total_bytes_or_tokens": 32129024,
+      "padding_ratio": 0.4324467497051887,
+      "padding_efficiency": 0.5675532502948113,
+      "max_sequence_length": 68386,
+      "mean_sequence_length": 35615.1015625,
+      "max_padded_batch_width": 68608,
+      "max_padded_batch_tokens": 2195456,
+      "max_samples_per_batch": 32,
+      "effective_batch_size_distribution": {
+        "32": 16
+      }
+    },
+    "memory_estimate": {
+      "padded_token_slots": 2195456,
+      "padded_input_tensor_bytes_int64": 17563648,
+      "measurement": "derived from cache lengths; not recorded by the original Phase 4 runs"
+    }
+  },
+  "token_budget_batching": {
+    "max_padded_tokens": 2097152,
+    "max_samples_per_batch": 32,
+    "effective_batch_size_target": 32,
+    "padding": {
+      "sample_count": 512,
+      "batch_count": 17,
+      "true_total_input_bytes": 18234932,
+      "padded_total_bytes_or_tokens": 19285760,
+      "padding_ratio": 0.05448724862281806,
+      "padding_efficiency": 0.9455127513771819,
+      "max_sequence_length": 68386,
+      "mean_sequence_length": 35615.1015625,
+      "max_padded_batch_width": 68608,
+      "max_padded_batch_tokens": 2071296,
+      "max_samples_per_batch": 32,
+      "effective_batch_size_distribution": {
+        "1": 1,
+        "31": 1,
+        "32": 15
+      }
+    },
+    "sampler_padding_check": {
+      "sample_count": 512,
+      "batch_count": 17,
+      "true_total_input_bytes": 18234932,
+      "padded_total_bytes_or_tokens": 19285760,
+      "padding_ratio": 0.05448724862281806,
+      "padding_efficiency": 0.9455127513771819,
+      "max_sequence_length": 68386,
+      "mean_sequence_length": 35615.1015625,
+      "max_padded_batch_width": 68608,
+      "max_padded_batch_tokens": 2071296,
+      "max_samples_per_batch": 32,
+      "effective_batch_size_distribution": {
+        "1": 1,
+        "31": 1,
+        "32": 15
+      }
+    },
+    "padded_tokens_reduction_fraction": 0.39974024732279445
+  },
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 84,
+    "sampling_interval_seconds": 0.5,
+    "start": {
+      "timestamp": 1792936793.72627,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 12834381824,
+        "commit_used_bytes": 31035981824,
+        "commit_limit_bytes": 41403559936
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 38770438144,
+      "gpu": {
+        "cuda_allocated_bytes": 888320,
+        "cuda_allocated_peak_bytes": 888320,
+        "cuda_reserved_bytes": 2097152,
+        "cuda_reserved_peak_bytes": 2097152,
+        "vram_used_mb": 690,
+        "utilization_percent": 4
+      }
+    },
+    "end": {
+      "timestamp": 1792936841.3949697,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 10829520896,
+        "commit_used_bytes": 35387736064,
+        "commit_limit_bytes": 41403559936
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 38774562816,
+      "gpu": {}
+    },
+    "peaks": {
+      "commit_used_bytes": 37903396864,
+      "cuda_allocated_peak_bytes": 765656064,
+      "cuda_reserved_peak_bytes": 1851785216,
+      "vram_used_mb": 2529,
+      "utilization_percent": 99
+    },
+    "minima": {
+      "disk_free_bytes": 38764109824,
+      "memory_available_bytes": 9967931392
+    },
+    "gpu_utilization_mean_percent": 16.023809523809526
+  }
+}

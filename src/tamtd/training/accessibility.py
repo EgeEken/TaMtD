@@ -7,9 +7,10 @@ from typing import Callable
 
 import torch
 from torch import nn
-from torch.utils.data import DataLoader, Dataset, default_collate
+from torch.utils.data import DataLoader, Dataset, Subset, default_collate
 
 from ..neural_accessibility import pad_byte_sequences
+from .byte_batching import LengthBucketBatchSampler, summarize_byte_batches
 
 
 class DictTensorDataset(Dataset):
@@ -33,6 +34,7 @@ class ByteStreamDataset(Dataset):
         if len(streams) != len(labels) or not streams:
             raise ValueError("byte streams and labels must have the same nonzero length")
         self.streams = streams
+        self.stream_lengths = [len(stream) for stream in streams]
         self.labels = labels.long()
 
     def __len__(self) -> int:
@@ -47,6 +49,7 @@ class ByteStreamFileDataset(Dataset):
         self.stream_path = Path(stream_path)
         self.rows = rows
         self.condition = condition
+        self.stream_lengths = [int(row["streams"][condition]["length"]) for row in rows]
         self.labels = torch.tensor([int(row["label"]) for row in rows], dtype=torch.long)
         self._handle = self.stream_path.open("rb")
         self._mapping = mmap.mmap(self._handle.fileno(), 0, access=mmap.ACCESS_READ)
@@ -107,18 +110,44 @@ def make_loader(
     workers: int = 0,
     byte_max_length: int | None = None,
     pin_memory: bool | None = None,
+    byte_batching: dict | None = None,
 ) -> DataLoader:
     generator = torch.Generator().manual_seed(seed)
+    common = {
+        "num_workers": workers,
+        "pin_memory": torch.cuda.is_available() if pin_memory is None else pin_memory,
+        "collate_fn": lambda samples: collate_accessibility(samples, byte_max_length),
+        "persistent_workers": workers > 0,
+    }
+    if byte_batching is not None:
+        lengths = byte_stream_lengths(dataset)
+        sampler = LengthBucketBatchSampler(
+            lengths,
+            max_padded_tokens=int(byte_batching["max_padded_tokens"]),
+            max_samples_per_batch=int(byte_batching["max_samples_per_batch"]),
+            seed=seed,
+            shuffle=shuffle,
+            pad_multiple=int(byte_batching.get("pad_multiple", 256)),
+            bucket_multiplier=int(byte_batching.get("bucket_multiplier", 50)),
+        )
+        return DataLoader(dataset, batch_sampler=sampler, **common)
     return DataLoader(
         dataset,
         batch_size=batch_size,
         shuffle=shuffle,
         generator=generator,
-        num_workers=workers,
-        pin_memory=torch.cuda.is_available() if pin_memory is None else pin_memory,
-        collate_fn=lambda samples: collate_accessibility(samples, byte_max_length),
-        persistent_workers=workers > 0,
+        **common,
     )
+
+
+def byte_stream_lengths(dataset: Dataset) -> list[int]:
+    if isinstance(dataset, Subset):
+        base_lengths = byte_stream_lengths(dataset.dataset)
+        return [base_lengths[int(index)] for index in dataset.indices]
+    lengths = getattr(dataset, "stream_lengths", None)
+    if lengths is None:
+        raise TypeError("length-bucket batching requires a byte-stream dataset")
+    return [int(length) for length in lengths]
 
 
 def _move_inputs(inputs: dict, device: torch.device) -> dict:
@@ -148,31 +177,68 @@ def _train_epoch(
     scaler: torch.amp.GradScaler,
     device: torch.device,
     amp: bool,
+    gradient_accumulation_samples: int | None = None,
 ) -> tuple[float, dict]:
     model.train()
     loss_sum = 0.0
     sample_count = 0
     truncation_count = 0
     truncation_bytes = 0
-    for inputs, labels, truncation in loader:
+    batch_lengths: list[list[int]] = []
+    effective_update_sizes: list[int] = []
+    accumulated_samples = 0
+    if gradient_accumulation_samples is not None:
+        optimizer.zero_grad(set_to_none=True)
+    for batch_index, (inputs, labels, truncation) in enumerate(loader):
+        if "lengths" in inputs:
+            batch_lengths.append([int(length) for length in inputs["lengths"].tolist()])
+            if truncation and truncation["truncated_samples"]:
+                raise ValueError("byte streams must not be truncated")
         inputs = _move_inputs(inputs, device)
         labels = labels.to(device, non_blocking=True)
         if truncation:
             truncation_count += truncation["truncated_samples"]
             truncation_bytes += truncation["truncated_bytes"]
-        optimizer.zero_grad(set_to_none=True)
         with torch.autocast(device_type=device.type, dtype=torch.float16, enabled=amp and device.type == "cuda"):
             logits = model(**inputs)
-            loss = nn.functional.cross_entropy(logits, labels)
-        scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
-        loss_sum += float(loss.detach().item()) * len(labels)
+            loss_sum_batch = nn.functional.cross_entropy(logits, labels, reduction="sum")
+        batch_size = len(labels)
+        loss_sum += float(loss_sum_batch.detach().item())
+        if gradient_accumulation_samples is None:
+            optimizer.zero_grad(set_to_none=True)
+            scaler.scale(loss_sum_batch / batch_size).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            effective_update_sizes.append(batch_size)
+        else:
+            scaler.scale(loss_sum_batch).backward()
+            accumulated_samples += batch_size
+            is_last_batch = batch_index + 1 == len(loader)
+            if accumulated_samples >= gradient_accumulation_samples or is_last_batch:
+                scaler.unscale_(optimizer)
+                for parameter in model.parameters():
+                    if parameter.grad is not None:
+                        parameter.grad.div_(accumulated_samples)
+                scaler.step(optimizer)
+                scaler.update()
+                optimizer.zero_grad(set_to_none=True)
+                effective_update_sizes.append(accumulated_samples)
+                accumulated_samples = 0
         sample_count += len(labels)
-    return loss_sum / sample_count, {
+    summary = {
         "truncated_samples": truncation_count,
         "truncated_bytes": truncation_bytes,
     }
+    if batch_lengths:
+        summary["byte_batch_metrics"] = summarize_byte_batches(
+            batch_lengths,
+            pad_multiple=getattr(loader.batch_sampler, "pad_multiple", 256),
+        )
+        update_distribution: dict[str, int] = {}
+        for size in effective_update_sizes:
+            update_distribution[str(size)] = update_distribution.get(str(size), 0) + 1
+        summary["optimizer_update_sample_distribution"] = update_distribution
+    return loss_sum / sample_count, summary
 
 
 def train_classifier(
@@ -189,6 +255,7 @@ def train_classifier(
     momentum: float = 0.9,
     patience: int = 5,
     amp: bool = True,
+    gradient_accumulation_samples: int | None = None,
 ) -> dict:
     model.to(device)
     if optimizer_name == "sgd":
@@ -208,15 +275,38 @@ def train_classifier(
     best_epoch = 0
     epochs_without_improvement = 0
     truncation_counts = {"truncated_samples": 0, "truncated_bytes": 0}
+    byte_epoch_metrics: list[dict] = []
+    optimizer_update_distributions: list[dict] = []
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(device)
     start = time.perf_counter()
     for epoch in range(1, epochs + 1):
+        if hasattr(train_loader.batch_sampler, "set_epoch"):
+            train_loader.batch_sampler.set_epoch(epoch - 1)
         train_loss, truncation = _train_epoch(
-            model, train_loader, optimizer, scaler, device, amp
+            model,
+            train_loader,
+            optimizer,
+            scaler,
+            device,
+            amp,
+            gradient_accumulation_samples=gradient_accumulation_samples,
         )
         for key in truncation_counts:
             truncation_counts[key] += truncation[key]
+        if "byte_batch_metrics" in truncation:
+            byte_epoch_metrics.append(
+                {
+                    "epoch": epoch,
+                    **truncation["byte_batch_metrics"],
+                    "optimizer_update_sample_distribution": truncation[
+                        "optimizer_update_sample_distribution"
+                    ],
+                }
+            )
+            optimizer_update_distributions.append(
+                truncation["optimizer_update_sample_distribution"]
+            )
         validation_accuracy = evaluate_accuracy(model, validation_loader, device)
         scheduler.step()
         history.append(
@@ -225,13 +315,16 @@ def train_classifier(
                 "train_loss": train_loss,
                 "validation_accuracy": validation_accuracy,
                 "learning_rate": optimizer.param_groups[0]["lr"],
+                **({"byte_batch_metrics": truncation["byte_batch_metrics"]} if "byte_batch_metrics" in truncation else {}),
             }
         )
         if validation_accuracy > best_validation_accuracy:
             best_validation_accuracy = validation_accuracy
             best_epoch = epoch
             epochs_without_improvement = 0
-            torch.save(model.state_dict(), checkpoint_path)
+            checkpoint_temporary = checkpoint_path.with_name(f".{checkpoint_path.name}.tmp")
+            torch.save(model.state_dict(), checkpoint_temporary)
+            checkpoint_temporary.replace(checkpoint_path)
         else:
             epochs_without_improvement += 1
         if patience > 0 and epochs_without_improvement >= patience:
@@ -242,6 +335,35 @@ def train_classifier(
     test_accuracy = evaluate_accuracy(model, test_loader, device)
     peak_vram = torch.cuda.max_memory_allocated(device) / (1024**2) if device.type == "cuda" else None
     trained_samples = len(train_loader.dataset) * len(history)
+    byte_batching = None
+    if byte_epoch_metrics:
+        padded_total = sum(row["padded_total_bytes_or_tokens"] for row in byte_epoch_metrics)
+        true_total = sum(row["true_total_input_bytes"] for row in byte_epoch_metrics)
+        physical_batch_sizes: dict[str, int] = {}
+        update_sizes: dict[str, int] = {}
+        for row in byte_epoch_metrics:
+            for size, count in row["effective_batch_size_distribution"].items():
+                physical_batch_sizes[size] = physical_batch_sizes.get(size, 0) + count
+        for distribution in optimizer_update_distributions:
+            for size, count in distribution.items():
+                update_sizes[size] = update_sizes.get(size, 0) + count
+        byte_batching = {
+            "policy": "length_bucket_token_budget" if isinstance(train_loader.batch_sampler, LengthBucketBatchSampler) else "fixed_batch",
+            "gradient_accumulation_target_samples": gradient_accumulation_samples,
+            "epochs": byte_epoch_metrics,
+            "run": {
+                "true_total_input_bytes": true_total,
+                "padded_total_bytes_or_tokens": padded_total,
+                "padding_ratio": 1.0 - true_total / padded_total,
+                "padding_efficiency": true_total / padded_total,
+                "max_sequence_length": max(row["max_sequence_length"] for row in byte_epoch_metrics),
+                "mean_sequence_length": byte_epoch_metrics[0]["mean_sequence_length"],
+                "max_padded_batch_width": max(row["max_padded_batch_width"] for row in byte_epoch_metrics),
+                "max_samples_per_batch": max(row["max_samples_per_batch"] for row in byte_epoch_metrics),
+                "effective_batch_size_distribution": physical_batch_sizes,
+                "optimizer_update_sample_distribution": update_sizes,
+            },
+        }
     del state, optimizer, scheduler, scaler
     return {
         "best_epoch": best_epoch,
@@ -252,6 +374,7 @@ def train_classifier(
         "examples_per_second": trained_samples / wall_seconds,
         "peak_vram_mb": peak_vram,
         "truncation": truncation_counts,
+        **({"byte_batching": byte_batching} if byte_batching is not None else {}),
         "history": history,
         "checkpoint": str(checkpoint_path),
     }

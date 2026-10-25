@@ -9,6 +9,7 @@ import torch
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
+from tamtd.runtime import results_root
 
 
 def _write_json(path: Path, value) -> None:
@@ -366,7 +367,7 @@ The plots show absolute preprocessing milliseconds and fraction of each implemen
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--results-dir", type=Path, default=PROJECT_ROOT / "results" / "Neural Accessibility")
+    parser.add_argument("--results-dir", type=Path, default=results_root() / "Neural Accessibility")
     args = parser.parse_args()
     output_dir = args.results_dir.resolve()
     summary_path = output_dir / "summary.json"
@@ -430,7 +431,7 @@ def main():
     )
     _write_json(summary_path, summary)
     _write_findings(summary, comparisons, output_dir)
-    phase2_config = json.loads((PROJECT_ROOT / "results" / "Staged Decoding" / "config.json").read_text(encoding="utf-8"))
+    phase2_config = json.loads((results_root() / "Staged Decoding" / "config.json").read_text(encoding="utf-8"))
     config = {
         "dataset": summary["dataset"],
         "device": summary["device"],

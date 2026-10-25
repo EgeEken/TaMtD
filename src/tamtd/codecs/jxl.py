@@ -5,6 +5,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from ..runtime import cache_root
+
 from .base import CodecAdapter, EncodedSample
 
 
@@ -26,7 +28,7 @@ class JXLCodec(CodecAdapter):
         self.effort = effort
         self.num_threads = num_threads
         self.name = f"jxl_d{self.distance:g}"
-        self.temp_root = Path(__file__).resolve().parents[3] / "data" / "cache" / "codec_benchmark_temp"
+        self.temp_root = cache_root() / "codec_benchmark_temp"
         self.temp_root.mkdir(parents=True, exist_ok=True)
         version = subprocess.run(
             [self.cjxl, "--version"], capture_output=True, text=True, check=True

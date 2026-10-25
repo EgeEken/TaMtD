@@ -14,6 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tamtd.codecs.jpeg import JPEGCodec
 from tamtd.data.transforms import prepare_image
+from tamtd.runtime import results_root, temp_root
 from tamtd.staged_decode import build_jpeg_ir, read_jpeg_coefficients
 
 
@@ -21,11 +22,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--source-dir", type=Path,
-        default=PROJECT_ROOT / "results" / "Codec Benchmark" / "sources",
+        default=results_root() / "Codec Benchmark" / "sources",
     )
     parser.add_argument(
         "--output", type=Path,
-        default=PROJECT_ROOT / "results" / "Neural Accessibility" / "jpeg_q20_timing_extension.json",
+        default=results_root() / "Neural Accessibility" / "jpeg_q20_timing_extension.json",
     )
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--repeats", type=int, default=5)
@@ -38,7 +39,9 @@ def main():
     extract_samples_ms = []
     build_samples_ms = []
     decode_samples_ms = []
-    with tempfile.TemporaryDirectory(dir=PROJECT_ROOT / "data" / "cache", prefix="jpeg-q20-") as temp_dir:
+    temporary_root = temp_root()
+    temporary_root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=temporary_root, prefix="jpeg-q20-") as temp_dir:
         temp_dir = Path(temp_dir)
         for source in sources:
             with Image.open(source) as image:

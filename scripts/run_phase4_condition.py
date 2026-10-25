@@ -1,6 +1,7 @@
 import argparse
 import gc
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -15,8 +16,10 @@ from tamtd.codecs.pbc import PBCCodecPair
 from tamtd.data.accessibility_datasets import DecodedRGBImageDataset, PixelImageDataset
 from tamtd.data.imagenette_accessibility import get_imagenette_source_root, read_manifest
 from tamtd.models.accessibility import ByteStreamCNN, JPEGDCTNet, PBCInstructionNet, RGBResNet18, parameter_count
+from tamtd.runtime import cache_root, data_root, default_device, results_root, temp_root
 from tamtd.training.accessibility import ByteStreamFileDataset, IndexedDictTensorDataset, evaluate_accuracy, make_loader, train_classifier
 from tamtd.training.seed import seed_everything
+from tamtd.training.telemetry import ResourceMonitor
 
 
 PBC_PRESETS = ("compression", "balanced", "quality")
@@ -111,7 +114,33 @@ def _run_training(args, condition: str, representation: str, rows: list[dict], t
     if args.batch_size is not None:
         settings["batch_size"] = args.batch_size
     batch_size = settings["batch_size"]
-    loaders = [make_loader(dataset, batch_size, split == "train", args.seed, workers=0, pin_memory=False) for dataset, split in zip(datasets, ("train", "validation", "test"))]
+    byte_batching = None
+    gradient_accumulation_samples = None
+    is_byte_stream = representation in {
+        "pbc_lzma_bytes",
+        "pbc_store_bytes",
+        "jpeg_file_bytes",
+        "codec_file_bytes",
+    }
+    if is_byte_stream and args.byte_batch_mode == "token_budget":
+        byte_batching = {
+            "max_padded_tokens": args.max_padded_tokens,
+            "max_samples_per_batch": args.max_samples_per_batch or batch_size,
+            "bucket_multiplier": args.bucket_multiplier,
+        }
+        gradient_accumulation_samples = args.effective_batch_size or batch_size
+    loaders = [
+        make_loader(
+            dataset,
+            batch_size,
+            split == "train",
+            args.seed,
+            workers=0,
+            pin_memory=False,
+            byte_batching=byte_batching if is_byte_stream else None,
+        )
+        for dataset, split in zip(datasets, ("train", "validation", "test"))
+    ]
     checkpoint_base = args.checkpoint_dir / f"{condition}__{representation}__seed{args.seed}.pt"
     checkpoint = checkpoint_base
     retry = 1
@@ -131,6 +160,7 @@ def _run_training(args, condition: str, representation: str, rows: list[dict], t
         optimizer_name=settings["optimizer"],
         patience=settings["patience"],
         amp=device.type == "cuda" and bool(args.training_settings.get("mixed_precision", True)),
+        gradient_accumulation_samples=gradient_accumulation_samples,
     )
     result.pop("checkpoint", None)
     result_row = {
@@ -146,6 +176,12 @@ def _run_training(args, condition: str, representation: str, rows: list[dict], t
         "pin_memory": False,
         "device": device.type,
         "training_settings": settings,
+        "byte_batching_config": {
+            "mode": args.byte_batch_mode if is_byte_stream else "not_applicable",
+            "max_padded_tokens": byte_batching["max_padded_tokens"] if byte_batching else None,
+            "max_samples_per_batch": byte_batching["max_samples_per_batch"] if byte_batching else batch_size if is_byte_stream else None,
+            "gradient_accumulation_samples": gradient_accumulation_samples,
+        },
     }
     if representation == "decoded_rgb_reference":
         references = {}
@@ -174,24 +210,43 @@ def main() -> None:
     parser.add_argument("--condition", required=True)
     parser.add_argument("--representation", required=True)
     parser.add_argument("--seed", type=int, required=True)
-    parser.add_argument("--device", default="auto")
-    parser.add_argument("--cache-root", type=Path, default=PROJECT_ROOT / "data/cache/neural_accessibility/imagenette_320")
-    parser.add_argument("--phase4-cache-root", type=Path, default=PROJECT_ROOT / "data/cache/neural_accessibility/imagenette_320/phase4_streams")
-    parser.add_argument("--dataset-root", type=Path, default=PROJECT_ROOT / "data/raw/imagenette")
-    parser.add_argument("--output-dir", type=Path, default=PROJECT_ROOT / "results/Phase 4 Confirmation")
+    parser.add_argument("--device", default=default_device())
+    parser.add_argument("--cache-root", type=Path)
+    parser.add_argument("--phase4-cache-root", type=Path)
+    parser.add_argument("--dataset-root", type=Path)
+    parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--checkpoint-dir", type=Path, default=None)
     parser.add_argument("--pbc-root", type=Path, default=None)
+    parser.add_argument("--training-settings", type=Path, default=None)
     parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--byte-batch-mode", choices=("fixed", "token_budget"), default="fixed")
+    parser.add_argument("--max-padded-tokens", type=int, default=1048576)
+    parser.add_argument("--max-samples-per-batch", type=int)
+    parser.add_argument("--effective-batch-size", type=int)
+    parser.add_argument("--bucket-multiplier", type=int, default=50)
     parser.add_argument("--result-suffix")
     parser.add_argument("--eval-existing-rgb", action="store_true")
+    parser.add_argument("--temp-root", type=Path, default=temp_root())
     args = parser.parse_args()
+    shared_cache = cache_root() / "neural_accessibility" / "imagenette_320"
+    args.cache_root = args.cache_root or shared_cache
+    args.phase4_cache_root = args.phase4_cache_root or shared_cache / "phase4_streams"
+    args.dataset_root = args.dataset_root or data_root() / "raw" / "imagenette"
+    results_dir = results_root()
+    args.output_dir = args.output_dir or results_dir / "Phase 4 Confirmation"
+    args.training_settings = args.training_settings or results_dir / "Neural Accessibility" / "training_settings.json"
     args.cache_root = args.cache_root.resolve()
     args.phase4_cache_root = args.phase4_cache_root.resolve()
     args.dataset_root = args.dataset_root.resolve()
     args.output_dir = args.output_dir.resolve()
     args.checkpoint_dir = (args.checkpoint_dir or args.cache_root / "checkpoints" / "phase4").resolve()
+    args.temp_root = args.temp_root.resolve()
+    args.temp_root.mkdir(parents=True, exist_ok=True)
+    os.environ["TMPDIR"] = str(args.temp_root)
+    os.environ["TEMP"] = str(args.temp_root)
+    os.environ["TMP"] = str(args.temp_root)
     args.source_root = get_imagenette_source_root(args.dataset_root)
-    args.training_settings = json.loads((PROJECT_ROOT / "results/Neural Accessibility/training_settings.json").read_text(encoding="utf-8"))
+    args.training_settings = json.loads(args.training_settings.read_text(encoding="utf-8"))
     args.training_settings["mixed_precision"] = True
 
     rows = read_manifest(args.cache_root / "codec_manifest.jsonl")
@@ -236,7 +291,13 @@ def main() -> None:
         print(json.dumps({"validation_references": references}, indent=2), flush=True)
         return
 
-    result_row, model = _run_training(args, args.condition, args.representation, rows, train_rows, validation_rows, test_rows, device)
+    resource_monitor = ResourceMonitor(torch, device=device, disk_path=args.cache_root)
+    resource_monitor.start()
+    try:
+        result_row, model = _run_training(args, args.condition, args.representation, rows, train_rows, validation_rows, test_rows, device)
+    finally:
+        resource_diagnostics = resource_monitor.stop()
+    result_row["resource_diagnostics"] = resource_diagnostics
     _write_json(output_path, result_row)
     print(json.dumps({"result": str(output_path), "test_accuracy": result_row["test_accuracy"], "best_validation_accuracy": result_row["best_validation_accuracy"]}, indent=2), flush=True)
     del model, rows, train_rows, validation_rows, test_rows, result_row

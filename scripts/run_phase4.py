@@ -64,22 +64,6 @@ class MemoryStatusEx(ctypes.Structure):
     ]
 
 
-class ProcessMemoryCountersEx(ctypes.Structure):
-    _fields_ = [
-        ("cb", wintypes.DWORD),
-        ("PageFaultCount", wintypes.DWORD),
-        ("PeakWorkingSetSize", ctypes.c_size_t),
-        ("WorkingSetSize", ctypes.c_size_t),
-        ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
-        ("QuotaPagedPoolUsage", ctypes.c_size_t),
-        ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
-        ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
-        ("PagefileUsage", ctypes.c_size_t),
-        ("PeakPagefileUsage", ctypes.c_size_t),
-        ("PrivateUsage", ctypes.c_size_t),
-    ]
-
-
 class SafetyStop(RuntimeError):
     def __init__(self, message: str, details: dict | None = None) -> None:
         super().__init__(message)
@@ -110,24 +94,6 @@ def _commit() -> dict:
         "commit_limit_bytes": int(status.ullTotalPageFile),
         "physical_available_bytes": int(status.ullAvailPhys),
     }
-
-
-def _process_memory(pid: int) -> int | None:
-    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-    kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
-    kernel32.OpenProcess.restype = wintypes.HANDLE
-    handle = kernel32.OpenProcess(0x0400 | 0x0010, False, pid)
-    if not handle:
-        return None
-    counters = ProcessMemoryCountersEx()
-    counters.cb = ctypes.sizeof(counters)
-    query = ctypes.WinDLL("psapi", use_last_error=True).GetProcessMemoryInfo
-    query.argtypes = [wintypes.HANDLE, ctypes.POINTER(ProcessMemoryCountersEx), wintypes.DWORD]
-    query.restype = wintypes.BOOL
-    success = query(handle, ctypes.byref(counters), counters.cb)
-    value = int(counters.PeakWorkingSetSize) if success else 0
-    kernel32.CloseHandle(handle)
-    return value if value > 0 else None
 
 
 def _gpu_memory() -> int | None:
@@ -212,7 +178,7 @@ def _run_job(name: str, command: list[str], log_path: Path, expected_paths: list
     started = _now()
     min_free = free_before
     peak_commit = memory_before.get("commit_used_bytes")
-    peak_working_set = None
+    peak_process_rss = None
     peak_gpu = _gpu_memory()
     print(f"START {name}; C: free={free_before / 1e9:.2f} GB; system commit={commit_fraction_before:.1%}", flush=True)
     creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
@@ -235,9 +201,6 @@ def _run_job(name: str, command: list[str], log_path: Path, expected_paths: list
                         commit_high_since = time.monotonic()
                 else:
                     commit_high_since = None
-                working = _process_memory(process.pid)
-                if working is not None:
-                    peak_working_set = max(peak_working_set or working, working)
                 gpu = _gpu_memory()
                 if gpu is not None:
                     peak_gpu = max(peak_gpu or gpu, gpu)
@@ -251,7 +214,8 @@ def _run_job(name: str, command: list[str], log_path: Path, expected_paths: list
                             "system_commit_peak_bytes": peak_commit,
                             "system_commit_limit_bytes": memory.get("commit_limit_bytes"),
                             "system_commit_peak_fraction": None if not peak_commit else peak_commit / memory.get("commit_limit_bytes", 1),
-                            "peak_process_working_set_bytes": peak_working_set,
+                            "peak_process_rss_bytes": peak_process_rss,
+                            "process_rss_status": "unavailable: Windows process working-set counters are not trusted",
                             "gpu_memory_peak_mb": peak_gpu,
                         },
                     )
@@ -270,7 +234,8 @@ def _run_job(name: str, command: list[str], log_path: Path, expected_paths: list
                             "system_commit_limit_bytes": memory.get("commit_limit_bytes"),
                             "system_commit_peak_fraction": None if not peak_commit else peak_commit / memory.get("commit_limit_bytes", 1),
                             "physical_available_bytes_at_stop": memory.get("physical_available_bytes"),
-                            "peak_process_working_set_bytes": peak_working_set,
+                            "peak_process_rss_bytes": peak_process_rss,
+                            "process_rss_status": "unavailable: Windows process working-set counters are not trusted",
                             "gpu_memory_peak_mb": peak_gpu,
                         },
                     )
@@ -313,7 +278,8 @@ def _run_job(name: str, command: list[str], log_path: Path, expected_paths: list
         "free_recovered_vs_minimum_bytes": free_after_recovery - min_free,
         "system_commit_before_bytes": memory_before.get("commit_used_bytes"),
         "system_commit_before_fraction": commit_fraction_before,
-        "peak_process_working_set_bytes": peak_working_set,
+        "peak_process_rss_bytes": peak_process_rss,
+        "process_rss_status": "unavailable: Windows process working-set counters are not trusted",
         "system_commit_peak_bytes": peak_commit,
         "system_commit_limit_bytes": commit_limit_after_recovery,
         "system_commit_peak_fraction": None if not peak_commit else peak_commit / (commit_limit_after_recovery or 1),

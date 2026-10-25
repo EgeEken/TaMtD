@@ -15,6 +15,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tamtd.codecs.jpeg import JPEGCodec
+from tamtd.runtime import results_root, temp_root
 from tamtd.staged_decode import build_jpeg_ir, read_jpeg_coefficients
 
 
@@ -46,7 +47,9 @@ def _measure(args) -> dict:
     if any(not path.is_file() for path in sources):
         raise FileNotFoundError("Phase 1 prepared source PNG is missing")
     samples = {}
-    with tempfile.TemporaryDirectory(dir=PROJECT_ROOT / "data" / "cache", prefix="phase4-jpeg-timing-") as temporary:
+    temporary_root = temp_root()
+    temporary_root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=temporary_root, prefix="phase4-jpeg-timing-") as temporary:
         temporary = Path(temporary)
         for quality in (10, 20, 60, 80):
             codec = JPEGCodec(quality)
@@ -133,8 +136,8 @@ def _measure(args) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-dir", type=Path, default=PROJECT_ROOT / "results/Codec Benchmark/sources")
-    parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "results/Phase 4 Confirmation/jpeg_timing_refresh.json")
+    parser.add_argument("--source-dir", type=Path, default=results_root() / "Codec Benchmark/sources")
+    parser.add_argument("--output", type=Path, default=results_root() / "Phase 4 Confirmation/jpeg_timing_refresh.json")
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--repeats", type=int, default=5)
     args = parser.parse_args()

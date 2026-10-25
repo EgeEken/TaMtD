@@ -14,6 +14,7 @@ from tamtd.codecs.avif import AVIFCodec
 from tamtd.codecs.jxl import JXLCodec
 from tamtd.codecs.webp import WebPCodec
 from tamtd.data.imagenette_accessibility import get_imagenette_source_root, load_prepared_rgb, read_manifest
+from tamtd.runtime import cache_root, data_root
 
 
 CODEC_FACTORIES = {
@@ -120,9 +121,10 @@ def build_condition(condition: str, cache_root: Path, dataset_root: Path, output
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--condition", required=True, choices=sorted(CODEC_FACTORIES))
-    parser.add_argument("--cache-root", type=Path, default=PROJECT_ROOT / "data/cache/neural_accessibility/imagenette_320")
-    parser.add_argument("--dataset-root", type=Path, default=PROJECT_ROOT / "data/raw/imagenette")
-    parser.add_argument("--output-root", type=Path, default=PROJECT_ROOT / "data/cache/neural_accessibility/imagenette_320/phase4_streams")
+    neural_cache = cache_root() / "neural_accessibility" / "imagenette_320"
+    parser.add_argument("--cache-root", type=Path, default=neural_cache)
+    parser.add_argument("--dataset-root", type=Path, default=data_root() / "raw" / "imagenette")
+    parser.add_argument("--output-root", type=Path, default=neural_cache / "phase4_streams")
     parser.add_argument("--limit", type=int)
     args = parser.parse_args()
     result = build_condition(args.condition, args.cache_root.resolve(), args.dataset_root.resolve(), args.output_root.resolve(), args.limit)

@@ -17,3 +17,4 @@ results/Codec Benchmark/smoke/
 results/Codec Benchmark/sources/*.png
 results/Codec Benchmark/visual_comparison_grid.png
 *.pt
+tmp/

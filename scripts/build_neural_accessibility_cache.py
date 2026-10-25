@@ -7,14 +7,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tamtd.data.neural_accessibility import build_neural_accessibility_cache
+from tamtd.runtime import cache_root, data_root
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset-root", type=Path, default=PROJECT_ROOT / "data" / "raw" / "imagenette")
+    parser.add_argument("--dataset-root", type=Path, default=data_root() / "raw" / "imagenette")
     parser.add_argument(
         "--cache-root", type=Path,
-        default=PROJECT_ROOT / "data" / "cache" / "neural_accessibility" / "imagenette_320",
+        default=cache_root() / "neural_accessibility" / "imagenette_320",
     )
     parser.add_argument("--pbc-root", type=Path, default=None)
     parser.add_argument("--seed", type=int, default=42)

@@ -18,6 +18,7 @@ from tamtd.data.accessibility_datasets import DecodedRGBImageDataset, PixelImage
 from tamtd.data.imagenette_accessibility import check_representation_alignment, get_imagenette_source_root, read_manifest
 from tamtd.models.accessibility import ByteStreamCNN, JPEGDCTNet, PBCInstructionNet, RGBResNet18, parameter_count
 from tamtd.neural_accessibility import build_frontier_rows
+from tamtd.runtime import cache_root, data_root, default_device, results_root
 from tamtd.training.accessibility import (
     ByteStreamFileDataset,
     IndexedDictTensorDataset,
@@ -469,12 +470,12 @@ def _phase2_timings(results_dir: Path) -> dict:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cache-root", type=Path, default=PROJECT_ROOT / "data" / "cache" / "neural_accessibility" / "imagenette_320")
-    parser.add_argument("--dataset-root", type=Path, default=PROJECT_ROOT / "data" / "raw" / "imagenette")
-    parser.add_argument("--results-dir", type=Path, default=PROJECT_ROOT / "results" / "Neural Accessibility")
+    parser.add_argument("--cache-root", type=Path, default=cache_root() / "neural_accessibility" / "imagenette_320")
+    parser.add_argument("--dataset-root", type=Path, default=data_root() / "raw" / "imagenette")
+    parser.add_argument("--results-dir", type=Path, default=results_root() / "Neural Accessibility")
     parser.add_argument("--pbc-root", type=Path, default=None)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--device", default="auto")
+    parser.add_argument("--device", default=default_device())
     parser.add_argument("--only-condition", nargs=2, metavar=("CONDITION", "REPRESENTATION"))
     args = parser.parse_args()
     if args.only_condition is not None:

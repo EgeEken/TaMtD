@@ -5,8 +5,10 @@ import math
 import os
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
+
+from ..runtime import cache_root
 
 from PIL import Image
 
@@ -32,7 +34,7 @@ def resolve_pbc_root(pbc_root: str | os.PathLike[str] | None = None) -> Path:
 
 def _load_pbc(pbc_root: Path):
     if "NUMBA_CACHE_DIR" not in os.environ:
-        cache_dir = Path(__file__).resolve().parents[3] / "data" / "cache" / "tamtd-numba-cache"
+        cache_dir = cache_root() / "tamtd-numba-cache"
         cache_dir.mkdir(parents=True, exist_ok=True)
         os.environ["NUMBA_CACHE_DIR"] = str(cache_dir)
     if str(pbc_root) not in sys.path:
@@ -47,6 +49,26 @@ def _load_pbc(pbc_root: Path):
             "Install the PBC repository dependencies and retry."
         ) from error
     return pbc3.PBC3, types.PBC3Config
+
+
+def _resolve_model_path(pbc_root: Path, configured: str | os.PathLike[str]) -> str:
+    value = os.fspath(configured)
+    path = Path(value).expanduser()
+    if path.is_absolute() and path.is_file():
+        return str(path.resolve())
+    windows_path = PureWindowsPath(value)
+    if windows_path.drive or path.is_absolute():
+        parts = windows_path.parts
+        marker = next((index for index, part in enumerate(parts) if part.lower() == "pbc"), None)
+        relative_parts = parts[marker + 1 :] if marker is not None else (windows_path.name,)
+        candidate = pbc_root.joinpath(*relative_parts)
+    elif "\\" in value:
+        candidate = pbc_root.joinpath(*windows_path.parts)
+    else:
+        candidate = pbc_root / path
+    if candidate.is_file():
+        return str(candidate.resolve())
+    raise FileNotFoundError(f"PBC model file {value!r} was not found under PBC_ROOT {pbc_root}")
 
 
 def _git_state(root: Path) -> dict[str, Any]:
@@ -124,16 +146,14 @@ class PBCCodecPair:
         defaults = dict(preset_factory().__dict__)
         defaults["use_lzma"] = False
         if defaults.get("learned_filler_model_path"):
-            defaults["learned_filler_model_path"] = str(
-                (self.pbc_root / defaults["learned_filler_model_path"]).resolve()
+            defaults["learned_filler_model_path"] = _resolve_model_path(
+                self.pbc_root, defaults["learned_filler_model_path"]
             )
         self.config_values = {**defaults, **(config or {}), "use_lzma": False}
         if self.config_values.get("learned_filler_model_path"):
-            model_path = Path(self.config_values["learned_filler_model_path"])
-            if not model_path.is_absolute():
-                self.config_values["learned_filler_model_path"] = str(
-                    (self.pbc_root / model_path).resolve()
-                )
+            self.config_values["learned_filler_model_path"] = _resolve_model_path(
+                self.pbc_root, self.config_values["learned_filler_model_path"]
+            )
         self.git_state = _git_state(self.pbc_root)
 
     def _config(self):
@@ -219,17 +239,15 @@ class PBCStandardCodec(CodecAdapter):
             raise ValueError(f"unknown PBC preset: {preset}")
         defaults = dict(preset_factory().__dict__)
         if defaults.get("learned_filler_model_path"):
-            defaults["learned_filler_model_path"] = str(
-                (self.pbc_root / defaults["learned_filler_model_path"]).resolve()
+            defaults["learned_filler_model_path"] = _resolve_model_path(
+                self.pbc_root, defaults["learned_filler_model_path"]
             )
         self.preset = preset
         self.config_values = {**defaults, **(config or {})}
         if self.config_values.get("learned_filler_model_path"):
-            model_path = Path(self.config_values["learned_filler_model_path"])
-            if not model_path.is_absolute():
-                self.config_values["learned_filler_model_path"] = str(
-                    (self.pbc_root / model_path).resolve()
-                )
+            self.config_values["learned_filler_model_path"] = _resolve_model_path(
+                self.pbc_root, self.config_values["learned_filler_model_path"]
+            )
         self.git_state = _git_state(self.pbc_root)
         self.name = f"pbc_{preset}"
 

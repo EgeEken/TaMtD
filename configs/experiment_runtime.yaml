@@ -1,0 +1,73 @@
+paths:
+  data_root: data
+  cache_root: ""
+  results_root: results
+  temp_root: tmp/tamtd
+  pbc_root: ""
+  training_settings: Neural Accessibility/training_settings.json
+
+runtime:
+  device: auto
+  python: ""
+  poll_seconds: 1.0
+  recovery_seconds: 60
+  minimum_start_free_gb: 20
+  stop_free_gb: 12
+  windows_commit_start_max: 0.95
+  windows_commit_stop: 0.985
+  windows_commit_high: 0.95
+  windows_commit_high_seconds: 300
+  linux_minimum_available_gib: 6
+  linux_stop_available_gib: 2
+  linux_stop_cgroup_headroom_gib: 1
+  byte_batch_mode: fixed
+  max_padded_tokens: 1048576
+  max_samples_per_batch: 32
+  effective_batch_size: 32
+  bucket_multiplier: 50
+
+diagnostics:
+  pbc_quality_store:
+    output: Phase 4.5A Diagnostics/pbc_quality_store_byte_batching.json
+
+phases:
+  phase4_confirmation:
+    results_subdir: Phase 4 Confirmation
+    cache_subdir: neural_accessibility/imagenette_320
+    dataset_subdir: raw/imagenette
+    seeds: [42, 123, 777]
+    jobs:
+      - {condition: pbc_compression, representation: pbc_lzma_bytes}
+      - {condition: pbc_compression, representation: pbc_store_bytes}
+      - {condition: pbc_compression, representation: pbc_canonical_ir}
+      - {condition: pbc_balanced, representation: pbc_canonical_ir}
+      - {condition: pbc_balanced, representation: pbc_lzma_bytes, batch_size: 8, device: cpu, result_suffix: cpu_batch8}
+      - {condition: pbc_balanced, representation: pbc_store_bytes, batch_size: 8, device: cpu}
+      - {condition: pbc_quality, representation: pbc_canonical_ir}
+      - {condition: pbc_quality, representation: pbc_lzma_bytes, batch_size: 8, device: cpu}
+      - {condition: pbc_quality, representation: pbc_store_bytes, batch_size: 8, device: cpu}
+      - {condition: jpeg_q10, representation: jpeg_file_bytes}
+      - {condition: jpeg_q10, representation: jpeg_dct_ir}
+      - {condition: jpeg_q60, representation: jpeg_file_bytes}
+      - {condition: jpeg_q60, representation: jpeg_dct_ir}
+      - {condition: original_rgb, representation: decoded_rgb_reference}
+    seed42_reuse:
+      results_subdir: Neural Accessibility
+      representations:
+        - [pbc_compression, pbc_lzma_bytes]
+        - [pbc_compression, pbc_store_bytes]
+        - [pbc_compression, pbc_canonical_ir]
+        - [pbc_balanced, pbc_canonical_ir]
+        - [pbc_quality, pbc_canonical_ir]
+        - [jpeg_q10, jpeg_file_bytes]
+        - [jpeg_q10, jpeg_dct_ir]
+        - [jpeg_q60, jpeg_file_bytes]
+        - [jpeg_q60, jpeg_dct_ir]
+        - [original_rgb, decoded_rgb_reference]
+    extra_jobs:
+      - {condition: webp_q30, representation: codec_file_bytes, seed: 42}
+      - {condition: webp_q75, representation: codec_file_bytes, seed: 42}
+      - {condition: avif_q40, representation: codec_file_bytes, seed: 42}
+      - {condition: avif_q60, representation: codec_file_bytes, seed: 42}
+      - {condition: jxl_d6, representation: codec_file_bytes, seed: 42}
+      - {condition: jxl_d3, representation: codec_file_bytes, seed: 42}
