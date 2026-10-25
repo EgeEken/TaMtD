@@ -1,0 +1,297 @@
+{
+  "data": [
+    {
+      "condition": "pbc_compression",
+      "representation": "pbc_lzma_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 0.6207420941978503,
+      "imagenette_psnr_mean_db": 26.13167313789373,
+      "imagenette_ssim_mean": 0.7711727626952657,
+      "raw_test_accuracy_mean": 0.19668789808917198,
+      "raw_u_probe_bits_mean": 0.19398445616502932
+    },
+    {
+      "condition": "pbc_compression",
+      "representation": "pbc_store_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 0.8318044635748407,
+      "imagenette_psnr_mean_db": 26.13167313789373,
+      "imagenette_ssim_mean": 0.7711727626952657,
+      "raw_test_accuracy_mean": 0.3576220806794055,
+      "raw_u_probe_bits_mean": 0.6545043428112284
+    },
+    {
+      "condition": "pbc_balanced",
+      "representation": "pbc_lzma_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 1.3982581421675955,
+      "imagenette_psnr_mean_db": 29.430665043309585,
+      "imagenette_ssim_mean": 0.8769275054006868,
+      "raw_test_accuracy_mean": 0.1846284501061571,
+      "raw_u_probe_bits_mean": 0.15204583334337998
+    },
+    {
+      "condition": "pbc_balanced",
+      "representation": "pbc_store_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 2.180220441878981,
+      "imagenette_psnr_mean_db": 29.430665043309585,
+      "imagenette_ssim_mean": 0.8769275054006868,
+      "raw_test_accuracy_mean": 0.3906581740976645,
+      "raw_u_probe_bits_mean": 0.7847535696700744
+    },
+    {
+      "condition": "pbc_quality",
+      "representation": "pbc_lzma_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 2.734527580115446,
+      "imagenette_psnr_mean_db": 33.39782178033556,
+      "imagenette_ssim_mean": 0.9417721297820912,
+      "raw_test_accuracy_mean": 0.16628450106157114,
+      "raw_u_probe_bits_mean": 0.11172127879354327
+    },
+    {
+      "condition": "pbc_quality",
+      "representation": "pbc_store_bytes",
+      "codec_family": "pbc",
+      "imagenette_bpp_mean": 4.488530584444666,
+      "imagenette_psnr_mean_db": 33.39782178033556,
+      "imagenette_ssim_mean": 0.9417721297820912,
+      "raw_test_accuracy_mean": 0.39422505307855626,
+      "raw_u_probe_bits_mean": 0.757801487226636
+    },
+    {
+      "condition": "jpeg_q10",
+      "representation": "jpeg_file_bytes",
+      "codec_family": "jpeg",
+      "imagenette_bpp_mean": 0.4476095367237261,
+      "imagenette_psnr_mean_db": 26.249095547201534,
+      "imagenette_ssim_mean": 0.7740998571390927,
+      "raw_test_accuracy_mean": 0.3663694267515924,
+      "raw_u_probe_bits_mean": 0.7601877177108526
+    },
+    {
+      "condition": "jpeg_q60",
+      "representation": "jpeg_file_bytes",
+      "codec_family": "jpeg",
+      "imagenette_bpp_mean": 1.2384649930334395,
+      "imagenette_psnr_mean_db": 32.80865419384044,
+      "imagenette_ssim_mean": 0.9278721210240177,
+      "raw_test_accuracy_mean": 0.3200849256900212,
+      "raw_u_probe_bits_mean": 0.41942056479194356
+    },
+    {
+      "condition": "webp_q30",
+      "representation": "codec_file_bytes",
+      "codec_family": "webp",
+      "imagenette_bpp_mean": 0.5975357036226114,
+      "imagenette_psnr_mean_db": 31.011042681765048,
+      "imagenette_ssim_mean": 0.8970504583721007,
+      "raw_test_accuracy_mean": 0.24356687898089172,
+      "raw_u_probe_bits_mean": 0.31564920889167836
+    },
+    {
+      "condition": "webp_q75",
+      "representation": "codec_file_bytes",
+      "codec_family": "webp",
+      "imagenette_bpp_mean": 1.0989329344148089,
+      "imagenette_psnr_mean_db": 34.956721031422155,
+      "imagenette_ssim_mean": 0.9496092174491687,
+      "raw_test_accuracy_mean": 0.22547770700636943,
+      "raw_u_probe_bits_mean": 0.3084193841526761
+    },
+    {
+      "condition": "avif_q40",
+      "representation": "codec_file_bytes",
+      "codec_family": "avif",
+      "imagenette_bpp_mean": 0.5903933307623408,
+      "imagenette_psnr_mean_db": 31.945324609749186,
+      "imagenette_ssim_mean": 0.9105505879981981,
+      "raw_test_accuracy_mean": 0.18394904458598726,
+      "raw_u_probe_bits_mean": 0.1869664970513214
+    },
+    {
+      "condition": "avif_q60",
+      "representation": "codec_file_bytes",
+      "codec_family": "avif",
+      "imagenette_bpp_mean": 1.1807093762440286,
+      "imagenette_psnr_mean_db": 36.54549937113788,
+      "imagenette_ssim_mean": 0.9620468625107479,
+      "raw_test_accuracy_mean": 0.16840764331210192,
+      "raw_u_probe_bits_mean": 0.20632211462393765
+    },
+    {
+      "condition": "jxl_d6",
+      "representation": "codec_file_bytes",
+      "codec_family": "jxl",
+      "imagenette_bpp_mean": 0.5686858081210191,
+      "imagenette_psnr_mean_db": 29.85270491018835,
+      "imagenette_ssim_mean": 0.8662670381429823,
+      "raw_test_accuracy_mean": 0.20382165605095542,
+      "raw_u_probe_bits_mean": 0.16292471451460525
+    },
+    {
+      "condition": "jxl_d3",
+      "representation": "codec_file_bytes",
+      "codec_family": "jxl",
+      "imagenette_bpp_mean": 0.9660804077925955,
+      "imagenette_psnr_mean_db": 32.960319256328,
+      "imagenette_ssim_mean": 0.9261407789027478,
+      "raw_test_accuracy_mean": 0.20585987261146496,
+      "raw_u_probe_bits_mean": 0.22077307658546508
+    }
+  ],
+  "fits": {
+    "raw_test_accuracy_mean": {
+      "rate_distortion_only_log_bpp_psnr": {
+        "n": 14,
+        "parameters": 3,
+        "rank": 3,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "psnr_db"
+        ],
+        "coefficients": [
+          0.7317358985524891,
+          0.06771761592934943,
+          -0.015437554793720776
+        ],
+        "r_squared": 0.3317257072466657,
+        "adjusted_r_squared": 0.2102212903824231,
+        "rmse": 0.06897272882685154,
+        "loo_rmse": 0.09036724915148037
+      },
+      "rate_distortion_plus_codec_log_bpp_psnr": {
+        "n": 14,
+        "parameters": 7,
+        "rank": 7,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "psnr_db",
+          "codec[jpeg]",
+          "codec[jxl]",
+          "codec[pbc]",
+          "codec[webp]"
+        ],
+        "coefficients": [
+          2.5413908889297883,
+          0.34545084021225453,
+          -0.06724650958121847,
+          -0.1105486337146804,
+          -0.12112044197620882,
+          -0.4361078222091151,
+          -0.01616908186600428
+        ],
+        "r_squared": 0.8570858534067212,
+        "adjusted_r_squared": 0.734588013469625,
+        "rmse": 0.03189610419384,
+        "loo_rmse": 0.05555569212295238
+      },
+      "rate_distortion_plus_codec_log_bpp_ssim": {
+        "n": 14,
+        "parameters": 7,
+        "rank": 7,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "ssim",
+          "codec[jpeg]",
+          "codec[jxl]",
+          "codec[pbc]",
+          "codec[webp]"
+        ],
+        "coefficients": [
+          3.117484483155722,
+          0.3437942773974765,
+          -3.07516909738865,
+          -0.05591883287904126,
+          -0.053709874521178536,
+          -0.3507054257580766,
+          0.0287334043734645
+        ],
+        "r_squared": 0.8305765402309102,
+        "adjusted_r_squared": 0.6853564318574047,
+        "rmse": 0.03472856226930386,
+        "loo_rmse": 0.07659459233265696
+      }
+    },
+    "raw_u_probe_bits_mean": {
+      "rate_distortion_only_log_bpp_psnr": {
+        "n": 14,
+        "parameters": 3,
+        "rank": 3,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "psnr_db"
+        ],
+        "coefficients": [
+          1.6897101643095673,
+          0.18537239034672107,
+          -0.04284201943852187
+        ],
+        "r_squared": 0.3016872787972217,
+        "adjusted_r_squared": 0.17472132948762564,
+        "rmse": 0.20410649575061116,
+        "loo_rmse": 0.2708855787773368
+      },
+      "rate_distortion_plus_codec_log_bpp_psnr": {
+        "n": 14,
+        "parameters": 7,
+        "rank": 7,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "psnr_db",
+          "codec[jpeg]",
+          "codec[jxl]",
+          "codec[pbc]",
+          "codec[webp]"
+        ],
+        "coefficients": [
+          7.497972263691526,
+          1.0496950603856776,
+          -0.2076755936792617,
+          -0.46610177575276157,
+          -0.46940756552133206,
+          -1.4152680730768004,
+          -0.11523901369609213
+        ],
+        "r_squared": 0.8391921089507252,
+        "adjusted_r_squared": 0.7013567737656324,
+        "rmse": 0.0979457345966423,
+        "loo_rmse": 0.1801859586469283
+      },
+      "rate_distortion_plus_codec_log_bpp_ssim": {
+        "n": 14,
+        "parameters": 7,
+        "rank": 7,
+        "coefficient_names": [
+          "intercept",
+          "log_bpp",
+          "ssim",
+          "codec[jpeg]",
+          "codec[jxl]",
+          "codec[pbc]",
+          "codec[webp]"
+        ],
+        "coefficients": [
+          9.984487488152979,
+          1.1212949422767338,
+          -10.237686746448812,
+          -0.3517950583652363,
+          -0.2817921042658911,
+          -1.2573034120217197,
+          0.016117671781985976
+        ],
+        "r_squared": 0.8872427886723355,
+        "adjusted_r_squared": 0.7905937503914803,
+        "rmse": 0.08201702515331252,
+        "loo_rmse": 0.15935129639669854
+      }
+    }
+  },
+  "warning": "Only 11 codec-setting points; predictors are correlated; coefficients, adjusted R-squared and leave-one-out residuals are descriptive. P-values are not used as confirmatory evidence."
+}

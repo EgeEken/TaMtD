@@ -1,0 +1,31 @@
+{
+  "dataset": "Imagenette 320px distribution prepared as 256x256 RGB",
+  "samples": 13394,
+  "split_counts": {
+    "train": 8522,
+    "validation": 947,
+    "test": 3925
+  },
+  "manifest": "data/cache/neural_accessibility/imagenette_320/manifest.jsonl",
+  "codec_manifest": "data/cache/neural_accessibility/imagenette_320/codec_manifest.jsonl",
+  "rate_distortion": {
+    "rows": 214304,
+    "samples": 13394,
+    "stream_forms": 16,
+    "path": "results/Phase 4.5B Analysis/imagenette_rd_per_sample.csv.gz",
+    "source_hashes_checked": 13394,
+    "pbc_store_lzma_pixel_identity_checked": 40182
+  },
+  "checkpoint_evaluations": 55,
+  "checkpoint_accuracy_recheck": "results/Phase 4.5B Analysis/checkpoint_accuracy_recheck.json",
+  "decoded_endpoint_rows": 84,
+  "predictions": {
+    "model_splits": 136,
+    "test_prediction_rows": 368950,
+    "summary_path": "results/Phase 4.5B Analysis/test_predictions_summary.csv.gz",
+    "logits_cache": "data/cache/neural_accessibility/imagenette_320/phase45b/prediction_logits.npz"
+  },
+  "device": "cuda",
+  "source_rgb_hashes_verified": 13394,
+  "training_performed": false
+}
