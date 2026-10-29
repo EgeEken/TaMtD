@@ -1,0 +1,249 @@
+{
+  "condition": "jpeg_q10",
+  "representation": "jpeg_dct_low4x4",
+  "ablation": "low4x4",
+  "mask_convention": "keep channels u*8+v for 0<=u,v<4; zero all other frequencies in Y, Cb, and Cr",
+  "model_family": "jpeg_dct_cnn",
+  "model_name": "JPEGDCTNet",
+  "parameter_count": 428426,
+  "seed": 42,
+  "device": "cuda",
+  "workers": 0,
+  "pin_memory": false,
+  "training_settings": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  },
+  "best_epoch": 20,
+  "epochs_run": 20,
+  "best_validation_accuracy": 0.778247096092925,
+  "test_accuracy": 0.7650955414012739,
+  "training_wall_seconds": 107.53140239999993,
+  "examples_per_second": 1585.0253618565298,
+  "peak_vram_mb": 93.603515625,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "validation_metrics": {
+    "n": 947,
+    "accuracy": 0.778247096092925,
+    "cross_entropy_nats": 0.7072474148356549,
+    "class_prior_cross_entropy_nats": 2.3019862036060705,
+    "u_probe_bits": 2.300721742072351,
+    "brier_score": 0.3163719549853799
+  },
+  "test_metrics": {
+    "n": 3925,
+    "accuracy": 0.7650955414012739,
+    "cross_entropy_nats": 0.7657742135843654,
+    "class_prior_cross_entropy_nats": 2.303672990382601,
+    "u_probe_bits": 2.2187189386760178,
+    "brier_score": 0.334712240316306
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5485840542051776,
+      "validation_accuracy": 0.5691657866948258,
+      "learning_rate": 0.00029815325108927063
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1574376197354779,
+      "validation_accuracy": 0.6684266103484688,
+      "learning_rate": 0.00029265847744427303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.9840652942097934,
+      "validation_accuracy": 0.665258711721225,
+      "learning_rate": 0.0002836509786282552
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.8896744896397012,
+      "validation_accuracy": 0.6853220696937699,
+      "learning_rate": 0.0002713525491562421
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.7762126051968349,
+      "validation_accuracy": 0.7254487856388595,
+      "learning_rate": 0.0002560660171779821
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7076850693932556,
+      "validation_accuracy": 0.7381203801478353,
+      "learning_rate": 0.000238167787843871
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.6298347025291373,
+      "validation_accuracy": 0.7265047518479408,
+      "learning_rate": 0.00021809857496093204
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5505524063804177,
+      "validation_accuracy": 0.7602956705385427,
+      "learning_rate": 0.00019635254915624216
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.4694577022719008,
+      "validation_accuracy": 0.7423442449841605,
+      "learning_rate": 0.00017346516975603468
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.4049989370302649,
+      "validation_accuracy": 0.7518479408658922,
+      "learning_rate": 0.00015000000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.3303671973715699,
+      "validation_accuracy": 0.7349524815205913,
+      "learning_rate": 0.0001265348302439654
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.27319878411108384,
+      "validation_accuracy": 0.7497360084477297,
+      "learning_rate": 0.0001036474508437579
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.21977002677769764,
+      "validation_accuracy": 0.747624076029567,
+      "learning_rate": 8.190142503906799e-05
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.18137397699808186,
+      "validation_accuracy": 0.7666314677930306,
+      "learning_rate": 6.183221215612905e-05
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.1548694580604537,
+      "validation_accuracy": 0.7592397043294614,
+      "learning_rate": 4.393398282201788e-05
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.13010461170666096,
+      "validation_accuracy": 0.7687434002111933,
+      "learning_rate": 2.86474508437579e-05
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.11361110210418701,
+      "validation_accuracy": 0.7666314677930306,
+      "learning_rate": 1.6349021371744834e-05
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.10287954911635085,
+      "validation_accuracy": 0.7750791974656811,
+      "learning_rate": 7.341522555726972e-06
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.09819598589332919,
+      "validation_accuracy": 0.7740232312565998,
+      "learning_rate": 1.8467489107293517e-06
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.09285221297649732,
+      "validation_accuracy": 0.778247096092925,
+      "learning_rate": 0.0
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase46\\jpeg_q10__jpeg_dct_low4x4__seed42.pt",
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 104,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793288053.9244957,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 16512004096,
+        "commit_used_bytes": 27673530368,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162503909376,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 1382,
+        "vram_free_mb": 6636,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793288163.8272412,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 15357542400,
+        "commit_used_bytes": 29244481536,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162487263232,
+      "gpu": {}
+    },
+    "peaks": {
+      "commit_used_bytes": 29718196224,
+      "cuda_allocated_peak_bytes": 98150400,
+      "cuda_reserved_peak_bytes": 121634816,
+      "vram_used_mb": 1714,
+      "utilization_percent": 42
+    },
+    "minima": {
+      "disk_free_bytes": 162487132160,
+      "vram_free_mb": 6304,
+      "memory_available_bytes": 13037260800
+    },
+    "gpu_utilization_mean_percent": 32.666666666666664
+  },
+  "child_wall_seconds_including_setup": 110.01664800000071
+}

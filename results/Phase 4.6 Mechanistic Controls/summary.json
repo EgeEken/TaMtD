@@ -1,0 +1,956 @@
+{
+  "schema": "tamtd.phase46.summary.v1",
+  "byte_probe": {
+    "ranking": {
+      "ByteStreamCNN": {
+        "accuracy_order": [
+          "jpeg_q10",
+          "webp_q30",
+          "jxl_d6",
+          "avif_q40"
+        ],
+        "u_probe_order": [
+          "jpeg_q10",
+          "webp_q30",
+          "avif_q40",
+          "jxl_d6"
+        ]
+      },
+      "BytePatchTransformer": {
+        "accuracy_order": [
+          "jpeg_q10",
+          "webp_q30",
+          "jxl_d6",
+          "avif_q40"
+        ],
+        "u_probe_order": [
+          "jpeg_q10",
+          "webp_q30",
+          "jxl_d6",
+          "avif_q40"
+        ]
+      }
+    },
+    "rank_correlations": {
+      "accuracy_spearman": 1.0,
+      "accuracy_kendall": 1.0,
+      "u_probe_spearman": 0.7999999999999999,
+      "u_probe_kendall": 0.6666666666666669
+    },
+    "jpeg_advantage_gaps": {
+      "webp_q30": {
+        "transformer_seed_gaps": [
+          0.10700636942675157,
+          0.1370700636942675,
+          0.12127388535031847
+        ],
+        "transformer_gap_mean": 0.12178343949044584,
+        "transformer_gap_sample_std": 0.015038323121909511,
+        "bytestreamcnn_seed42_gap": 0.11210191082802551
+      },
+      "avif_q40": {
+        "transformer_seed_gaps": [
+          0.16101910828025476,
+          0.1594904458598726,
+          0.13656050955414012
+        ],
+        "transformer_gap_mean": 0.15235668789808918,
+        "transformer_gap_sample_std": 0.013701227678724838,
+        "bytestreamcnn_seed42_gap": 0.17171974522293
+      },
+      "jxl_d6": {
+        "transformer_seed_gaps": [
+          0.13859872611464966,
+          0.14420382165605095,
+          0.11363057324840764
+        ],
+        "transformer_gap_mean": 0.13214437367303608,
+        "transformer_gap_sample_std": 0.016276513097997627,
+        "bytestreamcnn_seed42_gap": 0.1518471337579618
+      }
+    },
+    "bytestreamcnn_seed_counts": {
+      "jpeg_q10": 3,
+      "webp_q30": 1,
+      "avif_q40": 1,
+      "jxl_d6": 1
+    },
+    "unequal_seed_count_note": "ByteStreamCNN has three JPEG q10 seeds but only seed 42 for WebP/AVIF/JXL; mean-rank comparisons are descriptive. The legacy JPEG gap uses seed 42, while BytePatchTransformer gaps use all three matched seeds."
+  },
+  "byte_probe_seed_summaries": [
+    {
+      "condition": "jpeg_q10",
+      "seed_count": 3,
+      "best_validation_accuracy_mean": 0.3597324885603661,
+      "test_accuracy_mean": 0.3459023354564756,
+      "cross_entropy_nats_mean": 1.8435948927083592,
+      "u_probe_bits_mean": 0.6637523899362606,
+      "training_wall_seconds_mean": 102.81073810000028,
+      "examples_per_second_mean": 801.0818861116286,
+      "peak_cuda_allocated_mb_mean": 175.74072265625,
+      "padding_ratio_mean": 0.05184007256384467,
+      "best_validation_accuracy_sample_std": 0.01860219677821022,
+      "test_accuracy_sample_std": 0.004385817862819647,
+      "cross_entropy_nats_sample_std": 0.022975892433002267,
+      "u_probe_bits_sample_std": 0.03314720607309063,
+      "training_wall_seconds_sample_std": 4.654610583412543,
+      "examples_per_second_sample_std": 24.011203648411627,
+      "peak_cuda_allocated_mb_sample_std": 1.7923795109984781,
+      "padding_ratio_sample_std": 6.568535358965337e-05,
+      "parameter_count": 456138,
+      "minimum_vram_free_mb": 5647,
+      "minimum_host_available_gib": 13.348445892333984,
+      "maximum_commit_fraction": 0.7955368247035671
+    },
+    {
+      "condition": "webp_q30",
+      "seed_count": 3,
+      "best_validation_accuracy_mean": 0.2442801830341429,
+      "test_accuracy_mean": 0.2241188959660297,
+      "cross_entropy_nats_mean": 2.157373968152737,
+      "u_probe_bits_mean": 0.21106487385793585,
+      "training_wall_seconds_mean": 100.28830406666687,
+      "examples_per_second_mean": 821.774470479534,
+      "peak_cuda_allocated_mb_mean": 202.8017578125,
+      "padding_ratio_mean": 0.06455392323597157,
+      "best_validation_accuracy_sample_std": 0.012193247501364848,
+      "test_accuracy_sample_std": 0.016146381654300226,
+      "cross_entropy_nats_sample_std": 0.10949385427853256,
+      "u_probe_bits_sample_std": 0.15796624057545774,
+      "training_wall_seconds_sample_std": 12.28593761925405,
+      "examples_per_second_sample_std": 18.18374137588474,
+      "peak_cuda_allocated_mb_sample_std": 0.821487457226074,
+      "padding_ratio_sample_std": 0.0003312929984613577,
+      "parameter_count": 456138,
+      "minimum_vram_free_mb": 5616,
+      "minimum_host_available_gib": 13.889373779296875,
+      "maximum_commit_fraction": 0.7856328467446495
+    },
+    {
+      "condition": "avif_q40",
+      "seed_count": 3,
+      "best_validation_accuracy_mean": 0.2189369940161915,
+      "test_accuracy_mean": 0.1935456475583864,
+      "cross_entropy_nats_mean": 2.2097744300664104,
+      "u_probe_bits_mean": 0.1354669873147878,
+      "training_wall_seconds_mean": 99.15055873333222,
+      "examples_per_second_mean": 830.7867635420275,
+      "peak_cuda_allocated_mb_mean": 202.56119791666666,
+      "padding_ratio_mean": 0.06574270308116192,
+      "best_validation_accuracy_sample_std": 0.008792675816118829,
+      "test_accuracy_sample_std": 0.009341439868495656,
+      "cross_entropy_nats_sample_std": 0.0905095790571059,
+      "u_probe_bits_sample_std": 0.13057772085863426,
+      "training_wall_seconds_sample_std": 11.739535170892738,
+      "examples_per_second_sample_std": 1.6099606843434644,
+      "peak_cuda_allocated_mb_sample_std": 1.3304595475056848,
+      "padding_ratio_sample_std": 3.8679118551016545e-05,
+      "parameter_count": 456138,
+      "minimum_vram_free_mb": 5666,
+      "minimum_host_available_gib": 14.126556396484375,
+      "maximum_commit_fraction": 0.7785100845426437
+    },
+    {
+      "condition": "jxl_d6",
+      "seed_count": 3,
+      "best_validation_accuracy_mean": 0.24287222808870115,
+      "test_accuracy_mean": 0.2137579617834395,
+      "cross_entropy_nats_mean": 2.192355072280657,
+      "u_probe_bits_mean": 0.1605978084077653,
+      "training_wall_seconds_mean": 98.08603180000016,
+      "examples_per_second_mean": 840.3003183760778,
+      "peak_cuda_allocated_mb_mean": 185.3037109375,
+      "padding_ratio_mean": 0.05071727595552274,
+      "best_validation_accuracy_sample_std": 0.006335797254487852,
+      "test_accuracy_sample_std": 0.012189425440922993,
+      "cross_entropy_nats_sample_std": 0.09102601664148018,
+      "u_probe_bits_sample_std": 0.13132278280053972,
+      "training_wall_seconds_sample_std": 12.347566918819364,
+      "examples_per_second_sample_std": 6.08390465414852,
+      "peak_cuda_allocated_mb_sample_std": 2.1137108216357317,
+      "padding_ratio_sample_std": 0.0001306210453458079,
+      "parameter_count": 456138,
+      "minimum_vram_free_mb": 5834,
+      "minimum_host_available_gib": 14.36191177368164,
+      "maximum_commit_fraction": 0.7236914656156677
+    }
+  ],
+  "architecture_comparison": [
+    {
+      "condition": "jpeg_q10",
+      "bytestreamcnn_seed_count": 3,
+      "bytestreamcnn_accuracy_mean": 0.3663694267515924,
+      "bytestreamcnn_accuracy_sample_std": 0.011244879740491168,
+      "bytestreamcnn_u_probe_bits_mean": 0.7601877177108526,
+      "bytestreamcnn_u_probe_bits_sample_std": 0.04606096777770113,
+      "bytestreamcnn_accuracy_rank": 1,
+      "bytepatchtransformer_seed_count": 3,
+      "bytepatchtransformer_accuracy_mean": 0.3459023354564756,
+      "bytepatchtransformer_accuracy_sample_std": 0.004385817862819647,
+      "bytepatchtransformer_u_probe_bits_mean": 0.6637523899362606,
+      "bytepatchtransformer_u_probe_bits_sample_std": 0.03314720607309063,
+      "bytepatchtransformer_accuracy_rank": 1,
+      "accuracy_difference_transformer_minus_cnn": -0.020467091295116813,
+      "u_probe_difference_transformer_minus_cnn_bits": -0.09643532777459196
+    },
+    {
+      "condition": "webp_q30",
+      "bytestreamcnn_seed_count": 1,
+      "bytestreamcnn_accuracy_mean": 0.2435668789808917,
+      "bytestreamcnn_accuracy_sample_std": 0.0,
+      "bytestreamcnn_u_probe_bits_mean": 0.3156492088916783,
+      "bytestreamcnn_u_probe_bits_sample_std": 0.0,
+      "bytestreamcnn_accuracy_rank": 2,
+      "bytepatchtransformer_seed_count": 3,
+      "bytepatchtransformer_accuracy_mean": 0.2241188959660297,
+      "bytepatchtransformer_accuracy_sample_std": 0.016146381654300226,
+      "bytepatchtransformer_u_probe_bits_mean": 0.21106487385793585,
+      "bytepatchtransformer_u_probe_bits_sample_std": 0.15796624057545774,
+      "bytepatchtransformer_accuracy_rank": 2,
+      "accuracy_difference_transformer_minus_cnn": -0.019447983014861975,
+      "u_probe_difference_transformer_minus_cnn_bits": -0.10458433503374245
+    },
+    {
+      "condition": "avif_q40",
+      "bytestreamcnn_seed_count": 1,
+      "bytestreamcnn_accuracy_mean": 0.1839490445859872,
+      "bytestreamcnn_accuracy_sample_std": 0.0,
+      "bytestreamcnn_u_probe_bits_mean": 0.1869664970513214,
+      "bytestreamcnn_u_probe_bits_sample_std": 0.0,
+      "bytestreamcnn_accuracy_rank": 4,
+      "bytepatchtransformer_seed_count": 3,
+      "bytepatchtransformer_accuracy_mean": 0.1935456475583864,
+      "bytepatchtransformer_accuracy_sample_std": 0.009341439868495656,
+      "bytepatchtransformer_u_probe_bits_mean": 0.1354669873147878,
+      "bytepatchtransformer_u_probe_bits_sample_std": 0.13057772085863426,
+      "bytepatchtransformer_accuracy_rank": 4,
+      "accuracy_difference_transformer_minus_cnn": 0.009596602972399199,
+      "u_probe_difference_transformer_minus_cnn_bits": -0.05149950973653361
+    },
+    {
+      "condition": "jxl_d6",
+      "bytestreamcnn_seed_count": 1,
+      "bytestreamcnn_accuracy_mean": 0.2038216560509554,
+      "bytestreamcnn_accuracy_sample_std": 0.0,
+      "bytestreamcnn_u_probe_bits_mean": 0.1629247145146052,
+      "bytestreamcnn_u_probe_bits_sample_std": 0.0,
+      "bytestreamcnn_accuracy_rank": 3,
+      "bytepatchtransformer_seed_count": 3,
+      "bytepatchtransformer_accuracy_mean": 0.2137579617834395,
+      "bytepatchtransformer_accuracy_sample_std": 0.012189425440922993,
+      "bytepatchtransformer_u_probe_bits_mean": 0.1605978084077653,
+      "bytepatchtransformer_u_probe_bits_sample_std": 0.13132278280053972,
+      "bytepatchtransformer_accuracy_rank": 3,
+      "accuracy_difference_transformer_minus_cnn": 0.009936305732484108,
+      "u_probe_difference_transformer_minus_cnn_bits": -0.0023269061068398877
+    }
+  ],
+  "dct_contributions": {
+    "jpeg_q10": {
+      "dc_only_minus_full": {
+        "test_accuracy": {
+          "per_seed": [
+            0.012993630573248427,
+            0.0022929936305732257,
+            -0.03719745222929938
+          ],
+          "mean": -0.007303609341825908,
+          "sample_std": 0.026435909095025415
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            0.09638389612886833,
+            0.06786997240433656,
+            -0.08721675160195064
+          ],
+          "mean": 0.02567903897708475,
+          "sample_std": 0.09880463354211262
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            -0.06680822585311186,
+            -0.04704388001675086,
+            0.06045404547048505
+          ],
+          "mean": -0.017799353466459222,
+          "sample_std": 0.06848615316597388
+        }
+      },
+      "low4x4_minus_dc_only": {
+        "test_accuracy": {
+          "per_seed": [
+            -0.006878980891719788,
+            -0.015796178343949085,
+            0.046114649681528674
+          ],
+          "mean": 0.007813163481953267,
+          "sample_std": 0.033468372927626916
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            -0.07846939230997041,
+            -0.08035792201225922,
+            0.1135062687946915
+          ],
+          "mean": -0.015107015175846042,
+          "sample_std": 0.11138637370151566
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            0.05439083803990841,
+            0.05569986707845309,
+            -0.07867655019091957
+          ],
+          "mean": 0.010471384975813977,
+          "sample_std": 0.07720715088400189
+        }
+      },
+      "full_minus_low4x4": {
+        "test_accuracy": {
+          "per_seed": [
+            -0.006114649681528639,
+            0.01350318471337586,
+            -0.008917197452229297
+          ],
+          "mean": -0.0005095541401273588,
+          "sample_std": 0.012216022516929307
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            -0.01791450381889792,
+            0.012487949607922655,
+            -0.026289517192740863
+          ],
+          "mean": -0.010572023801238709,
+          "sample_std": 0.020404827675734826
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            0.012417387813203451,
+            -0.00865598706170223,
+            0.018222504720434518
+          ],
+          "mean": 0.0073279684906452465,
+          "sample_std": 0.01414354877324711
+        }
+      },
+      "full_minus_y_only": {
+        "test_accuracy": {
+          "per_seed": [
+            0.06726114649681536,
+            0.06904458598726115,
+            0.06675159235668793
+          ],
+          "mean": 0.06768577494692148,
+          "sample_std": 0.0012040294589178414
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            0.3654740261320253,
+            0.26964664751333167,
+            0.3206236046762192
+          ],
+          "mean": 0.31858142610719203,
+          "sample_std": 0.04794631887031015
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            -0.2533272907813008,
+            -0.1869048134713034,
+            -0.2222393476022837
+          ],
+          "mean": -0.22082381728496261,
+          "sample_std": 0.03323385574318335
+        }
+      }
+    },
+    "jpeg_q60": {
+      "dc_only_minus_full": {
+        "test_accuracy": {
+          "per_seed": [
+            0.007643312101910826,
+            0.004585987261146562,
+            0.0028025477707005475
+          ],
+          "mean": 0.005010615711252646,
+          "sample_std": 0.0024481588629129123
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            0.07749599377646854,
+            0.06389221936627498,
+            0.03273004887754727
+          ],
+          "mean": 0.058039420673430264,
+          "sample_std": 0.022949703594546435
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            -0.05371612959085437,
+            -0.044286711713454996,
+            -0.0226867410990651
+          ],
+          "mean": -0.04022986080112482,
+          "sample_std": 0.015907522341246347
+        }
+      },
+      "low4x4_minus_dc_only": {
+        "test_accuracy": {
+          "per_seed": [
+            -0.003057324840764375,
+            -0.006369426751592355,
+            -0.010445859872611374
+          ],
+          "mean": -0.006624203821656034,
+          "sample_std": 0.0037008507124417023
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            -0.037071635695649974,
+            -0.05574937643127065,
+            -0.05678467150233857
+          ],
+          "mean": -0.04986856120975306,
+          "sample_std": 0.011094545323318633
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            0.025696099761185365,
+            0.03864252309131022,
+            0.03936013495086865
+          ],
+          "mean": 0.034566252601121415,
+          "sample_std": 0.007690152810452721
+        }
+      },
+      "full_minus_low4x4": {
+        "test_accuracy": {
+          "per_seed": [
+            -0.004585987261146451,
+            0.0017834394904457929,
+            0.007643312101910826
+          ],
+          "mean": 0.0016135881104033893,
+          "sample_std": 0.006116418710838477
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            -0.04042435808081857,
+            -0.008142842935004335,
+            0.0240546226247913
+          ],
+          "mean": -0.008170859463677202,
+          "sample_std": 0.03223949948282404
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            0.028020029829669002,
+            0.005644188622144775,
+            -0.016673393851803553
+          ],
+          "mean": 0.005663608200003408,
+          "sample_std": 0.02234671816918328
+        }
+      },
+      "full_minus_y_only": {
+        "test_accuracy": {
+          "per_seed": [
+            0.06318471337579623,
+            0.06878980891719744,
+            0.06369426751592366
+          ],
+          "mean": 0.06522292993630578,
+          "sample_std": 0.0030994968307251577
+        },
+        "u_probe_bits": {
+          "per_seed": [
+            0.2552675879341222,
+            0.32350547812536634,
+            0.2896789703491571
+          ],
+          "mean": 0.2894840121362152,
+          "sample_std": 0.034119362845262347
+        },
+        "cross_entropy_nats": {
+          "per_seed": [
+            -0.17693800886487066,
+            -0.22423691005829072,
+            -0.20079016156502227
+          ],
+          "mean": -0.20065502682939454,
+          "sample_std": 0.023649740158695365
+        }
+      }
+    }
+  },
+  "dct_seed_summary": [
+    {
+      "condition": "jpeg_q10",
+      "ablation": "full",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7884547694473777,
+      "test_accuracy_mean": 0.7620382165605095,
+      "cross_entropy_nats_mean": 0.7757161398789837,
+      "u_probe_bits_mean": 2.204375770913894,
+      "relative_u_vs_full_dct_mean": 1.0,
+      "accuracy_difference_vs_rgb_mean": -0.04484076433121017,
+      "u_probe_difference_vs_rgb_bits_mean": 0.03080565811647329,
+      "validation_accuracy_sample_std": 0.009581596331444049,
+      "test_accuracy_sample_std": 0.003192347537870487,
+      "cross_entropy_nats_sample_std": 0.011027236142737814,
+      "u_probe_bits_sample_std": 0.015908938897839408,
+      "relative_u_vs_full_dct_sample_std": 0.0,
+      "accuracy_difference_vs_rgb_sample_std": 0.006783962779971621,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.03727439568394918
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "dc_only",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7775431186202041,
+      "test_accuracy_mean": 0.7547346072186837,
+      "cross_entropy_nats_mean": 0.7579167864125246,
+      "u_probe_bits_mean": 2.2300548098909787,
+      "relative_u_vs_full_dct_mean": 1.0118407513486607,
+      "accuracy_difference_vs_rgb_mean": -0.05214437367303607,
+      "u_probe_difference_vs_rgb_bits_mean": 0.056484697093558044,
+      "validation_accuracy_sample_std": 0.010577246885826633,
+      "test_accuracy_sample_std": 0.02619912802819667,
+      "cross_entropy_nats_sample_std": 0.058882815825724015,
+      "u_probe_bits_sample_std": 0.08494994638535042,
+      "relative_u_vs_full_dct_sample_std": 0.04471199439658576,
+      "accuracy_difference_vs_rgb_sample_std": 0.025265785291960777,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.06595915374901841
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "low4x4",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7817669834565294,
+      "test_accuracy_mean": 0.7625477707006368,
+      "cross_entropy_nats_mean": 0.7683881713883385,
+      "u_probe_bits_mean": 2.2149477947151324,
+      "relative_u_vs_full_dct_mean": 1.0047572915803389,
+      "accuracy_difference_vs_rgb_mean": -0.044331210191082805,
+      "u_probe_difference_vs_rgb_bits_mean": 0.041377681917711996,
+      "validation_accuracy_sample_std": 0.003226030056287164,
+      "test_accuracy_sample_std": 0.009681528662420422,
+      "cross_entropy_nats_sample_std": 0.024361490776929413,
+      "u_probe_bits_sample_std": 0.03514620193253841,
+      "relative_u_vs_full_dct_sample_std": 0.00924326877516228,
+      "accuracy_difference_vs_rgb_sample_std": 0.00851123214700137,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.045772219850193085
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "y_only",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7096092925026399,
+      "test_accuracy_mean": 0.6943524416135881,
+      "cross_entropy_nats_mean": 0.9965399571639465,
+      "u_probe_bits_mean": 1.8857943448067018,
+      "relative_u_vs_full_dct_mean": 0.8555103001416179,
+      "accuracy_difference_vs_rgb_mean": -0.11252653927813165,
+      "u_probe_difference_vs_rgb_bits_mean": -0.28777576799071874,
+      "validation_accuracy_sample_std": 0.00824735974224565,
+      "test_accuracy_sample_std": 0.0023672798071790353,
+      "cross_entropy_nats_sample_std": 0.031057572129651573,
+      "u_probe_bits_sample_std": 0.044806605293499675,
+      "relative_u_vs_full_dct_sample_std": 0.021484945609426834,
+      "accuracy_difference_vs_rgb_sample_std": 0.006041673515696803,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.07354008540477551
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "full",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7824709609292503,
+      "test_accuracy_mean": 0.7642462845010615,
+      "cross_entropy_nats_mean": 0.7684557995940723,
+      "u_probe_bits_mean": 2.214850227838102,
+      "relative_u_vs_full_dct_mean": 1.0,
+      "accuracy_difference_vs_rgb_mean": -0.05537154989384289,
+      "u_probe_difference_vs_rgb_bits_mean": -0.03441457403347803,
+      "validation_accuracy_sample_std": 0.012802909876433089,
+      "test_accuracy_sample_std": 0.0019291408393377132,
+      "cross_entropy_nats_sample_std": 0.014445672331040564,
+      "u_probe_bits_sample_std": 0.02084069983429911,
+      "relative_u_vs_full_dct_sample_std": 0.0,
+      "accuracy_difference_vs_rgb_sample_std": 0.0032260585839868996,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.04016305001977887
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "dc_only",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.7912706793382611,
+      "test_accuracy_mean": 0.7692569002123143,
+      "cross_entropy_nats_mean": 0.7282259387929475,
+      "u_probe_bits_mean": 2.272889648511532,
+      "relative_u_vs_full_dct_mean": 1.0262405733193065,
+      "accuracy_difference_vs_rgb_mean": -0.050360934182590245,
+      "u_probe_difference_vs_rgb_bits_mean": 0.023624846639952235,
+      "validation_accuracy_sample_std": 0.006187397335884154,
+      "test_accuracy_sample_std": 0.0031445449820082538,
+      "cross_entropy_nats_sample_std": 0.014757125714170859,
+      "u_probe_bits_sample_std": 0.02129003208560919,
+      "relative_u_vs_full_dct_sample_std": 0.010438813383935566,
+      "accuracy_difference_vs_rgb_sample_std": 0.00153572325435454,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.01730245595424416
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "low4x4",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.786342837029215,
+      "test_accuracy_mean": 0.7626326963906581,
+      "cross_entropy_nats_mean": 0.7627921913940688,
+      "u_probe_bits_mean": 2.223021087301779,
+      "relative_u_vs_full_dct_mean": 1.0037191516690938,
+      "accuracy_difference_vs_rgb_mean": -0.05698513800424628,
+      "u_probe_difference_vs_rgb_bits_mean": -0.02624371456980083,
+      "validation_accuracy_sample_std": 0.007925610875887177,
+      "test_accuracy_sample_std": 0.006211198132730839,
+      "cross_entropy_nats_sample_std": 0.022251234355439378,
+      "u_probe_bits_sample_std": 0.03210174545825059,
+      "relative_u_vs_full_dct_sample_std": 0.014493322173897125,
+      "accuracy_difference_vs_rgb_sample_std": 0.003275974780804329,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.012826263639980068
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "y_only",
+      "seed_count": 3,
+      "validation_accuracy_mean": 0.722632875747976,
+      "test_accuracy_mean": 0.6990233545647558,
+      "cross_entropy_nats_mean": 0.9691108264234668,
+      "u_probe_bits_mean": 1.9253662157018867,
+      "relative_u_vs_full_dct_mean": 0.8692276918705392,
+      "accuracy_difference_vs_rgb_mean": -0.12059447983014866,
+      "u_probe_difference_vs_rgb_bits_mean": -0.32389858616969325,
+      "validation_accuracy_sample_std": 0.00958159633144397,
+      "test_accuracy_sample_std": 0.005001250739476999,
+      "cross_entropy_nats_sample_std": 0.03479906889361533,
+      "u_probe_bits_sample_std": 0.05020444412037221,
+      "relative_u_vs_full_dct_sample_std": 0.01630274735113787,
+      "accuracy_difference_vs_rgb_sample_std": 0.004981744161719723,
+      "u_probe_difference_vs_rgb_bits_sample_std": 0.04587214941263418
+    }
+  ],
+  "dct_energy_rows": [
+    {
+      "condition": "jpeg_q10",
+      "ablation": "full",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "full",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "full",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "dc_only",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.5705408364916995,
+      "retained_squared_energy_fraction": 0.8136848161456207
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "dc_only",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.8625536887393075,
+      "retained_squared_energy_fraction": 0.9323396658821479
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "dc_only",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.8388355936447445,
+      "retained_squared_energy_fraction": 0.91357336854792
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "low4x4",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.9796435377213358,
+      "retained_squared_energy_fraction": 0.9959585888046809
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "low4x4",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.999990101233,
+      "retained_squared_energy_fraction": 0.9999958460695206
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "low4x4",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.9999785203966488,
+      "retained_squared_energy_fraction": 0.9999906886959365
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "y_only",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "y_only",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.0,
+      "retained_absolute_magnitude_fraction": 0.0,
+      "retained_squared_energy_fraction": 0.0
+    },
+    {
+      "condition": "jpeg_q10",
+      "ablation": "y_only",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.0,
+      "retained_absolute_magnitude_fraction": 0.0,
+      "retained_squared_energy_fraction": 0.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "full",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "full",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "full",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "dc_only",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.4964251281550505,
+      "retained_squared_energy_fraction": 0.8167505398414715
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "dc_only",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.6940533891266178,
+      "retained_squared_energy_fraction": 0.917545209892259
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "dc_only",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.015625,
+      "retained_absolute_magnitude_fraction": 0.6714348163111238,
+      "retained_squared_energy_fraction": 0.8964241582504738
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "low4x4",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.9339128191906281,
+      "retained_squared_energy_fraction": 0.9947142648321199
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "low4x4",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.9993460719478564,
+      "retained_squared_energy_fraction": 0.9999409914708134
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "low4x4",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.25,
+      "retained_absolute_magnitude_fraction": 0.9990343244520284,
+      "retained_squared_energy_fraction": 0.9999073126664124
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "y_only",
+      "component": "y_coefficients",
+      "retained_coefficient_fraction": 1.0,
+      "retained_absolute_magnitude_fraction": 1.0,
+      "retained_squared_energy_fraction": 1.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "y_only",
+      "component": "cb_coefficients",
+      "retained_coefficient_fraction": 0.0,
+      "retained_absolute_magnitude_fraction": 0.0,
+      "retained_squared_energy_fraction": 0.0
+    },
+    {
+      "condition": "jpeg_q60",
+      "ablation": "y_only",
+      "component": "cr_coefficients",
+      "retained_coefficient_fraction": 0.0,
+      "retained_absolute_magnitude_fraction": 0.0,
+      "retained_squared_energy_fraction": 0.0
+    }
+  ],
+  "overfit_gate": {
+    "condition": "jpeg_q10",
+    "representation": "byte_patch_transformer_overfit",
+    "seed": 42,
+    "status": "passed",
+    "passed": true,
+    "target_train_accuracy": 0.9,
+    "stratified_sample_count": 128,
+    "stratified_class_counts": {
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
+      "4": 13,
+      "5": 13,
+      "6": 13,
+      "7": 13,
+      "8": 12,
+      "9": 12
+    },
+    "parameter_count": 456138,
+    "device": "cuda",
+    "training_wall_seconds": 4.354075400000511,
+    "epochs_run": 12,
+    "best_train_accuracy": 0.9296875,
+    "peak_vram_mb": 152.7607421875,
+    "true_input_bytes_total": 469370,
+    "input_byte_length_mean": 3666.953125,
+    "input_byte_length_max": 7025,
+    "batching": {
+      "max_padded_tokens": 1048576,
+      "max_samples_per_batch": 32,
+      "effective_batch_size": 32,
+      "bucket_multiplier": 50
+    },
+    "resource_diagnostics": {
+      "schema": "tamtd.resource-diagnostics.v1",
+      "sample_count": 6,
+      "sampling_interval_seconds": 1.0,
+      "start": {
+        "timestamp": 1793285374.1926558,
+        "platform": "win32",
+        "process": {
+          "rss_bytes": null,
+          "virtual_bytes": null,
+          "status": "unavailable: process working-set counters are not trusted on Windows",
+          "rss_reliability": "unavailable"
+        },
+        "system": {
+          "memory_total_bytes": 34011373568,
+          "memory_available_bytes": 15925559296,
+          "commit_used_bytes": 29115781120,
+          "commit_limit_bytes": 40990695424
+        },
+        "cgroup": {
+          "memory_current_bytes": null,
+          "memory_peak_bytes": null,
+          "memory_limit_bytes": null,
+          "swap_current_bytes": null,
+          "swap_limit_bytes": null
+        },
+        "disk_free_bytes": 162549436416,
+        "gpu": {
+          "cuda_allocated_bytes": 0,
+          "cuda_allocated_peak_bytes": 0,
+          "cuda_reserved_bytes": 0,
+          "cuda_reserved_peak_bytes": 0,
+          "vram_used_mb": 2127,
+          "vram_free_mb": 5891,
+          "vram_total_mb": 8192,
+          "utilization_percent": 24
+        }
+      },
+      "end": {
+        "timestamp": 1793285378.784338,
+        "platform": "win32",
+        "process": {
+          "rss_bytes": null,
+          "virtual_bytes": null,
+          "status": "unavailable: process working-set counters are not trusted on Windows",
+          "rss_reliability": "unavailable"
+        },
+        "system": {
+          "memory_total_bytes": 34011373568,
+          "memory_available_bytes": 14921531392,
+          "commit_used_bytes": 30586638336,
+          "commit_limit_bytes": 40990695424
+        },
+        "cgroup": {
+          "memory_current_bytes": null,
+          "memory_peak_bytes": null,
+          "memory_limit_bytes": null,
+          "swap_current_bytes": null,
+          "swap_limit_bytes": null
+        },
+        "disk_free_bytes": 162549424128,
+        "gpu": {}
+      },
+      "peaks": {
+        "commit_used_bytes": 30586638336,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 2127,
+        "utilization_percent": 24
+      },
+      "minima": {
+        "disk_free_bytes": 162549424128,
+        "vram_free_mb": 5891,
+        "memory_available_bytes": 14921531392
+      },
+      "gpu_utilization_mean_percent": 24.0
+    },
+    "child_wall_seconds_including_setup": 4.719156799999837
+  },
+  "resource_safety": {
+    "condition_count": 30,
+    "all_children_cuda": true,
+    "minimum_disk_free_bytes": 161712865280,
+    "minimum_host_available_bytes": 11645485056,
+    "minimum_vram_free_mb": 5616,
+    "maximum_commit_fraction": 0.811622969746472
+  }
+}

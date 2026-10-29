@@ -129,10 +129,14 @@ def _update_summary(summary: dict, snapshot: dict) -> None:
         ("maximum_cgroup_swap_bytes", cgroup.get("swap_current_bytes")),
         ("maximum_commit_used_bytes", system.get("commit_used_bytes")),
         ("maximum_vram_used_mb", gpu.get("vram_used_mb")),
+        ("minimum_vram_free_mb", gpu.get("vram_free_mb")),
         ("maximum_gpu_utilization_percent", gpu.get("utilization_percent")),
     ):
         if value is not None:
-            summary[key] = max(summary.get(key, value), value)
+            if key.startswith("minimum_"):
+                summary[key] = min(summary.get(key, value), value)
+            else:
+                summary[key] = max(summary.get(key, value), value)
     commit_used = system.get("commit_used_bytes")
     commit_limit = system.get("commit_limit_bytes")
     if commit_used is not None and commit_limit:
@@ -150,6 +154,18 @@ def _safety_reason(snapshot: dict, runtime: dict, commit_high_since: float | Non
     if disk_free is not None and disk_free < int(runtime["stop_free_gb"] * 1_000_000_000):
         return "free disk space fell below the configured stop threshold", commit_high_since
     system = snapshot.get("system", {})
+    available = system.get("memory_available_bytes")
+    stop_available_gib = runtime.get("stop_memory_available_gib")
+    if stop_available_gib is not None and available is not None and available < int(stop_available_gib * (1024**3)):
+        return "available host memory fell below the configured stop threshold", commit_high_since
+    gpu = snapshot.get("gpu", {})
+    if runtime.get("require_cuda"):
+        vram_free = gpu.get("vram_free_mb")
+        if vram_free is None:
+            return "CUDA VRAM telemetry is unavailable", commit_high_since
+        stop_vram = runtime.get("stop_cuda_free_mb")
+        if stop_vram is not None and vram_free < int(stop_vram):
+            return "free CUDA VRAM fell below the configured stop threshold", commit_high_since
     if snapshot.get("platform", "").startswith("win"):
         used = system.get("commit_used_bytes")
         limit = system.get("commit_limit_bytes")
@@ -205,6 +221,17 @@ def _check_start(snapshot: dict, runtime: dict) -> None:
         available = snapshot.get("system", {}).get("memory_available_bytes")
         if available is None or available < int(runtime["linux_minimum_available_gib"] * (1024**3)):
             raise SafetyStop("Linux available RAM is unavailable or below the configured start threshold")
+    available = snapshot.get("system", {}).get("memory_available_bytes")
+    minimum_available_gib = runtime.get("minimum_memory_available_gib")
+    if minimum_available_gib is not None and (
+        available is None or available < int(minimum_available_gib * (1024**3))
+    ):
+        raise SafetyStop("available host memory is unavailable or below the configured start threshold")
+    if runtime.get("require_cuda"):
+        vram_free = snapshot.get("gpu", {}).get("vram_free_mb")
+        minimum_vram = runtime.get("minimum_cuda_free_mb")
+        if vram_free is None or minimum_vram is None or vram_free < int(minimum_vram):
+            raise SafetyStop("CUDA VRAM is unavailable or below the configured start threshold")
 
 
 def _run_child(
@@ -366,6 +393,7 @@ def main() -> None:
         jobs = []
         for job in _jobs(args, config, results):
             phase = job["phase"]
+            phase_runtime = {**runtime, **phase.get("runtime", {})}
             output_dir = results / args.output_subdir if args.output_subdir else results / phase["results_subdir"]
             suffix = args.result_suffix or job.get("result_suffix")
             output = _result_path(output_dir, job["condition"], job["representation"], job["seed"], suffix)
@@ -379,37 +407,61 @@ def main() -> None:
                 continue
             if _phase3_has_row(results, job, job["seed"], phase):
                 continue
-            command = [
-                str(python), str(PROJECT_ROOT / "scripts/run_phase4_condition.py"),
-                "--condition", job["condition"],
-                "--representation", job["representation"],
-                "--seed", str(job["seed"]),
-                "--device", str(args.device or job.get("device") or device),
-                "--cache-root", str(cache / phase["cache_subdir"]),
-                "--phase4-cache-root", str(cache / phase["cache_subdir"] / "phase4_streams"),
-                "--dataset-root", str(data / phase["dataset_subdir"]),
-                "--output-dir", str(output_dir),
-                "--checkpoint-dir", str(cache / phase["cache_subdir"] / "checkpoints" / "phase4"),
-                "--training-settings", str(results / paths_config["training_settings"]),
-                "--temp-root", str(temp),
-            ]
+            condition_runner = phase.get("condition_runner", "scripts/run_phase4_condition.py")
+            if condition_runner != "scripts/run_phase4_condition.py":
+                command = [
+                    str(python), str(PROJECT_ROOT / condition_runner),
+                    "--condition", job["condition"],
+                    "--representation", job["representation"],
+                    "--seed", str(job["seed"]),
+                    "--device", str(args.device or job.get("device") or phase.get("device") or device),
+                    "--cache-dir", str(cache / phase["cache_subdir"]),
+                    "--phase4-cache-dir", str(cache / phase["cache_subdir"] / "phase4_streams"),
+                    "--dataset-root", str(data / phase["dataset_subdir"]),
+                    "--output-dir", str(output_dir),
+                    "--checkpoint-dir", str(cache / phase["cache_subdir"] / "checkpoints" / phase.get("checkpoint_subdir", "phase4")),
+                    "--training-settings", str(results / paths_config["training_settings"]),
+                    "--temp-root", str(temp),
+                ]
+                command.extend([
+                    "--max-padded-tokens", str(args.max_padded_tokens or phase_runtime["max_padded_tokens"]),
+                    "--max-samples-per-batch", str(args.max_samples_per_batch or phase_runtime["max_samples_per_batch"]),
+                    "--effective-batch-size", str(args.effective_batch_size or phase_runtime["effective_batch_size"]),
+                    "--bucket-multiplier", str(phase_runtime["bucket_multiplier"]),
+                ])
+            else:
+                command = [
+                    str(python), str(PROJECT_ROOT / condition_runner),
+                    "--condition", job["condition"],
+                    "--representation", job["representation"],
+                    "--seed", str(job["seed"]),
+                    "--device", str(args.device or job.get("device") or phase.get("device") or device),
+                    "--cache-root", str(cache / phase["cache_subdir"]),
+                    "--phase4-cache-root", str(cache / phase["cache_subdir"] / "phase4_streams"),
+                    "--dataset-root", str(data / phase["dataset_subdir"]),
+                    "--output-dir", str(output_dir),
+                    "--checkpoint-dir", str(cache / phase["cache_subdir"] / "checkpoints" / "phase4"),
+                    "--training-settings", str(results / paths_config["training_settings"]),
+                    "--temp-root", str(temp),
+                ]
             batch_size = args.batch_size or job.get("batch_size")
             if batch_size is not None:
                 command.extend(["--batch-size", str(batch_size)])
-            mode = args.byte_batch_mode or job.get("byte_batch_mode") or runtime.get("byte_batch_mode", "fixed")
-            command.extend(["--byte-batch-mode", mode])
-            if mode == "token_budget":
-                command.extend([
-                    "--max-padded-tokens", str(args.max_padded_tokens or runtime["max_padded_tokens"]),
-                    "--max-samples-per-batch", str(args.max_samples_per_batch or runtime["max_samples_per_batch"]),
-                    "--effective-batch-size", str(args.effective_batch_size or runtime["effective_batch_size"]),
-                    "--bucket-multiplier", str(runtime["bucket_multiplier"]),
-                ])
-            if suffix:
-                command.extend(["--result-suffix", suffix])
-            if pbc:
-                command.extend(["--pbc-root", pbc])
-            jobs.append({"name": f"{job['condition']}/{job['representation']} seed={job['seed']}", "command": command, "output": output, "log_dir": output_dir / "logs" / "portable_runner"})
+            if condition_runner == "scripts/run_phase4_condition.py":
+                mode = args.byte_batch_mode or job.get("byte_batch_mode") or phase_runtime.get("byte_batch_mode", "fixed")
+                command.extend(["--byte-batch-mode", mode])
+                if mode == "token_budget":
+                    command.extend([
+                        "--max-padded-tokens", str(args.max_padded_tokens or phase_runtime["max_padded_tokens"]),
+                        "--max-samples-per-batch", str(args.max_samples_per_batch or phase_runtime["max_samples_per_batch"]),
+                        "--effective-batch-size", str(args.effective_batch_size or phase_runtime["effective_batch_size"]),
+                        "--bucket-multiplier", str(phase_runtime["bucket_multiplier"]),
+                    ])
+                if suffix:
+                    command.extend(["--result-suffix", suffix])
+                if pbc:
+                    command.extend(["--pbc-root", pbc])
+            jobs.append({"name": f"{job['condition']}/{job['representation']} seed={job['seed']}", "command": command, "output": output, "log_dir": output_dir / "logs" / "portable_runner", "runtime": phase_runtime})
 
     if args.dry_run:
         print(json.dumps({"python": str(python), "device": device, "data_root": str(data), "cache_root": str(cache), "results_root": str(results), "temp_root": str(temp), "pending_jobs": [{"name": job["name"], "command": job["command"], "output": str(job["output"])} for job in jobs], "count": len(jobs)}, indent=2))
@@ -421,7 +473,7 @@ def main() -> None:
         log_dir = job.get("log_dir", output.parent / "logs")
         log_path = log_dir / f"{output.stem}.log"
         try:
-            _run_child(job["command"], output, log_path, environment, runtime, cache)
+            _run_child(job["command"], output, log_path, environment, job.get("runtime", runtime), cache)
         except (SafetyStop, RuntimeError) as error:
             print(f"STOPPED {job['name']}: {error}", file=sys.stderr, flush=True)
             raise SystemExit(2) from error

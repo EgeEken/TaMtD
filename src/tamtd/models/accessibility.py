@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -70,6 +72,89 @@ class ByteStreamCNN(nn.Module):
         values = self.block3(values, valid_lengths)
         mask = _sequence_mask(valid_lengths, values.size(-1), values.dtype)
         pooled = (values * mask).sum(dim=-1) / mask.sum(dim=-1).clamp_min(1.0)
+        return self.classifier(self.dropout(pooled))
+
+
+class BytePatchTransformer(nn.Module):
+    pad_token = 256
+
+    def __init__(
+        self,
+        num_classes: int = 10,
+        embedding_dim: int = 32,
+        patch_size: int = 32,
+        model_dim: int = 96,
+        layers: int = 4,
+        heads: int = 4,
+        feedforward_dim: int = 256,
+        dropout: float = 0.1,
+        max_attention_tokens: int = 256,
+    ) -> None:
+        super().__init__()
+        if model_dim % 2 or model_dim % heads or patch_size < 1 or max_attention_tokens < 1:
+            raise ValueError("model dimensions, patch size, and attention-token limit are invalid")
+        self.embedding_dim = embedding_dim
+        self.patch_size = patch_size
+        self.model_dim = model_dim
+        self.max_attention_tokens = max_attention_tokens
+        self.embedding = nn.Embedding(257, embedding_dim, padding_idx=self.pad_token)
+        self.patch_projection = nn.Linear(patch_size * embedding_dim, model_dim)
+        layer = nn.TransformerEncoderLayer(
+            d_model=model_dim,
+            nhead=heads,
+            dim_feedforward=feedforward_dim,
+            dropout=dropout,
+            activation="gelu",
+            batch_first=True,
+            norm_first=True,
+        )
+        self.encoder = nn.TransformerEncoder(layer, num_layers=layers, enable_nested_tensor=False)
+        self.dropout = nn.Dropout(dropout)
+        self.classifier = nn.Linear(model_dim, num_classes)
+
+    def reduce_patches(
+        self, tokens: torch.Tensor, lengths: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        if tokens.ndim != 2 or lengths.ndim != 1 or tokens.size(0) != lengths.size(0):
+            raise ValueError("tokens and lengths must have shapes [batch, bytes] and [batch]")
+        if tokens.size(1) % self.patch_size:
+            raise ValueError("padded byte width must be divisible by patch size")
+        if torch.any(lengths <= 0) or torch.any(lengths > tokens.size(1)):
+            raise ValueError("byte lengths must be positive and no greater than the padded width")
+        patches = self.embedding(tokens).reshape(tokens.size(0), -1, self.patch_size * self.embedding_dim)
+        values = self.patch_projection(patches)
+        positions = torch.arange(values.size(1), device=tokens.device, dtype=values.dtype).unsqueeze(1)
+        frequencies = torch.exp(
+            torch.arange(0, self.model_dim, 2, device=tokens.device, dtype=values.dtype)
+            * (-math.log(10000.0) / self.model_dim)
+        )
+        angles = positions * frequencies.unsqueeze(0)
+        position_encoding = torch.zeros_like(values)
+        position_encoding[:, :, 0::2] = angles.sin().unsqueeze(0)
+        position_encoding[:, :, 1::2] = angles.cos().unsqueeze(0)
+        values = values + position_encoding
+        patch_lengths = torch.div(lengths + self.patch_size - 1, self.patch_size, rounding_mode="floor")
+        patch_mask = torch.arange(values.size(1), device=tokens.device).unsqueeze(0) < patch_lengths.unsqueeze(1)
+        values = values * patch_mask.unsqueeze(-1).to(values.dtype)
+        reduced_lengths = patch_lengths.clamp_max(self.max_attention_tokens)
+        reduced_width = int(reduced_lengths.max().item())
+        reduced = values.new_zeros((tokens.size(0), reduced_width, self.model_dim))
+        for index, patch_count in enumerate(patch_lengths.tolist()):
+            sequence = values[index, :patch_count].transpose(0, 1).unsqueeze(0)
+            if patch_count > self.max_attention_tokens:
+                sequence = F.adaptive_avg_pool1d(sequence, self.max_attention_tokens)
+            sequence = sequence.squeeze(0).transpose(0, 1)
+            reduced[index, : sequence.size(0)] = sequence
+        attention_padding_mask = (
+            torch.arange(reduced_width, device=tokens.device).unsqueeze(0) >= reduced_lengths.unsqueeze(1)
+        )
+        return reduced, attention_padding_mask, patch_lengths
+
+    def forward(self, tokens: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+        values, padding_mask, _ = self.reduce_patches(tokens, lengths)
+        values = self.encoder(values, src_key_padding_mask=padding_mask)
+        valid = (~padding_mask).unsqueeze(-1).to(values.dtype)
+        pooled = (values * valid).sum(dim=1) / valid.sum(dim=1).clamp_min(1.0)
         return self.classifier(self.dropout(pooled))
 
 

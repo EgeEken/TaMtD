@@ -1,0 +1,213 @@
+{
+  "condition": "jpeg_q10",
+  "representation": "jpeg_dct_dc_only",
+  "ablation": "dc_only",
+  "mask_convention": "keep coefficient channel u*8+v=0; zero channels 1..63 in Y, Cb, and Cr",
+  "model_family": "jpeg_dct_cnn",
+  "model_name": "JPEGDCTNet",
+  "parameter_count": 428426,
+  "seed": 777,
+  "device": "cuda",
+  "workers": 0,
+  "pin_memory": false,
+  "training_settings": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 6
+  },
+  "best_epoch": 8,
+  "epochs_run": 14,
+  "best_validation_accuracy": 0.7655755015839493,
+  "test_accuracy": 0.7245859872611465,
+  "training_wall_seconds": 74.85623579999992,
+  "examples_per_second": 1593.828473004785,
+  "peak_vram_mb": 93.603515625,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "validation_metrics": {
+    "n": 947,
+    "accuracy": 0.7655755015839493,
+    "cross_entropy_nats": 0.7412397023113375,
+    "class_prior_cross_entropy_nats": 2.3019862036060705,
+    "u_probe_bits": 2.2516812375027113,
+    "brier_score": 0.3316358870412631
+  },
+  "test_metrics": {
+    "n": 3925,
+    "accuracy": 0.7245859872611465,
+    "cross_entropy_nats": 0.8241156156503471,
+    "class_prior_cross_entropy_nats": 2.303672990382601,
+    "u_probe_bits": 2.1345500872369163,
+    "brier_score": 0.3711637995045656
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5625406519064626,
+      "validation_accuracy": 0.5248152059134108,
+      "learning_rate": 0.00029815325108927063
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1996486500881278,
+      "validation_accuracy": 0.6420274551214361,
+      "learning_rate": 0.00029265847744427303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.030834770068348,
+      "validation_accuracy": 0.6863780359028511,
+      "learning_rate": 0.0002836509786282552
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9378871273138355,
+      "validation_accuracy": 0.6874340021119324,
+      "learning_rate": 0.0002713525491562421
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.85403832760363,
+      "validation_accuracy": 0.7117212249208026,
+      "learning_rate": 0.0002560660171779821
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7866586017317684,
+      "validation_accuracy": 0.7349524815205913,
+      "learning_rate": 0.000238167787843871
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.7183366002009189,
+      "validation_accuracy": 0.7170010559662091,
+      "learning_rate": 0.00021809857496093204
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.6581380583819748,
+      "validation_accuracy": 0.7655755015839493,
+      "learning_rate": 0.00019635254915624216
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5930725248507339,
+      "validation_accuracy": 0.7592397043294614,
+      "learning_rate": 0.00017346516975603468
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.5296189320028681,
+      "validation_accuracy": 0.7391763463569165,
+      "learning_rate": 0.00015000000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.4598230462319357,
+      "validation_accuracy": 0.7381203801478353,
+      "learning_rate": 0.0001265348302439654
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.40385042566336593,
+      "validation_accuracy": 0.7602956705385427,
+      "learning_rate": 0.0001036474508437579
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.347192402597717,
+      "validation_accuracy": 0.7581837381203802,
+      "learning_rate": 8.190142503906799e-05
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.29664448459672693,
+      "validation_accuracy": 0.7581837381203802,
+      "learning_rate": 6.183221215612905e-05
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase46\\jpeg_q10__jpeg_dct_dc_only__seed777.pt",
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 74,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793287907.4256737,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 16702722048,
+        "commit_used_bytes": 27634561024,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162493079552,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 1516,
+        "vram_free_mb": 6502,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793287984.6189723,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 15466827776,
+        "commit_used_bytes": 29263560704,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162505396224,
+      "gpu": {}
+    },
+    "peaks": {
+      "commit_used_bytes": 29370961920,
+      "cuda_allocated_peak_bytes": 98150400,
+      "cuda_reserved_peak_bytes": 121634816,
+      "vram_used_mb": 1869,
+      "utilization_percent": 43
+    },
+    "minima": {
+      "disk_free_bytes": 162486075392,
+      "vram_free_mb": 6149,
+      "memory_available_bytes": 13294948352
+    },
+    "gpu_utilization_mean_percent": 33.4
+  },
+  "child_wall_seconds_including_setup": 77.28710980000142
+}

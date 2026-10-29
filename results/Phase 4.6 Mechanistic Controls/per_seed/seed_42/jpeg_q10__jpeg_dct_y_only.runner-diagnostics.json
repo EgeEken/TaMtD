@@ -1,0 +1,108 @@
+{
+  "schema": "tamtd.runner-diagnostics.v1",
+  "status": "completed",
+  "reason": null,
+  "started_unix_seconds": 1793288585.5154269,
+  "finished_unix_seconds": 1793288762.5789077,
+  "return_code": 0,
+  "result_path": "results/Phase 4.6 Mechanistic Controls/per_seed/seed_42/jpeg_q10__jpeg_dct_y_only.json",
+  "log_path": "results/Phase 4.6 Mechanistic Controls/logs/portable_runner/jpeg_q10__jpeg_dct_y_only.log",
+  "disk_free_before_bytes": 162500812800,
+  "disk_free_minimum_bytes": 162460274688,
+  "disk_free_after_recovery_bytes": 162495696896,
+  "runner_resource_peaks_and_minima": {
+    "minimum_disk_free_bytes": 162460274688,
+    "minimum_memory_available_bytes": 13198352384,
+    "maximum_commit_used_bytes": 31594627072,
+    "maximum_vram_used_mb": 1962,
+    "minimum_vram_free_mb": 6056,
+    "maximum_gpu_utilization_percent": 47,
+    "maximum_commit_fraction": 0.7707755807797636
+  },
+  "child_resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 101,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793288593.8822541,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 16594837504,
+        "commit_used_bytes": 27721801728,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162500796416,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 1569,
+        "vram_free_mb": 6449,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793288700.6447814,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": null,
+        "virtual_bytes": null,
+        "status": "unavailable: process working-set counters are not trusted on Windows",
+        "rss_reliability": "unavailable"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 15396814848,
+        "commit_used_bytes": 29433212928,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 162488565760,
+      "gpu": {
+        "cuda_allocated_bytes": 17039360,
+        "cuda_allocated_peak_bytes": 98150400,
+        "cuda_reserved_bytes": 121634816,
+        "cuda_reserved_peak_bytes": 121634816,
+        "vram_used_mb": 1939,
+        "vram_free_mb": 6079,
+        "vram_total_mb": 8192,
+        "utilization_percent": 2
+      }
+    },
+    "peaks": {
+      "commit_used_bytes": 31618027520,
+      "cuda_allocated_peak_bytes": 98150400,
+      "cuda_reserved_peak_bytes": 121634816,
+      "vram_used_mb": 1962,
+      "utilization_percent": 46
+    },
+    "minima": {
+      "disk_free_bytes": 162488565760,
+      "vram_free_mb": 6056,
+      "memory_available_bytes": 13088206848
+    },
+    "gpu_utilization_mean_percent": 32.904761904761905
+  }
+}

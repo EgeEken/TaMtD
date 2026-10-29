@@ -23,6 +23,23 @@
     "optimizer": "adamw",
     "patience": 6
   },
+  "phase46_byte_patch_transformer": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "patience": 6,
+    "max_padded_tokens": 1048576,
+    "max_samples_per_batch": 32,
+    "effective_batch_size": 32,
+    "bucket_multiplier": 50,
+    "workers": 0,
+    "pin_memory": false,
+    "amp": true,
+    "augmentation": "none"
+  },
   "rgb": {
     "epochs": 30,
     "batch_size": 32,

@@ -256,6 +256,7 @@ def train_classifier(
     patience: int = 5,
     amp: bool = True,
     gradient_accumulation_samples: int | None = None,
+    evaluation_callback: Callable[[nn.Module, DataLoader, torch.device], dict] | None = None,
 ) -> dict:
     model.to(device)
     if optimizer_name == "sgd":
@@ -332,7 +333,9 @@ def train_classifier(
     wall_seconds = time.perf_counter() - start
     state = torch.load(checkpoint_path, map_location=device, weights_only=True)
     model.load_state_dict(state)
-    test_accuracy = evaluate_accuracy(model, test_loader, device)
+    validation_metrics = evaluation_callback(model, validation_loader, device) if evaluation_callback else None
+    test_metrics = evaluation_callback(model, test_loader, device) if evaluation_callback else None
+    test_accuracy = float(test_metrics["accuracy"]) if test_metrics is not None else evaluate_accuracy(model, test_loader, device)
     peak_vram = torch.cuda.max_memory_allocated(device) / (1024**2) if device.type == "cuda" else None
     trained_samples = len(train_loader.dataset) * len(history)
     byte_batching = None
@@ -375,6 +378,7 @@ def train_classifier(
         "peak_vram_mb": peak_vram,
         "truncation": truncation_counts,
         **({"byte_batching": byte_batching} if byte_batching is not None else {}),
+        **({"validation_metrics": validation_metrics, "test_metrics": test_metrics} if evaluation_callback else {}),
         "history": history,
         "checkpoint": str(checkpoint_path),
     }

@@ -141,6 +141,8 @@ def _gpu_snapshot(torch_module: Any = None, device: Any = None) -> dict[str, int
         "cuda_reserved_bytes": None,
         "cuda_reserved_peak_bytes": None,
         "vram_used_mb": None,
+        "vram_free_mb": None,
+        "vram_total_mb": None,
         "utilization_percent": None,
     }
     if torch_module is not None:
@@ -159,16 +161,22 @@ def _gpu_snapshot(torch_module: Any = None, device: Any = None) -> dict[str, int
     if executable:
         try:
             completed = subprocess.run(
-                [executable, "--query-gpu=memory.used,utilization.gpu", "--format=csv,noheader,nounits"],
+                [
+                    executable,
+                    "--query-gpu=memory.free,memory.used,memory.total,utilization.gpu",
+                    "--format=csv,noheader,nounits",
+                ],
                 check=True,
                 capture_output=True,
                 text=True,
                 timeout=5,
             )
-            pairs = [tuple(int(part.strip()) for part in line.split(",")) for line in completed.stdout.splitlines() if line.strip()]
-            if pairs:
-                result["vram_used_mb"] = max(memory for memory, _ in pairs)
-                result["utilization_percent"] = max(utilization for _, utilization in pairs)
+            rows = [tuple(int(part.strip()) for part in line.split(",")) for line in completed.stdout.splitlines() if line.strip()]
+            if rows:
+                result["vram_free_mb"] = min(free for free, _, _, _ in rows)
+                result["vram_used_mb"] = max(used for _, used, _, _ in rows)
+                result["vram_total_mb"] = max(total for _, _, total, _ in rows)
+                result["utilization_percent"] = max(utilization for _, _, _, utilization in rows)
         except (OSError, subprocess.SubprocessError, ValueError):
             pass
     return result
@@ -291,6 +299,9 @@ class ResourceMonitor:
             if utilization is not None:
                 self._gpu_utilization_sum += int(utilization)
                 self._gpu_utilization_samples += 1
+            vram_free = snapshot.get("gpu", {}).get("vram_free_mb")
+            if vram_free is not None:
+                self._minima["vram_free_mb"] = min(self._minima.get("vram_free_mb", vram_free), vram_free)
             available = snapshot.get("system", {}).get("memory_available_bytes")
             if available is not None:
                 self._minima["memory_available_bytes"] = min(
