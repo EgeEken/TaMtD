@@ -134,6 +134,51 @@ def _windows_memory() -> dict[str, int | None]:
     }
 
 
+def _windows_process_memory(pid: int) -> dict[str, int | str | None]:
+    class ProcessMemoryCounters(ctypes.Structure):
+        _fields_ = [
+            ("cb", ctypes.c_ulong),
+            ("page_fault_count", ctypes.c_ulong),
+            ("peak_working_set_size", ctypes.c_size_t),
+            ("working_set_size", ctypes.c_size_t),
+            ("quota_peak_paged_pool_usage", ctypes.c_size_t),
+            ("quota_paged_pool_usage", ctypes.c_size_t),
+            ("quota_peak_non_paged_pool_usage", ctypes.c_size_t),
+            ("quota_non_paged_pool_usage", ctypes.c_size_t),
+            ("pagefile_usage", ctypes.c_size_t),
+            ("peak_pagefile_usage", ctypes.c_size_t),
+            ("private_usage", ctypes.c_size_t),
+        ]
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    psapi = ctypes.WinDLL("psapi", use_last_error=True)
+    kernel.OpenProcess.argtypes = [ctypes.c_ulong, ctypes.c_int, ctypes.c_ulong]
+    kernel.OpenProcess.restype = ctypes.c_void_p
+    kernel.CloseHandle.argtypes = [ctypes.c_void_p]
+    kernel.CloseHandle.restype = ctypes.c_int
+    psapi.GetProcessMemoryInfo.argtypes = [ctypes.c_void_p, ctypes.POINTER(ProcessMemoryCounters), ctypes.c_ulong]
+    psapi.GetProcessMemoryInfo.restype = ctypes.c_int
+    handle = kernel.OpenProcess(0x1000, 0, int(pid))
+    if not handle:
+        return {"rss_bytes": None, "peak_rss_bytes": None, "process_pagefile_bytes": None, "peak_process_pagefile_bytes": None, "private_bytes": None, "status": f"unavailable: OpenProcess error {ctypes.get_last_error()}"}
+    try:
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(counters)
+        if not psapi.GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb):
+            return {"rss_bytes": None, "peak_rss_bytes": None, "process_pagefile_bytes": None, "peak_process_pagefile_bytes": None, "private_bytes": None, "status": f"unavailable: GetProcessMemoryInfo error {ctypes.get_last_error()}"}
+        return {
+            "rss_bytes": int(counters.working_set_size),
+            "peak_rss_bytes": int(counters.peak_working_set_size),
+            "private_bytes": int(counters.private_usage),
+            "process_pagefile_bytes": int(counters.pagefile_usage),
+            "peak_process_pagefile_bytes": int(counters.peak_pagefile_usage),
+            "status": "available_from_GetProcessMemoryInfo",
+            "rss_reliability": "Windows process working set counters",
+        }
+    finally:
+        kernel.CloseHandle(handle)
+
+
 def _gpu_snapshot(torch_module: Any = None, device: Any = None) -> dict[str, int | float | None]:
     result: dict[str, int | float | None] = {
         "cuda_allocated_bytes": None,
@@ -208,12 +253,7 @@ def collect_resource_snapshot(
         cgroup = _cgroup_memory(pid, proc_root, Path(cgroup_root))
         process["rss_reliability"] = "procfs resident set"
     elif platform_name.startswith("win"):
-        process = {
-            "rss_bytes": None,
-            "virtual_bytes": None,
-            "status": "unavailable: process working-set counters are not trusted on Windows",
-            "rss_reliability": "unavailable",
-        }
+        process = _windows_process_memory(pid)
         system = _windows_memory()
         cgroup = {key: None for key in ("memory_current_bytes", "memory_peak_bytes", "memory_limit_bytes", "swap_current_bytes", "swap_limit_bytes")}
     else:
@@ -282,7 +322,7 @@ class ResourceMonitor:
             self._last = snapshot
             self._sample_count += 1
             for category, fields in (
-                ("process", ("rss_bytes", "virtual_bytes")),
+                ("process", ("rss_bytes", "peak_rss_bytes", "private_bytes", "process_pagefile_bytes", "peak_process_pagefile_bytes", "virtual_bytes")),
                 ("system", ("commit_used_bytes", "swap_used_bytes")),
                 ("cgroup", ("memory_current_bytes", "memory_peak_bytes", "swap_current_bytes")),
                 ("gpu", ("cuda_allocated_peak_bytes", "cuda_reserved_peak_bytes", "vram_used_mb", "utilization_percent")),

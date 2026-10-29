@@ -74,11 +74,13 @@ class TelemetryTests(unittest.TestCase):
             self.assertEqual(snapshot["cgroup"]["swap_current_bytes"], 300)
             self.assertEqual(snapshot["cgroup"]["swap_limit_bytes"], 2000)
 
-    def test_windows_snapshot_marks_process_rss_unavailable(self):
+    def test_windows_snapshot_reports_process_rss_and_commit(self):
         snapshot = collect_resource_snapshot(platform_name="win32", include_gpu=False)
-        self.assertIsNone(snapshot["process"]["rss_bytes"])
-        self.assertIsNone(snapshot["process"]["virtual_bytes"])
-        self.assertIn("not trusted on Windows", snapshot["process"]["status"])
+        self.assertGreater(snapshot["process"]["rss_bytes"], 0)
+        self.assertGreaterEqual(snapshot["process"]["peak_rss_bytes"], snapshot["process"]["rss_bytes"])
+        self.assertGreaterEqual(snapshot["process"]["peak_process_pagefile_bytes"], snapshot["process"]["process_pagefile_bytes"])
+        self.assertNotIn("virtual_bytes", snapshot["process"])
+        self.assertEqual(snapshot["process"]["status"], "available_from_GetProcessMemoryInfo")
         if "commit_used_bytes" in snapshot["system"]:
             self.assertGreaterEqual(snapshot["system"]["commit_limit_bytes"], snapshot["system"]["commit_used_bytes"])
         else:

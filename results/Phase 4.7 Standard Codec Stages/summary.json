@@ -1,0 +1,83 @@
+{
+  "conditions": [
+    "jxl_d6",
+    "jxl_d3",
+    "webp_q30",
+    "webp_q75",
+    "avif_q40",
+    "avif_q60"
+  ],
+  "test_samples_per_condition": 3925,
+  "timing_sample_count_per_condition": 256,
+  "timing_repeats": 3,
+  "thread_count": 1,
+  "rgb_probe_seeds": [
+    42,
+    123,
+    777
+  ],
+  "structured_probe_seeds": [
+    42,
+    123,
+    777
+  ],
+  "jxl_progression_samples": 0,
+  "max_rgb_parity_accuracy_delta": 0.0010191379079393936,
+  "max_rgb_parity_u_probe_delta_bits": 0.0015646019865958039,
+  "rd_efficiency_vs_raw_accessibility_correlations": [
+    {
+      "x": "rd_efficiency_residual",
+      "y": "raw_u_probe_bits",
+      "n": 6,
+      "pearson_r": -0.04148154771299035,
+      "spearman_rho": -0.08571428571428573
+    },
+    {
+      "x": "rd_efficiency_residual",
+      "y": "raw_accuracy",
+      "n": 6,
+      "pearson_r": -0.4650753948295253,
+      "spearman_rho": -0.4285714285714286
+    }
+  ],
+  "rd_efficiency_vs_semantic_exposure_correlations": [
+    {
+      "x": "rd_efficiency_residual",
+      "y": "sed50_u_fraction",
+      "n": 4,
+      "pearson_r": -0.9330751957870502,
+      "spearman_rho": -0.7999999999999999
+    },
+    {
+      "x": "rd_efficiency_residual",
+      "y": "sed75_u_fraction",
+      "n": 0,
+      "pearson_r": null,
+      "spearman_rho": null
+    },
+    {
+      "x": "rd_efficiency_residual",
+      "y": "sed90_u_fraction",
+      "n": 0,
+      "pearson_r": null,
+      "spearman_rho": null
+    },
+    {
+      "x": "rd_efficiency_residual",
+      "y": "u_probe_auc",
+      "n": 6,
+      "pearson_r": 0.8679180140616808,
+      "spearman_rho": 0.942857142857143
+    }
+  ],
+  "rd_point_count": 6,
+  "rd_residual_model": "OLS: PSNR and SSIM independently regressed on log2(Imagenette bpp)",
+  "training_resource_rows": 12,
+  "resource_monitoring_note": "per-child peak/process telemetry is stored in training_resource_per_seed.csv; parent recovery snapshots are in training_resource_recovery.csv",
+  "limitations": [
+    "JXL exact cached streams emitted no progressive API event, so the JXL pre-full stage is unavailable.",
+    "Structured-stage metrics are representation + shared structured probe and are not architecture-independent.",
+    "Raw-byte metrics are one historical Phase 4.5B byte-probe result per condition; raw-byte and structured probes differ.",
+    "Six codec operating points make all RD/accessibility correlations descriptive and exploratory."
+  ]
+}

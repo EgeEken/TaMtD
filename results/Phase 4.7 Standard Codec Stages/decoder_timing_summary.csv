@@ -1,0 +1,15 @@
+condition,stage,n,median_decoder_ms,p95_decoder_ms,median_capture_adapter_ms,p95_capture_adapter_ms,median_model_adapter_ms,p95_model_adapter_ms,median_cumulative_decoder_ms,p95_cumulative_decoder_ms,median_cumulative_decoder_adapter_ms,p95_cumulative_decoder_adapter_ms,thread_count,timing_boundary
+avif_q40,decoded_rgb,768,2.4706,4.22483,0.0,0.0,0.0,0.0,2.4706,4.22483,2.4706,4.22483,1,avifDecoderReadMemory + avifImageYUVToRGB completed
+avif_q40,decoded_yuv,768,1.4337499999999999,2.907909999999999,0.0,0.0,0.0,0.0,1.4337499999999999,2.907909999999999,1.4337499999999999,2.907909999999999,1,avifDecoderReadMemory completed with full YUV planes
+avif_q40,pre_reconstruction_coefficients,768,1.04345,2.2476149999999997,0.032350000000000004,0.06668999999999999,0.3119,0.5364399999999999,1.04345,2.2476149999999997,1.3757,2.7190099999999995,1,libaom parse-only av1_decode_tg_tiles_and_wrapup before loop/restoration filters
+avif_q60,decoded_rgb,768,3.15445,5.41139,0.0,0.0,0.0,0.0,3.15445,5.41139,3.15445,5.41139,1,avifDecoderReadMemory + avifImageYUVToRGB completed
+avif_q60,decoded_yuv,768,2.2041,3.95688,0.0,0.0,0.0,0.0,2.2041,3.95688,2.2041,3.95688,1,avifDecoderReadMemory completed with full YUV planes
+avif_q60,pre_reconstruction_coefficients,768,1.7208,3.26388,0.0345,0.0724,0.30865,0.5290699999999999,1.7208,3.26388,2.09035,3.719635,1,libaom parse-only av1_decode_tg_tiles_and_wrapup before loop/restoration filters
+jxl_d3,decoded_rgb,768,1.9291,4.738294999999999,0.0,0.0,0.0,0.0,1.9291,4.738294999999999,1.9291,4.738294999999999,1,JXL_DEC_SUCCESS after full RGB output
+jxl_d6,decoded_rgb,768,3.8575999999999997,5.73133,0.0,0.0,0.0,0.0,3.8575999999999997,5.73133,3.8575999999999997,5.73133,1,JXL_DEC_SUCCESS after full RGB output
+webp_q30,decoded_rgb,768,0.4962,0.9686599999999999,0.0,0.0,0.0,0.0,0.4962,0.9686599999999999,0.4962,0.9686599999999999,1,WebPDecodeRGB completed
+webp_q30,decoded_yuv,768,0.48125,0.90721,0.0,0.0,0.0,0.0,0.48125,0.90721,0.48125,0.90721,1,WebPDecodeYUV completed
+webp_q30,pre_reconstruction_coefficients,768,0.3933,0.8127249999999999,7.10535,22.875025,0.19055,0.3766349999999999,0.3933,0.8127249999999999,7.748,23.75781,1,"VP8ProcessRow after final ParseResiduals, before ReconstructRow/FinishRow"
+webp_q75,decoded_rgb,768,0.72125,1.3956849999999996,0.0,0.0,0.0,0.0,0.72125,1.3956849999999996,0.72125,1.3956849999999996,1,WebPDecodeRGB completed
+webp_q75,decoded_yuv,768,0.7137,1.3438849999999998,0.0,0.0,0.0,0.0,0.7137,1.3438849999999998,0.7137,1.3438849999999998,1,WebPDecodeYUV completed
+webp_q75,pre_reconstruction_coefficients,768,0.6024499999999999,1.270625,7.3394,23.4817,0.20555,0.39137999999999995,0.6024499999999999,1.270625,8.273050000000001,24.607395,1,"VP8ProcessRow after final ParseResiduals, before ReconstructRow/FinishRow"

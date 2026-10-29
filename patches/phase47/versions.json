@@ -1,0 +1,36 @@
+{
+  "schema": "tamtd.phase47-codec-build.v1",
+  "sources": {
+    "libjxl": {
+      "repository": "https://github.com/libjxl/libjxl.git",
+      "tag": "v0.12.0",
+      "commit": "a7a9c787341cf703dede03c2009fa460cae5e5df",
+      "patch": null
+    },
+    "libwebp": {
+      "repository": "https://github.com/webmproject/libwebp.git",
+      "tag": "v1.6.0",
+      "commit": "4fa21912338357f89e4fd51cf2368325b59e9bd9",
+      "patch": "libwebp-pre-reconstruction.patch"
+    },
+    "libaom": {
+      "repository": "https://aomedia.googlesource.com/aom",
+      "tag": "v3.15.1",
+      "commit": "44d0a57786f432d933ff64b653347c66f4d0fa1d",
+      "patch": "libaom-pre-reconstruction.patch"
+    },
+    "libavif": {
+      "repository": "https://github.com/AOMediaCodec/libavif.git",
+      "tag": "v1.4.2",
+      "commit": "c5240fc79fe5c2407e10afd35f5505ef6333ea49",
+      "patch": null
+    }
+  },
+  "builds": {
+    "common": ["Release", "shared libraries", "Ninja/CMake", "single-thread decoder policy"],
+    "libjxl": ["tools off", "tests off", "examples off", "pinned submodules", "runtime uses JxlResizableParallelRunner with one thread"],
+    "libwebp": ["decoder shared library", "mux, animation and tools off", "tests off"],
+    "libaom": ["AV1 decoder on", "AV1 encoder off", "CONFIG_MULTITHREAD=0", "tests/examples/docs off"],
+    "libavif": ["AOM system decoder", "AOM encoder off", "libyuv off", "apps/tests off"]
+  }
+}

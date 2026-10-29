@@ -1,0 +1,41 @@
+diff --git a/src/dec/frame_dec.c b/src/dec/frame_dec.c
+index 8780772..164b830 100644
+--- a/src/dec/frame_dec.c
++++ b/src/dec/frame_dec.c
+@@ -28,0 +29,8 @@
++static WebPPhase47RowCallback phase47_row_callback;
++static void* phase47_row_context;
++
++void WebPPhase47SetRowCallback(WebPPhase47RowCallback callback, void* context) {
++  phase47_row_callback = callback;
++  phase47_row_context = context;
++}
++
+@@ -513,0 +522,7 @@ int VP8ProcessRow(VP8Decoder* const dec, VP8Io* const io) {
++  if (phase47_row_callback != NULL) {
++    phase47_row_callback(dec->pic_hdr.width, dec->pic_hdr.height,
++                         dec->mb_y, dec->mb_w,
++                         sizeof(*dec->mb_data) * dec->mb_w, dec->mb_data,
++                         sizeof(dec->dqm), dec->dqm, phase47_row_context);
++    return (dec->mb_y < dec->mb_h - 1);
++  }
+diff --git a/src/dec/tree_dec.c b/src/dec/tree_dec.c
+index a3b00ef..3e99fa1 100644
+--- a/src/dec/tree_dec.c
++++ b/src/dec/tree_dec.c
+@@ -312,0 +313 @@ static void ParseIntraMode(VP8BitReader* const br,
++  block->skip = 0;
+diff --git a/src/webp/decode.h b/src/webp/decode.h
+index 1f0d0c2..d4d1f57 100644
+--- a/src/webp/decode.h
++++ b/src/webp/decode.h
+@@ -26,0 +27,9 @@ extern "C" {
++typedef void (*WebPPhase47RowCallback)(uint32_t width, uint32_t height,
++                                       uint32_t mb_y, uint32_t mb_w,
++                                       size_t row_bytes, const void* row_data,
++                                       size_t quant_bytes,
++                                       const void* quant_data,
++                                       void* context);
++WEBP_EXTERN void WebPPhase47SetRowCallback(WebPPhase47RowCallback callback,
++                                           void* context);
++

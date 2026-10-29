@@ -1,0 +1,131 @@
+{
+  "conditions": [
+    "jxl_d6",
+    "jxl_d3",
+    "webp_q30",
+    "webp_q75",
+    "avif_q40",
+    "avif_q60"
+  ],
+  "cuda_device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+  "full_decode_sample_hash_rechecks": 8,
+  "jxl_progression_sample_count": 0,
+  "phase": "4.7 Standard Codec Stages",
+  "resource_telemetry": {
+    "end": {
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_limit_bytes": null,
+        "memory_peak_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 155156905984,
+      "gpu": {},
+      "platform": "win32",
+      "process": {
+        "peak_process_pagefile_bytes": 3484250112,
+        "peak_rss_bytes": 2113085440,
+        "private_bytes": 3484188672,
+        "process_pagefile_bytes": 3484188672,
+        "rss_bytes": 1340923904,
+        "rss_reliability": "Windows process working set counters",
+        "status": "available_from_GetProcessMemoryInfo"
+      },
+      "system": {
+        "commit_limit_bytes": 40990695424,
+        "commit_used_bytes": 29442015232,
+        "memory_available_bytes": 14270447616,
+        "memory_total_bytes": 34011373568
+      },
+      "timestamp": 1793299120.882439
+    },
+    "gpu_utilization_mean_percent": 10.983870967741936,
+    "minima": {
+      "disk_free_bytes": 155151110144,
+      "memory_available_bytes": 13473529856,
+      "vram_free_mb": 5874
+    },
+    "peaks": {
+      "commit_used_bytes": 29472944128,
+      "cuda_allocated_peak_bytes": 208861184,
+      "cuda_reserved_peak_bytes": 264241152,
+      "peak_process_pagefile_bytes": 3484250112,
+      "peak_rss_bytes": 2113085440,
+      "private_bytes": 3484188672,
+      "process_pagefile_bytes": 3484188672,
+      "rss_bytes": 2106597376,
+      "utilization_percent": 81,
+      "vram_used_mb": 2144
+    },
+    "sample_count": 309,
+    "sampling_interval_seconds": 1.0,
+    "schema": "tamtd.resource-diagnostics.v1",
+    "start": {
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_limit_bytes": null,
+        "memory_peak_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 157691285504,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "utilization_percent": 0,
+        "vram_free_mb": 6462,
+        "vram_total_mb": 8192,
+        "vram_used_mb": 1556
+      },
+      "platform": "win32",
+      "process": {
+        "peak_process_pagefile_bytes": 2212642816,
+        "peak_rss_bytes": 568279040,
+        "private_bytes": 2212642816,
+        "process_pagefile_bytes": 2212642816,
+        "rss_bytes": 568279040,
+        "rss_reliability": "Windows process working set counters",
+        "status": "available_from_GetProcessMemoryInfo"
+      },
+      "system": {
+        "commit_limit_bytes": 40990695424,
+        "commit_used_bytes": 27981922304,
+        "memory_available_bytes": 15155908608,
+        "memory_total_bytes": 34011373568
+      },
+      "timestamp": 1793298791.0963304
+    }
+  },
+  "rgb_probe_checkpoints": [
+    42,
+    123,
+    777
+  ],
+  "samples": 13394,
+  "split_counts": {
+    "test": 3925,
+    "train": 8522,
+    "validation": 947
+  },
+  "stage_cache_paths": {
+    "avif_q40": "data\\cache\\neural_accessibility\\imagenette_320\\phase47\\features\\avif_q40.npy",
+    "avif_q60": "data\\cache\\neural_accessibility\\imagenette_320\\phase47\\features\\avif_q60.npy",
+    "webp_q30": "data\\cache\\neural_accessibility\\imagenette_320\\phase47\\features\\webp_q30.npy",
+    "webp_q75": "data\\cache\\neural_accessibility\\imagenette_320\\phase47\\features\\webp_q75.npy"
+  },
+  "stream_manifest_sha256": {
+    "avif_q40": "430e19c6522cdd2dc3732e1d8b19077fe719b9b07f9ce2ce94c7b0acbce2b2de",
+    "avif_q60": "206cc1c07c04eb3e3819a870d9d60b4bf285ad442b76b3f7e9143b7981401f8e",
+    "jxl_d3": "bfd64cae57d72d5e24a05646a4c29b383c5ba7eea97dab7a18adca6111f8623d",
+    "jxl_d6": "5a62923f084a7907a76c44d364a47b9dfff16bfc78cd066a10773848864109a8",
+    "webp_q30": "06c9858332e50a3cb66d1e754a27f3d6a16aeb4346a463036a95b8bb3bf4dc29",
+    "webp_q75": "6907b1678e0c476525eb25279f0dc062366ff17a5ce7f824d6d8e1543ec10991"
+  },
+  "streams_reencoded": false,
+  "thread_count": 1,
+  "timing_repeats": 3,
+  "timing_sample_count_per_condition": 256
+}
