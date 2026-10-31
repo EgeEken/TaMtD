@@ -1,8 +1,11 @@
 import argparse
+import csv
 import gc
+import gzip
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -13,6 +16,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tamtd.codecs.jpeg import JPEGCodec
 from tamtd.codecs.pbc import PBCCodecPair
+from tamtd.analysis.phase45b import prediction_metrics
 from tamtd.data.accessibility_datasets import DecodedRGBImageDataset, PixelImageDataset
 from tamtd.data.imagenette_accessibility import get_imagenette_source_root, read_manifest
 from tamtd.models.accessibility import ByteStreamCNN, JPEGDCTNet, PBCInstructionNet, RGBResNet18, parameter_count
@@ -33,6 +37,68 @@ def _write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def _probe_evaluation(model, loader, device: torch.device, train_labels: list[int], sample_ids: list[str] | None = None) -> dict:
+    model.eval()
+    logits_rows = []
+    label_rows = []
+    batch_forward_ms = []
+    started = time.perf_counter()
+    for inputs, labels, _ in loader:
+        inputs = {name: values.to(device, non_blocking=True) for name, values in inputs.items()}
+        labels = labels.to(device, non_blocking=True)
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        forward_started = time.perf_counter()
+        with torch.inference_mode():
+            logits = model(**inputs)
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        batch_forward_ms.append((time.perf_counter() - forward_started) * 1000.0)
+        logits_rows.append(logits.float().cpu().numpy())
+        label_rows.append(labels.cpu().numpy())
+    elapsed = time.perf_counter() - started
+    logits = np.concatenate(logits_rows)
+    labels = np.concatenate(label_rows)
+    metrics = prediction_metrics(logits, labels, np.asarray(train_labels, dtype=np.int64))
+    result = {key: value for key, value in metrics.items() if not isinstance(value, np.ndarray)}
+    result.update({
+        "inference_elapsed_seconds": elapsed,
+        "inference_samples_per_second": len(labels) / elapsed,
+        "inference_model_forward_ms_per_sample": sum(batch_forward_ms) / len(labels),
+        "inference_batch_forward_ms_median": float(np.median(batch_forward_ms)),
+        "inference_batch_forward_ms_p95": float(np.percentile(batch_forward_ms, 95)),
+    })
+    if sample_ids is not None:
+        if len(sample_ids) != len(labels):
+            raise ValueError("prediction sample IDs are not aligned with the sequential test loader")
+        predictions = metrics["predicted_labels"]
+        probabilities = metrics["probabilities"]
+        per_image_ce = metrics["per_image_cross_entropy_nats"]
+        result["prediction_records"] = [
+            {
+                "image_id": sample_ids[index],
+                "true_label": int(labels[index]),
+                "predicted_label": int(predictions[index]),
+                "correct": int(predictions[index] == labels[index]),
+                "top1_probability": float(probabilities[index].max()),
+                "true_class_probability": float(probabilities[index, labels[index]]),
+                "cross_entropy_nats": float(per_image_ce[index]),
+            }
+            for index in range(len(labels))
+        ]
+    return result
+
+
+def _write_test_predictions(path: Path, rows: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with gzip.open(temporary, "wt", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=("image_id", "true_label", "predicted_label", "correct", "top1_probability", "true_class_probability", "cross_entropy_nats"))
+        writer.writeheader()
+        writer.writerows(rows)
     temporary.replace(path)
 
 
@@ -141,12 +207,23 @@ def _run_training(args, condition: str, representation: str, rows: list[dict], t
         )
         for dataset, split in zip(datasets, ("train", "validation", "test"))
     ]
+    if args.collect_probe_metrics:
+        evaluation_batch_size = min(batch_size, 8)
+        loaders[2] = make_loader(datasets[2], evaluation_batch_size, False, args.seed, workers=0, pin_memory=False)
     checkpoint_base = args.checkpoint_dir / f"{condition}__{representation}__seed{args.seed}.pt"
     checkpoint = checkpoint_base
     retry = 1
     while checkpoint.exists():
         checkpoint = checkpoint_base.with_name(f"{checkpoint_base.stem}__retry{retry}{checkpoint_base.suffix}")
         retry += 1
+    evaluation_calls = 0
+
+    def evaluation_callback(current_model, loader, current_device):
+        nonlocal evaluation_calls
+        evaluation_calls += 1
+        ids = [row["image_id"] for row in test_rows] if args.collect_probe_metrics and evaluation_calls == 2 else None
+        return _probe_evaluation(current_model, loader, current_device, [int(row["label"]) for row in train_rows], ids)
+
     result = train_classifier(
         model,
         loaders[0],
@@ -161,6 +238,7 @@ def _run_training(args, condition: str, representation: str, rows: list[dict], t
         patience=settings["patience"],
         amp=device.type == "cuda" and bool(args.training_settings.get("mixed_precision", True)),
         gradient_accumulation_samples=gradient_accumulation_samples,
+        evaluation_callback=evaluation_callback if args.collect_probe_metrics else None,
     )
     result.pop("checkpoint", None)
     result_row = {
@@ -226,6 +304,9 @@ def main() -> None:
     parser.add_argument("--bucket-multiplier", type=int, default=50)
     parser.add_argument("--result-suffix")
     parser.add_argument("--eval-existing-rgb", action="store_true")
+    parser.add_argument("--collect-probe-metrics", action="store_true")
+    parser.add_argument("--test-predictions-path", type=Path)
+    parser.add_argument("--require-cuda", action="store_true")
     parser.add_argument("--temp-root", type=Path, default=temp_root())
     args = parser.parse_args()
     shared_cache = cache_root() / "neural_accessibility" / "imagenette_320"
@@ -253,7 +334,10 @@ def main() -> None:
     source_rows = read_manifest(args.cache_root / "manifest.jsonl")
     if [(row["image_id"], row["label"], row["split"]) for row in rows] != [(row["image_id"], row["label"], row["split"]) for row in source_rows]:
         raise ValueError("Phase 3 codec cache does not align with its source manifest")
-    if args.condition in {"webp_q30", "webp_q75", "avif_q40", "avif_q60", "jxl_d6", "jxl_d3"}:
+    if args.condition in {
+        "webp_q30", "webp_q75", "avif_q40", "avif_q60", "jxl_d6", "jxl_d3",
+        "jpeg_q1", "jpeg_q5", "webp_q5", "webp_q10", "webp_q20", "avif_q5", "avif_q10", "avif_q20",
+    }:
         rows = _load_phase4_stream_rows(args.phase4_cache_root, args.condition, rows)
     train_rows = [row for row in rows if row["split"] == "train"]
     validation_rows = [row for row in rows if row["split"] == "validation"]
@@ -266,6 +350,8 @@ def main() -> None:
     device = torch.device("cuda" if args.device == "auto" and torch.cuda.is_available() else args.device)
     if args.device == "auto" and not torch.cuda.is_available():
         device = torch.device("cpu")
+    if args.require_cuda and (device.type != "cuda" or not torch.cuda.is_available()):
+        raise RuntimeError("CUDA is required for this Phase 4.8 condition; CPU fallback is disabled")
     if args.eval_existing_rgb:
         if args.condition != "original_rgb" or args.representation != "decoded_rgb_reference":
             raise ValueError("--eval-existing-rgb requires the original RGB condition")
@@ -298,6 +384,11 @@ def main() -> None:
     finally:
         resource_diagnostics = resource_monitor.stop()
     result_row["resource_diagnostics"] = resource_diagnostics
+    predictions = result_row.get("test_metrics", {}).pop("prediction_records", None)
+    if args.test_predictions_path is not None:
+        if predictions is None:
+            raise ValueError("test prediction path requested but probe metrics did not produce predictions")
+        _write_test_predictions(args.test_predictions_path, predictions)
     _write_json(output_path, result_row)
     print(json.dumps({"result": str(output_path), "test_accuracy": result_row["test_accuracy"], "best_validation_accuracy": result_row["best_validation_accuracy"]}, indent=2), flush=True)
     del model, rows, train_rows, validation_rows, test_rows, result_row

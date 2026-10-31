@@ -1,0 +1,3 @@
+condition,pre_reconstruction_decoder_plus_adapters_ms,full_yuv_decode_ms,full_rgb_decode_ms,early_savings_vs_yuv_percent,early_savings_vs_rgb_percent,yuv_inference_measured,interpretation
+avif_q40,1.3757,1.4337499999999999,2.4706,4.048823016564948,44.31716991823849,False,timing comparison only; no YUV classifier or matched YUV inference was measured
+avif_q60,2.09035,2.2041,3.15445,5.160836622657775,33.733297405252905,False,timing comparison only; no YUV classifier or matched YUV inference was measured

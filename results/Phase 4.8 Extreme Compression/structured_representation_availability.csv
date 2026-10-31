@@ -1,0 +1,4 @@
+codec_family,condition,status,representation,reason
+jpeg,jpeg_q1,completed,quantized DCT coefficients and quantization tables,existing pyjpegio/libjpeg coefficient reader and JPEGDCTNet supported the new stream layout
+webp,webp_q5,not_run,pre-reconstruction coefficient/token grid,"Phase 4.7 source instrumentation exists, but its compiled libwebp/libaom/libavif binaries are absent from the expected build root; rebuilding the native stack is outside this focused pass"
+avif,avif_q5,not_run,pre-reconstruction coefficient/token grid,"Phase 4.7 source instrumentation exists, but its compiled libwebp/libaom/libavif binaries are absent from the expected build root; rebuilding the native stack is outside this focused pass"

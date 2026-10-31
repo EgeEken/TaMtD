@@ -1,0 +1,550 @@
+{
+  "condition": "avif_q5",
+  "representation": "codec_file_bytes",
+  "model_family": "byte",
+  "model_name": "ByteStreamCNN",
+  "parameter_count": 221226,
+  "seed": 42,
+  "best_epoch": 3,
+  "epochs_run": 8,
+  "best_validation_accuracy": 0.2122492080253432,
+  "test_accuracy": 0.19006369426751593,
+  "training_wall_seconds": 72.28637129999697,
+  "examples_per_second": 943.1376727580024,
+  "peak_vram_mb": 68.1787109375,
+  "truncation": {
+    "truncated_samples": 0,
+    "truncated_bytes": 0
+  },
+  "byte_batching": {
+    "policy": "length_bucket_token_budget",
+    "gradient_accumulation_target_samples": 32,
+    "epochs": [
+      {
+        "epoch": 1,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10117632,
+        "padding_ratio": 0.14079243048175705,
+        "padding_efficiency": 0.859207569518243,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 2,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10126336,
+        "padding_ratio": 0.14153095453281428,
+        "padding_efficiency": 0.8584690454671857,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 3,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10161664,
+        "padding_ratio": 0.1445155045472868,
+        "padding_efficiency": 0.8554844954527132,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 4,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10109952,
+        "padding_ratio": 0.14013973557935788,
+        "padding_efficiency": 0.8598602644206421,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 5,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10142720,
+        "padding_ratio": 0.14291767888692575,
+        "padding_efficiency": 0.8570823211130743,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 6,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10156032,
+        "padding_ratio": 0.14404109794061304,
+        "padding_efficiency": 0.855958902059387,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 7,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10144256,
+        "padding_ratio": 0.14304745463836877,
+        "padding_efficiency": 0.8569525453616312,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 122880,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      },
+      {
+        "epoch": 8,
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10142208,
+        "padding_ratio": 0.1428744115679742,
+        "padding_efficiency": 0.8571255884320258,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        },
+        "optimizer_update_sample_distribution": {
+          "32": 265,
+          "42": 1
+        }
+      }
+    ],
+    "run": {
+      "true_total_input_bytes": 69545168,
+      "padded_total_bytes_or_tokens": 81100800,
+      "padding_ratio": 0.14248480902777783,
+      "padding_efficiency": 0.8575151909722222,
+      "max_sequence_length": 4308,
+      "mean_sequence_length": 1020.0828444027223,
+      "max_padded_batch_width": 4352,
+      "max_samples_per_batch": 32,
+      "effective_batch_size_distribution": {
+        "10": 8,
+        "32": 2128
+      },
+      "optimizer_update_sample_distribution": {
+        "32": 2120,
+        "42": 8
+      }
+    }
+  },
+  "validation_metrics": {
+    "n": 947,
+    "accuracy": 0.2122492080253432,
+    "cross_entropy_nats": 2.1104074024545016,
+    "class_prior_cross_entropy_nats": 2.30198620360607,
+    "test_label_entropy_nats": 2.3019816363282413,
+    "u_probe_nats": 0.19157880115156845,
+    "u_probe_bits": 0.2763897863608206,
+    "brier_score": 0.855050061619987,
+    "inference_elapsed_seconds": 0.15710289997514337,
+    "inference_samples_per_second": 6027.896366966066,
+    "inference_model_forward_ms_per_sample": 0.11092534320357177,
+    "inference_batch_forward_ms_median": 3.4270000032847747,
+    "inference_batch_forward_ms_p95": 5.05965500487946
+  },
+  "test_metrics": {
+    "n": 3925,
+    "accuracy": 0.19006369426751593,
+    "cross_entropy_nats": 2.16585093401564,
+    "class_prior_cross_entropy_nats": 2.303672990382605,
+    "test_label_entropy_nats": 2.301806979810302,
+    "u_probe_nats": 0.13782205636696476,
+    "u_probe_bits": 0.19883519724573925,
+    "brier_score": 0.8623704373133968,
+    "inference_elapsed_seconds": 1.8902535999950487,
+    "inference_samples_per_second": 2076.4409600967197,
+    "inference_model_forward_ms_per_sample": 0.38713898090052473,
+    "inference_batch_forward_ms_median": 2.288299991050735,
+    "inference_batch_forward_ms_p95": 6.437650008592755
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.305566944837626,
+      "validation_accuracy": 0.15311510031678988,
+      "learning_rate": 0.0009890738003669028,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10117632,
+        "padding_ratio": 0.14079243048175705,
+        "padding_efficiency": 0.859207569518243,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.1730041432285554,
+      "validation_accuracy": 0.21013727560718057,
+      "learning_rate": 0.0009567727288213003,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10126336,
+        "padding_ratio": 0.14153095453281428,
+        "padding_efficiency": 0.8584690454671857,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.0859693497230514,
+      "validation_accuracy": 0.2122492080253432,
+      "learning_rate": 0.0009045084971874737,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10161664,
+        "padding_ratio": 0.1445155045472868,
+        "padding_efficiency": 0.8554844954527132,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.9438889894483236,
+      "validation_accuracy": 0.21119324181626187,
+      "learning_rate": 0.0008345653031794292,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10109952,
+        "padding_ratio": 0.14013973557935788,
+        "padding_efficiency": 0.8598602644206421,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.671173410834183,
+      "validation_accuracy": 0.2016895459345301,
+      "learning_rate": 0.00075,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10142720,
+        "padding_ratio": 0.14291767888692575,
+        "padding_efficiency": 0.8570823211130743,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.3453668461414436,
+      "validation_accuracy": 0.1689545934530095,
+      "learning_rate": 0.0006545084971874737,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10156032,
+        "padding_ratio": 0.14404109794061304,
+        "padding_efficiency": 0.855958902059387,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.020839438307484,
+      "validation_accuracy": 0.1805702217529039,
+      "learning_rate": 0.0005522642316338268,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10144256,
+        "padding_ratio": 0.14304745463836877,
+        "padding_efficiency": 0.8569525453616312,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 122880,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.7015430879715994,
+      "validation_accuracy": 0.1805702217529039,
+      "learning_rate": 0.0004477357683661734,
+      "byte_batch_metrics": {
+        "sample_count": 8522,
+        "batch_count": 267,
+        "true_total_input_bytes": 8693146,
+        "padded_total_bytes_or_tokens": 10142208,
+        "padding_ratio": 0.1428744115679742,
+        "padding_efficiency": 0.8571255884320258,
+        "max_sequence_length": 4308,
+        "mean_sequence_length": 1020.0828444027223,
+        "max_padded_batch_width": 4352,
+        "max_padded_batch_tokens": 139264,
+        "max_samples_per_batch": 32,
+        "effective_batch_size_distribution": {
+          "10": 1,
+          "32": 266
+        }
+      }
+    }
+  ],
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase48\\avif_q5__codec_file_bytes__seed42.pt",
+  "workers": 0,
+  "pin_memory": false,
+  "device": "cuda",
+  "training_settings": {
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "patience": 5
+  },
+  "byte_batching_config": {
+    "mode": "token_budget",
+    "max_padded_tokens": 1048576,
+    "max_samples_per_batch": 32,
+    "gradient_accumulation_samples": 32
+  },
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 71,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793456020.1346257,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 810000384,
+        "peak_rss_bytes": 810000384,
+        "private_bytes": 2504093696,
+        "process_pagefile_bytes": 2504093696,
+        "peak_process_pagefile_bytes": 2504093696,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 16050532352,
+        "commit_used_bytes": 28438540288,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 131282911232,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 1561,
+        "vram_free_mb": 6457,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793456094.6906602,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 2418077696,
+        "peak_rss_bytes": 2443907072,
+        "private_bytes": 4677828608,
+        "process_pagefile_bytes": 4677828608,
+        "peak_process_pagefile_bytes": 4700688384,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 14377889792,
+        "commit_used_bytes": 30662942720,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 131278848000,
+      "gpu": {
+        "cuda_allocated_bytes": 17927680,
+        "cuda_allocated_peak_bytes": 71490560,
+        "cuda_reserved_bytes": 130023424,
+        "cuda_reserved_peak_bytes": 130023424,
+        "vram_used_mb": 1898,
+        "vram_free_mb": 6120,
+        "vram_total_mb": 8192,
+        "utilization_percent": 44
+      }
+    },
+    "peaks": {
+      "rss_bytes": 2430140416,
+      "peak_rss_bytes": 2443907072,
+      "private_bytes": 4679634944,
+      "process_pagefile_bytes": 4679634944,
+      "peak_process_pagefile_bytes": 4700688384,
+      "commit_used_bytes": 30726934528,
+      "cuda_allocated_peak_bytes": 71490560,
+      "cuda_reserved_peak_bytes": 130023424,
+      "vram_used_mb": 1898,
+      "utilization_percent": 59
+    },
+    "minima": {
+      "disk_free_bytes": 131278843904,
+      "vram_free_mb": 6120,
+      "memory_available_bytes": 14306123776
+    },
+    "gpu_utilization_mean_percent": 17.466666666666665
+  }
+}

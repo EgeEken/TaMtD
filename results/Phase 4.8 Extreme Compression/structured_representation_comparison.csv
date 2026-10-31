@@ -1,0 +1,4 @@
+condition,stage,status,representation,seed,accuracy,u_probe_bits,extraction_or_decode_median_ms,extraction_or_decode_p95_ms,model_forward_ms_per_sample,sum_of_median_preprocess_and_inference_ms,note
+jpeg_q1,raw_bytes,measured,compressed JPEG byte stream,42,0.332484076433121,0.6179181161203284,0.0,0.0,0.4194149299180669,0.4194149299180669,"raw ByteStreamCNN, seed 42"
+jpeg_q1,pre_reconstruction_dct,measured,quantized DCT coefficients + quantization tables,42,0.7169426751592357,2.0329910995879854,1.20825,2.420915,0.13316007647633696,1.341410076476337,"JPEGDCTNet, seed 42; pyjpegio entropy decode, canonical IR, model-array adapter"
+jpeg_q1,decoded_rgb,measured,fully decoded RGB,42,0.6881528662420382,1.397714324154811,0.2639,0.621385,1.4380966879169392,1.7019966879169393,frozen RGBResNet18 seed 42; decode timing from 200-image calibration subset

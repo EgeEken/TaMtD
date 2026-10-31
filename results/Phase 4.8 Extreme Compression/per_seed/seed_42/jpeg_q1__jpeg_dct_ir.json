@@ -1,0 +1,252 @@
+{
+  "schema": "tamtd.phase48.jpeg-dct-accessibility.v1",
+  "condition": "jpeg_q1",
+  "representation": "jpeg_dct_ir",
+  "model_name": "JPEGDCTNet",
+  "parameter_count": 428426,
+  "seed": 42,
+  "best_epoch": 10,
+  "epochs_run": 16,
+  "best_validation_accuracy": 0.7529039070749736,
+  "test_metrics": {
+    "n": 3925,
+    "accuracy": 0.7169426751592357,
+    "cross_entropy_nats": 0.8945109415997302,
+    "class_prior_cross_entropy_nats": 2.303672990382605,
+    "test_label_entropy_nats": 2.301806979810302,
+    "u_probe_nats": 1.4091620487828749,
+    "u_probe_bits": 2.0329910995879854,
+    "brier_score": 0.39491211183540076
+  },
+  "relative_u_probe_utility_to_matched_rgb": 1.4545111718858017,
+  "relative_accuracy_above_chance_to_matched_rgb": 1.0489495343296513,
+  "training_seconds": 77.55923909999547,
+  "examples_per_second": 1758.0368448974118,
+  "peak_vram_mb": 93.603515625,
+  "inference_model_forward_ms_per_sample": 0.13316007647633696,
+  "inference_batch_forward_ms_median": 3.9576000126544386,
+  "inference_batch_forward_ms_p95": 7.713390007847918,
+  "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase48\\jpeg_q1__jpeg_dct_ir__seed42.pt",
+  "checkpoint_sha256": "c47e9c6ee03889a4dc617d6bdafdef0d6006f2ca88ca1a6f66c2502fed7fd2c9",
+  "predictions": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\results\\Phase 4.8 Extreme Compression\\predictions\\jpeg_q1_dct_ir_seed42.csv.gz",
+  "predictions_sha256": "ec8ceff0fd6359ae23d8f17e1967ffdac578aacc01e0e53d7a71d12296848f20",
+  "training_config": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "max_epochs": 20,
+    "patience": 6,
+    "batch_size": 32,
+    "workers": 0,
+    "pin_memory": false,
+    "amp": true
+  },
+  "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+  "resource_snapshots": {
+    "start": {
+      "disk_free_bytes": 128608215040,
+      "memory_available_bytes": 16323100672,
+      "commit_free_bytes": 12084785152,
+      "vram_free_mb": 6314
+    },
+    "end": {
+      "disk_free_bytes": 128599928832,
+      "memory_available_bytes": 12552151040,
+      "commit_free_bytes": 10862247936,
+      "vram_free_mb": 6283
+    }
+  },
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 76,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793458014.3258367,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 690700288,
+        "peak_rss_bytes": 690700288,
+        "private_bytes": 5017559040,
+        "process_pagefile_bytes": 5017559040,
+        "peak_process_pagefile_bytes": 5017636864,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 16309731328,
+        "commit_used_bytes": 28908703744,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 128608215040,
+      "gpu": {
+        "cuda_allocated_bytes": 0,
+        "cuda_allocated_peak_bytes": 0,
+        "cuda_reserved_bytes": 0,
+        "cuda_reserved_peak_bytes": 0,
+        "vram_used_mb": 1704,
+        "vram_free_mb": 6314,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793458093.5496855,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 4372566016,
+        "peak_rss_bytes": 4372643840,
+        "private_bytes": 6475337728,
+        "process_pagefile_bytes": 6475337728,
+        "peak_process_pagefile_bytes": 6475845632,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 12544561152,
+        "commit_used_bytes": 30138314752,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 128599928832,
+      "gpu": {}
+    },
+    "peaks": {
+      "rss_bytes": 4372566016,
+      "peak_rss_bytes": 4372643840,
+      "private_bytes": 6475337728,
+      "process_pagefile_bytes": 6475337728,
+      "peak_process_pagefile_bytes": 6475845632,
+      "commit_used_bytes": 30451191808,
+      "cuda_allocated_peak_bytes": 98150400,
+      "cuda_reserved_peak_bytes": 121634816,
+      "vram_used_mb": 2027,
+      "utilization_percent": 45
+    },
+    "minima": {
+      "disk_free_bytes": 128584388608,
+      "vram_free_mb": 5991,
+      "memory_available_bytes": 12544561152
+    },
+    "gpu_utilization_mean_percent": 34.333333333333336
+  },
+  "feature_cache_sha256": {
+    "y": "ac75cd0b8d83af44a991d96ebd76fee1083f219b6175a2eb2d58dc65ae0b1c21",
+    "cb": "4de2bf3114f21fc7b83b09a63229b9bd09bb5cdc6b5734ff47eb2485e9e24e99",
+    "cr": "e91e3d9840b269b170d02231e99123bd06d04e7234f0a1ac290031a6165ebbe2",
+    "quantization": "d7fdf7fd5b7eef6cd9daefd6d936ba701360079d21af36582c7810d89b89efed"
+  },
+  "truncation": 0,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.6017628588941673,
+      "validation_accuracy": 0.5026399155227033,
+      "learning_rate": 0.00029815325108927063
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.2292369246287012,
+      "validation_accuracy": 0.6198521647307286,
+      "learning_rate": 0.00029265847744427303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.0643862357471952,
+      "validation_accuracy": 0.5945089757127772,
+      "learning_rate": 0.0002836509786282552
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9756814407871464,
+      "validation_accuracy": 0.6367476240760296,
+      "learning_rate": 0.0002713525491562421
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.8710383037199187,
+      "validation_accuracy": 0.7001055966209081,
+      "learning_rate": 0.0002560660171779821
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7982865817892079,
+      "validation_accuracy": 0.7265047518479408,
+      "learning_rate": 0.000238167787843871
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.7134382107593006,
+      "validation_accuracy": 0.7053854276663146,
+      "learning_rate": 0.00021809857496093204
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.6393137024590958,
+      "validation_accuracy": 0.7328405491024287,
+      "learning_rate": 0.00019635254915624216
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5586091307680586,
+      "validation_accuracy": 0.7159450897571278,
+      "learning_rate": 0.00017346516975603468
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.49529673867985496,
+      "validation_accuracy": 0.7529039070749736,
+      "learning_rate": 0.00015000000000000001
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.4092425558103191,
+      "validation_accuracy": 0.6737064413938754,
+      "learning_rate": 0.0001265348302439654
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.34913036446144985,
+      "validation_accuracy": 0.7402323125659979,
+      "learning_rate": 0.0001036474508437579
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.29257191872546384,
+      "validation_accuracy": 0.7032734952481521,
+      "learning_rate": 8.190142503906799e-05
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.2419137539535698,
+      "validation_accuracy": 0.7423442449841605,
+      "learning_rate": 6.183221215612905e-05
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.21006855257406282,
+      "validation_accuracy": 0.7265047518479408,
+      "learning_rate": 4.393398282201788e-05
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.18185288868048918,
+      "validation_accuracy": 0.7465681098204857,
+      "learning_rate": 2.86474508437579e-05
+    }
+  ]
+}

@@ -11,6 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tamtd.codecs.avif import AVIFCodec
+from tamtd.codecs.jpeg import JPEGCodec
 from tamtd.codecs.jxl import JXLCodec
 from tamtd.codecs.webp import WebPCodec
 from tamtd.data.imagenette_accessibility import get_imagenette_source_root, load_prepared_rgb, read_manifest
@@ -18,6 +19,14 @@ from tamtd.runtime import cache_root, data_root
 
 
 CODEC_FACTORIES = {
+    "jpeg_q1": lambda: JPEGCodec(1),
+    "jpeg_q5": lambda: JPEGCodec(5),
+    "webp_q5": lambda: WebPCodec(5, method=6),
+    "webp_q10": lambda: WebPCodec(10, method=6),
+    "webp_q20": lambda: WebPCodec(20, method=6),
+    "avif_q5": lambda: AVIFCodec(5, speed=6, max_threads=1),
+    "avif_q10": lambda: AVIFCodec(10, speed=6, max_threads=1),
+    "avif_q20": lambda: AVIFCodec(20, speed=6, max_threads=1),
     "webp_q30": lambda: WebPCodec(30, method=6),
     "webp_q75": lambda: WebPCodec(75, method=6),
     "avif_q40": lambda: AVIFCodec(40, speed=6, max_threads=1),
@@ -44,7 +53,10 @@ def _recover(stream_path: Path, manifest_path: Path, rows: list[dict]) -> list[d
             except json.JSONDecodeError:
                 break
             index = len(valid)
-            if index >= len(rows) or item.get("cache_index") != index or item.get("image_id") != rows[index]["image_id"]:
+            if index >= len(rows) or any(
+                item.get(key) != rows[index].get(key)
+                for key in ("cache_index", "image_id", "label", "split", "rgb_sha256")
+            ):
                 break
             reference = item.get("stream", {})
             offset = int(reference.get("offset", -1))

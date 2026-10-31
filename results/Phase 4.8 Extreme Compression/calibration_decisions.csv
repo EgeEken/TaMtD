@@ -1,0 +1,6 @@
+codec_family,condition_a,condition_b,exact_same_streams_on_all_calibration_images,training_decision,rule
+jpeg,jpeg_q1,jpeg_q5,False,train both,Skip duplicate training only if encoded bytes match exactly for every calibration image; rate-distortion similarity alone does not establish raw-byte redundancy.
+webp,webp_q5,webp_q10,False,train both,Skip duplicate training only if encoded bytes match exactly for every calibration image; rate-distortion similarity alone does not establish raw-byte redundancy.
+webp,webp_q10,webp_q20,False,train both,Skip duplicate training only if encoded bytes match exactly for every calibration image; rate-distortion similarity alone does not establish raw-byte redundancy.
+avif,avif_q5,avif_q10,False,train both,Skip duplicate training only if encoded bytes match exactly for every calibration image; rate-distortion similarity alone does not establish raw-byte redundancy.
+avif,avif_q10,avif_q20,False,train both,Skip duplicate training only if encoded bytes match exactly for every calibration image; rate-distortion similarity alone does not establish raw-byte redundancy.

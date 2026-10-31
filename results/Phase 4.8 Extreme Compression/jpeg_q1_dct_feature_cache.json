@@ -1,0 +1,84 @@
+{
+  "schema": "tamtd.phase48.jpeg-dct-feature-cache.v1",
+  "condition": "jpeg_q1",
+  "samples": 13394,
+  "source_manifest_sha256": "596c9bc2fd4f09361af94db160a6a63bd1ecee37829ab0987e2308a6e528acd0",
+  "stream_manifest_sha256": "ee433bc7119299879d16fc603cb073e67a13c321abb592ae77e71be5392c016e",
+  "stream_sha256": "6b07464840dd4f9517b9539c6f6b8c686deebb914e0c9a040686810b5658ccbc",
+  "feature_layout": {
+    "y": {
+      "shape": [
+        13394,
+        64,
+        32,
+        32
+      ],
+      "dtype": "int16"
+    },
+    "cb": {
+      "shape": [
+        13394,
+        64,
+        16,
+        16
+      ],
+      "dtype": "int16"
+    },
+    "cr": {
+      "shape": [
+        13394,
+        64,
+        16,
+        16
+      ],
+      "dtype": "int16"
+    },
+    "quantization": {
+      "shape": [
+        13394,
+        2,
+        8,
+        8
+      ],
+      "dtype": "uint16"
+    }
+  },
+  "feature_paths": {
+    "y": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\phase48\\features\\jpeg_q1_y.npy",
+    "cb": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\phase48\\features\\jpeg_q1_cb.npy",
+    "cr": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\phase48\\features\\jpeg_q1_cr.npy",
+    "quantization": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\phase48\\features\\jpeg_q1_quantization.npy"
+  },
+  "feature_sha256": {
+    "y": "ac75cd0b8d83af44a991d96ebd76fee1083f219b6175a2eb2d58dc65ae0b1c21",
+    "cb": "4de2bf3114f21fc7b83b09a63229b9bd09bb5cdc6b5734ff47eb2485e9e24e99",
+    "cr": "e91e3d9840b269b170d02231e99123bd06d04e7234f0a1ac290031a6165ebbe2",
+    "quantization": "d7fdf7fd5b7eef6cd9daefd6d936ba701360079d21af36582c7810d89b89efed"
+  },
+  "feature_total_bytes": 2636796928,
+  "timing_summary": {
+    "coefficient_read_ms": {
+      "median": 1.04705,
+      "p95": 1.9814149999999993,
+      "n": 768
+    },
+    "canonical_ir_build_ms": {
+      "median": 0.10300000000000001,
+      "p95": 0.28205499999999994,
+      "n": 768
+    },
+    "model_array_adapter_ms": {
+      "median": 0.04375,
+      "p95": 0.12068999999999998,
+      "n": 768
+    },
+    "pre_reconstruction_decoder_plus_adapter_ms": {
+      "median": 1.20825,
+      "p95": 2.420915,
+      "n": 768
+    }
+  },
+  "timing_boundary": "pyjpegio entropy decode -> canonical int16 DCT IR -> channel-grid and quantization-table adaptation",
+  "elapsed_seconds": 145.79037130001234,
+  "complete": true
+}

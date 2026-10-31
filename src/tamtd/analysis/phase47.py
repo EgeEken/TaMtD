@@ -84,17 +84,77 @@ def semantic_exposure_depth(
     return result
 
 
-def semantic_exposure_auc(stages: list[dict], full_decode_ms: float) -> dict:
-    ordered = sorted(stages, key=lambda row: row["cumulative_ms"])
-    x = np.asarray([min(1.0, max(0.0, row["cumulative_ms"] / full_decode_ms)) for row in ordered], dtype=np.float64)
-    utility = np.asarray([row["relative_u_probe_utility"] for row in ordered], dtype=np.float64)
-    accuracy = np.asarray([row["relative_accuracy"] for row in ordered], dtype=np.float64)
+def semantic_exposure_auc(
+    stages: list[dict],
+    full_decode_ms: float,
+    required_stages: tuple[str, ...] | None = None,
+) -> dict:
+    names = [str(row["stage"]) for row in stages]
+    base = {
+        "u_probe_auc": None,
+        "accuracy_auc": None,
+        "normalized_cost_end": None,
+        "n_stages": 0,
+        "status": "unavailable",
+        "reason": None,
+        "required_stages": list(required_stages or ()),
+        "interpolation": "linear between measured endpoints",
+    }
+    if required_stages is None:
+        return {**base, "reason": "required_stage_set_not_specified"}
+    if len(set(required_stages)) != len(required_stages):
+        raise ValueError("required stage names must be unique")
+    by_stage = {str(row["stage"]): row for row in stages}
+    missing = [stage for stage in required_stages if stage not in by_stage]
+    if missing:
+        return {**base, "reason": "missing_required_stages", "missing_stages": missing, "measured_stages": names}
+    if len(required_stages) < 2:
+        return {**base, "reason": "fewer_than_two_required_stages", "measured_stages": names}
+    ordered = [by_stage[stage] for stage in required_stages]
+    costs = np.asarray([float(row["cumulative_ms"]) for row in ordered], dtype=np.float64)
+    if full_decode_ms <= 0 or not np.all(np.isfinite(costs)) or np.any(costs < 0):
+        return {**base, "reason": "invalid_costs", "measured_stages": names}
+    if np.any(np.diff(costs) < 0):
+        return {**base, "reason": "nonmonotonic_stage_cost", "measured_stages": names}
+    if np.any(np.diff(costs) == 0):
+        return {**base, "reason": "duplicate_stage_cost", "measured_stages": names}
+    if not np.isclose(costs[-1], full_decode_ms, rtol=1e-6, atol=1e-9):
+        return {**base, "reason": "last_required_stage_is_not_full_decode", "measured_stages": names}
+    x = costs / float(full_decode_ms)
+    utility = np.asarray([float(row["relative_u_probe_utility"]) for row in ordered], dtype=np.float64)
+    accuracy = np.asarray([float(row["relative_accuracy"]) for row in ordered], dtype=np.float64)
+    if not np.all(np.isfinite(utility)) or not np.all(np.isfinite(accuracy)):
+        return {**base, "reason": "invalid_utility", "measured_stages": names}
     return {
+        **base,
         "u_probe_auc": float(np.trapezoid(utility, x)),
         "accuracy_auc": float(np.trapezoid(accuracy, x)),
-        "normalized_cost_end": float(x[-1]) if len(x) else None,
+        "normalized_cost_end": float(x[-1]),
         "n_stages": int(len(x)),
+        "status": "available",
+        "reason": None,
+        "measured_stages": list(required_stages),
     }
+
+
+def semantic_exposure_pareto(stages: list[dict], utility_field: str) -> list[dict]:
+    if utility_field not in {"accuracy", "u_probe_bits", "relative_accuracy", "relative_u_probe_utility"}:
+        raise ValueError(f"unsupported utility field: {utility_field}")
+    points = []
+    for row in stages:
+        cost = float(row["cumulative_ms"])
+        utility = float(row[utility_field])
+        if np.isfinite(cost) and np.isfinite(utility) and cost >= 0:
+            points.append({**row, "cost_ms": cost, "utility": utility})
+    return [
+        {**point, "nondominated": not any(
+            other["cost_ms"] <= point["cost_ms"]
+            and other["utility"] >= point["utility"]
+            and (other["cost_ms"] < point["cost_ms"] or other["utility"] > point["utility"])
+            for other in points
+        )}
+        for point in points
+    ]
 
 
 def stage_utility_gain(stages: list[dict]) -> list[dict]:

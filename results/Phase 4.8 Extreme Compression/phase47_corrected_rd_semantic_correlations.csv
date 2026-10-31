@@ -1,0 +1,4 @@
+x,y,n,pearson_r,spearman_rho,rd_efficiency_residual,note
+rd_efficiency_residual,raw_u_probe_bits,6,-0.04148154771299035,-0.08571428571428573,PSNR residual from descriptive OLS on log2(bpp),exploratory; no cross-seed inference when fewer than three comparable conditions are available
+rd_efficiency_residual,raw_accuracy,6,-0.4650753948295253,-0.4285714285714286,PSNR residual from descriptive OLS on log2(bpp),exploratory; no cross-seed inference when fewer than three comparable conditions are available
+rd_efficiency_residual,corrected_u_probe_auc,2,,,PSNR residual from descriptive OLS on log2(bpp),exploratory; no cross-seed inference when fewer than three comparable conditions are available

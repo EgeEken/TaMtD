@@ -1,0 +1,159 @@
+{
+  "schema": "tamtd.phase48.decoded-rgb-evaluation.v1",
+  "condition": "avif_q10",
+  "n_test_samples": 3925,
+  "complete": true,
+  "stream_manifest_sha256": "9f92fbe7ae14ba6a845c002b6b97ed89d4ec71359744496f23978aec84a93735",
+  "stream_sha256": "d986e8edbf3b0a6c42296a68876b0634eb5abe1cdd68b61089f3df711f402e66",
+  "decoded_rgb_per_seed": [
+    {
+      "condition": "avif_q10",
+      "stage": "decoded_rgb",
+      "representation": "decoded_rgb_reference",
+      "codec_family": "avif",
+      "seed": 42,
+      "n_samples": 3925,
+      "accuracy": 0.7513375796178344,
+      "cross_entropy_nats": 1.0446470470479894,
+      "class_prior_cross_entropy_nats": 2.303672990382605,
+      "u_probe_bits": 1.816390484799399,
+      "brier_score": 0.38774777643606884,
+      "joint_decode_and_three_model_eval_seconds": 138.3541120000009,
+      "inference_model_forward_ms_per_sample": 1.5568584713871312,
+      "inference_batch_forward_ms_median": 20.96745000744704,
+      "inference_batch_forward_ms_p95": 40.746199985733256,
+      "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\original_rgb__decoded_rgb_reference.pt",
+      "checkpoint_sha256": "ce984905927a2c01bf98b3c0aa8c3e92ad80e42404a0c5d2c8e238cf0ecfca94"
+    },
+    {
+      "condition": "avif_q10",
+      "stage": "decoded_rgb",
+      "representation": "decoded_rgb_reference",
+      "codec_family": "avif",
+      "seed": 123,
+      "n_samples": 3925,
+      "accuracy": 0.7673885350318471,
+      "cross_entropy_nats": 0.9654168856606237,
+      "class_prior_cross_entropy_nats": 2.303672990382605,
+      "u_probe_bits": 1.9306954457217835,
+      "brier_score": 0.3574039082212669,
+      "joint_decode_and_three_model_eval_seconds": 138.3541120000009,
+      "inference_model_forward_ms_per_sample": 1.5327478980773075,
+      "inference_batch_forward_ms_median": 20.965899995644577,
+      "inference_batch_forward_ms_p95": 40.48962498927722,
+      "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\original_rgb__decoded_rgb_reference__seed123.pt",
+      "checkpoint_sha256": "b6a19190aca5a6c6a781f04e5d8fb10033278685f27d22b14e48c7442015fb3f"
+    },
+    {
+      "condition": "avif_q10",
+      "stage": "decoded_rgb",
+      "representation": "decoded_rgb_reference",
+      "codec_family": "avif",
+      "seed": 777,
+      "n_samples": 3925,
+      "accuracy": 0.759235668789809,
+      "cross_entropy_nats": 1.0173715640584253,
+      "class_prior_cross_entropy_nats": 2.303672990382605,
+      "u_probe_bits": 1.8557406888462944,
+      "brier_score": 0.36836756495723333,
+      "joint_decode_and_three_model_eval_seconds": 138.3541120000009,
+      "inference_model_forward_ms_per_sample": 1.512088866231097,
+      "inference_batch_forward_ms_median": 20.9958000050392,
+      "inference_batch_forward_ms_p95": 40.484274992195424,
+      "checkpoint": "C:\\Users\\EGE\\Desktop\\Coding\\Personal Projects\\Completed Projects\\AI\\TaMtD\\TaMtD\\data\\cache\\neural_accessibility\\imagenette_320\\checkpoints\\phase4\\original_rgb__decoded_rgb_reference__seed777.pt",
+      "checkpoint_sha256": "105046a3944f1b08dde8e4479499412e4b9e76cd14dfee8dbad05eda8b9314f1"
+    }
+  ],
+  "resource_diagnostics": {
+    "schema": "tamtd.resource-diagnostics.v1",
+    "sample_count": 131,
+    "sampling_interval_seconds": 1.0,
+    "start": {
+      "timestamp": 1793457226.3140042,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 1170300928,
+        "peak_rss_bytes": 1206861824,
+        "private_bytes": 3221852160,
+        "process_pagefile_bytes": 3221852160,
+        "peak_process_pagefile_bytes": 3297763328,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 15838969856,
+        "commit_used_bytes": 27022749696,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 131264020480,
+      "gpu": {
+        "cuda_allocated_bytes": 8519680,
+        "cuda_allocated_peak_bytes": 8519680,
+        "cuda_reserved_bytes": 20971520,
+        "cuda_reserved_peak_bytes": 20971520,
+        "vram_used_mb": 1846,
+        "vram_free_mb": 6172,
+        "vram_total_mb": 8192,
+        "utilization_percent": 0
+      }
+    },
+    "end": {
+      "timestamp": 1793457364.6735656,
+      "platform": "win32",
+      "process": {
+        "rss_bytes": 1172238336,
+        "peak_rss_bytes": 1211813888,
+        "private_bytes": 3223183360,
+        "process_pagefile_bytes": 3223183360,
+        "peak_process_pagefile_bytes": 3336327168,
+        "status": "available_from_GetProcessMemoryInfo",
+        "rss_reliability": "Windows process working set counters"
+      },
+      "system": {
+        "memory_total_bytes": 34011373568,
+        "memory_available_bytes": 15960289280,
+        "commit_used_bytes": 26725011456,
+        "commit_limit_bytes": 40990695424
+      },
+      "cgroup": {
+        "memory_current_bytes": null,
+        "memory_peak_bytes": null,
+        "memory_limit_bytes": null,
+        "swap_current_bytes": null,
+        "swap_limit_bytes": null
+      },
+      "disk_free_bytes": 131259088896,
+      "gpu": {}
+    },
+    "peaks": {
+      "rss_bytes": 1211420672,
+      "peak_rss_bytes": 1211813888,
+      "private_bytes": 3328286720,
+      "process_pagefile_bytes": 3328286720,
+      "peak_process_pagefile_bytes": 3336327168,
+      "commit_used_bytes": 27161997312,
+      "cuda_allocated_peak_bytes": 126942208,
+      "cuda_reserved_peak_bytes": 163577856,
+      "vram_used_mb": 1982,
+      "utilization_percent": 97
+    },
+    "minima": {
+      "disk_free_bytes": 131239555072,
+      "vram_free_mb": 6036,
+      "memory_available_bytes": 15679324160
+    },
+    "gpu_utilization_mean_percent": 5.846153846153846
+  },
+  "prediction_rows": 11775,
+  "rate_distortion_rows": 3925,
+  "predictions_sha256": "09874f8c32574a4c97aefabefb0d69b06d8e470a0c596eadf7243297af028dda",
+  "rate_distortion_sha256": "b152dce9ef91b8571af4b044b40b60f6c9a0fac64f8aa1bbceed0ef50da441bf"
+}

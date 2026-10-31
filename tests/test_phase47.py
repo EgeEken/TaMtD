@@ -9,6 +9,7 @@ from tamtd.analysis.phase47 import (
     rate_distortion_residuals,
     semantic_exposure_auc,
     semantic_exposure_depth,
+    semantic_exposure_pareto,
     stage_operation_metadata,
     stage_utility_gain,
     summarize_timing,
@@ -144,7 +145,9 @@ def test_timing_sed_auc_and_stage_gain():
     sed = semantic_exposure_depth(stages, 4.0)
     assert sed[0]["stage"] == "coefficients"
     assert sed[1]["status"] == "not_reached_before_rgb"
-    assert semantic_exposure_auc(stages, 4.0)["u_probe_auc"] == pytest.approx(0.625)
+    auc = semantic_exposure_auc(stages[1:], 4.0, ("coefficients", "decoded_rgb"))
+    assert auc["u_probe_auc"] == pytest.approx(0.425)
+    assert auc["status"] == "available"
     gain = stage_utility_gain(stages)
     assert gain[0]["delta_u_probe_per_ms"] == pytest.approx(0.6)
     nonmonotonic = [
@@ -153,6 +156,39 @@ def test_timing_sed_auc_and_stage_gain():
         {**stages[2], "stage_order": 2, "cumulative_ms": 4.0},
     ]
     assert stage_utility_gain(nonmonotonic)[1]["delta_ms"] == -1.0
+
+
+def test_phase47_auc_requires_consistent_observed_endpoints():
+    rgb = {
+        "stage": "decoded_rgb", "cumulative_ms": 2.0,
+        "relative_u_probe_utility": 1.0, "relative_accuracy": 1.0,
+    }
+    only_rgb = semantic_exposure_auc([rgb], 2.0, ("pre_reconstruction_coefficients", "decoded_rgb"))
+    assert only_rgb["u_probe_auc"] is None
+    assert only_rgb["reason"] == "missing_required_stages"
+
+    webp = [
+        {"stage": "pre_reconstruction_coefficients", "cumulative_ms": 3.0, "relative_u_probe_utility": 0.7, "relative_accuracy": 0.7},
+        rgb,
+    ]
+    reordered = semantic_exposure_auc(webp, 2.0, ("pre_reconstruction_coefficients", "decoded_rgb"))
+    assert reordered["u_probe_auc"] is None
+    assert reordered["reason"] == "nonmonotonic_stage_cost"
+
+    missing_endpoint = semantic_exposure_auc(webp[:1], 2.0, ("raw_bytes", "decoded_rgb"))
+    assert missing_endpoint["u_probe_auc"] is None
+    assert missing_endpoint["reason"] == "missing_required_stages"
+
+
+def test_semantic_pareto_keeps_only_measured_nondominated_points():
+    stages = [
+        {"stage": "raw_bytes", "cumulative_ms": 0.0, "accuracy": 0.3},
+        {"stage": "pre_reconstruction_coefficients", "cumulative_ms": 3.0, "accuracy": 0.6},
+        {"stage": "decoded_rgb", "cumulative_ms": 2.0, "accuracy": 0.8},
+    ]
+    rows = semantic_exposure_pareto(stages, "accuracy")
+    assert [row["nondominated"] for row in rows] == [True, False, True]
+    assert [row["stage"] for row in rows] == ["raw_bytes", "pre_reconstruction_coefficients", "decoded_rgb"]
 
 
 def test_rate_distortion_residual_and_descriptive_correlations():

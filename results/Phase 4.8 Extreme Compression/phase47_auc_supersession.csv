@@ -1,0 +1,7 @@
+condition,historical_phase47_auc_mean_u,historical_phase47_auc_mean_accuracy,historical_phase47_seed_count,corrected_u_auc,corrected_u_auc_status,corrected_u_auc_seed_count,corrected_accuracy_auc,corrected_accuracy_auc_status,corrected_accuracy_auc_seed_count,historical_outputs_preserved
+avif_q40,0.4487828956235074,0.44504499267740805,3,0.3773507953974636,available,3,0.37218246650836456,available,3,True
+avif_q60,0.377408000425346,0.3750582668114421,3,0.28951371979870527,available,3,0.28720246346596295,available,3,True
+jxl_d3,0.18291170831441764,0.19118428130748888,3,,unavailable,0,,unavailable,0,True
+jxl_d6,0.17901732585887373,0.19104013469044112,3,,unavailable,0,,unavailable,0,True
+webp_q30,0.19026005466667653,0.2001425767912689,3,,unavailable,0,,unavailable,0,True
+webp_q75,0.1892265482255868,0.19559471435823936,3,,unavailable,0,,unavailable,0,True

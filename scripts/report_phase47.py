@@ -469,7 +469,16 @@ def main() -> None:
         full_ms = next(row["cumulative_ms"] for row in stages if row["stage"] == "decoded_rgb")
         for row in semantic_exposure_depth(stages, full_ms):
             sed_rows.append({"condition": condition, "seed": seed, "full_rgb_ms": full_ms, **row})
-        auc_rows.append({"condition": condition, "seed": seed, "full_rgb_ms": full_ms, **semantic_exposure_auc(stages, full_ms)})
+        auc_rows.append({
+            "condition": condition,
+            "seed": seed,
+            "full_rgb_ms": full_ms,
+            **semantic_exposure_auc(
+                stages,
+                full_ms,
+                ("pre_reconstruction_coefficients", "decoded_rgb"),
+            ),
+        })
         for row in stage_utility_gain(stages):
             gain_rows.append({"condition": condition, "seed": seed, **row})
     for condition in CONDITIONS:
@@ -483,11 +492,13 @@ def main() -> None:
                 "milliseconds": float(np.mean([row["milliseconds"] for row in reached])) if reached else None,
                 "fraction_of_full_rgb": float(np.mean([row["fraction_of_full_rgb"] for row in reached])) if reached else None,
             })
-        values = [row for row in auc_rows if row["condition"] == condition]
+        values = [row for row in auc_rows if row["condition"] == condition and row["status"] == "available"]
         if values:
             for field in ("u_probe_auc", "accuracy_auc"):
                 mean, std = _mean_std([float(row[field]) for row in values])
                 auc_rows.append({"condition": condition, "seed": "mean", field: mean, f"{field}_std": std, "n_seeds": len(values)})
+        else:
+            auc_rows.append({"condition": condition, "seed": "mean", "status": "unavailable", "reason": "no_seed_has_the_required_monotonic_endpoints", "u_probe_auc": None, "accuracy_auc": None, "n_seeds": 0})
     _write_csv(RESULTS / "semantic_exposure_depth.csv", sed_rows)
     _write_csv(RESULTS / "semantic_exposure_auc.csv", auc_rows)
     _write_csv(RESULTS / "stage_utility_gain.csv", gain_rows)
