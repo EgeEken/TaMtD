@@ -1,30 +1,45 @@
-# TaMtD
-Give a VLM Model a decoder, and you'll have to sample frames for a lifetime, Teach a Model to Decode (TaMtD) and you never have to sample again (hopefully)
+# TaMtD — Teach a Model to Decode
 
-The idea for this project is to develop a new technique for video / image comprehension for VLM's where instead of going through this process of:
+**Measuring neural semantic accessibility versus cumulative preprocessing cost across image and video codecs.**
 
-```Encoded media file (decodable by media decoder) -> Media Decoder -> Vision Encoder -> Encoded vision tokens (decodable by LLM Decoder) -> LLM -> Output```
+TaMtD studies the representations between entropy-coded file bytes and fully decoded RGB frames. The goal is not to show that neural networks can learn to decode; it is to establish **which codec stages expose usable task information, at what cost, and whether any compressed-domain approach is competitive with conventional decoding and vision encoding**.
 
-We can instead just teach the VLM to decode the media file itself, and do this:
+![TaMtD research snapshot](docs/research/figures/research-snapshot.svg)
 
-```Encoded media file (decodable by media decoder / TaMtD decoder) ->       TaMtD ViT Decoder         -> LLM -> Output```
+## Main image-track findings (through Phase 4.8)
 
-The core idea is that compressed media files for videos and images already have a lot of structure to them hidden somewhere in their bitstream, and they are made specifically to be decoded by a decoder algorithm and maintain all semantic visual information while cutting down the bit count. Meanwhile ViT's serve the purpose of extracting semantic information from uncompressed image matrices, and that is actually a much more difficult task than simply decoding compressed media files, so if we can teach a ViT to simultaneously decode and extract semantic information from compressed media files, we can skip the decoding step entirely which saves some overhead, and if this bitstream reading can be made efficient enough through a very high rate of tokenization, we can achieve video comprehension with full frame coverage, which is something that is completely impossible with the traditional approach.
+- **RD efficiency vs raw accessibility:** Across 16 JPEG/WebP/AVIF operating points, a pooled PSNR-over-log-rate RD-efficiency residual correlates with common seed-42 raw-byte classification at **Pearson r = −0.915**. Much of the relationship is **between codec families**; it is not a universal within-codec law.
 
-Steps i have in mind for this project are:
+- **Identical pixels, different coding:** PBC STORE vs LZMA achieves **25–39% smaller streams** with the *same decoded pixels* but **16–23 percentage points lower** three-seed mean raw-byte accuracy under LZMA.
 
-1- Preliminary testing to see if i can teach a model to decode a media file, this will be a small pipeline where the model will simply be required to take in the bitstream of a compressed media file, and output the uncompressed image matrix
+- **Comparable decoded utility, unequal byte utility:** Near 0.6 bpp, JPEG q20, WebP q30 and AVIF q40 retain ~81% decoded RGB accuracy, but raw byte accuracy is **36.71%, 24.36% and 18.39%**.
 
-- The data collection for this will be trivially easy since literally every single compressed media file has the "ground truth" for this already, which is just the media itself, so no manual labeling, no unsupervised learning, no reinforcement learning, no complicated loss functions or distillation processes, just a simple supervised learning problem.
+- **Structured codec features have utility, but extraction costs matter:** The WebP/AVIF intermediate classifiers attain ~68–72% of full RGB U-probe utility, yet AVIF's pre-reconstruction extraction + adapter already costs **95–96% of full YUV decode**, and the measured WebP adapter is slower than full RGB decode. **No end-to-end advantage has been established.**
 
-- The model design will be a larger challenge, but still probably not too much of a challenge, overall it has to simply take in a 1D sequence of bits and output a 3D matrix of pixel values (or 4D for videos), can take inspiration from image generation models for this.
+## Research figures
 
-- It might be a good idea to design the architecture in a semi-auto-encoder way so that there's an intermediary step where the model first generates an even further compressed representation of the media file, before attempting to recreate it, this way when the final TaMtD ViT is created, we can simply cut out the generator since it won't be needed, and just have the "decoder" part of the model
+[![RD efficiency versus raw-byte accessibility](docs/research/figures/rd-efficiency-vs-raw-accuracy.svg)](docs/research/ta-mtd-research-report.md)
 
-2- A tokenizer will be needed to convert the bitstream of the compressed media files into tokens that can be fed into the model, this tokenizer will have to be custom made and trained since obviously there is no existing tokenizer for tokenizing media file bitstreams. But i feel like simply running a standard tokenizer creation algorithm on the bitstreams of a relatively large dataset of media files will be enough since the logic of finding the most common sequences of bits and making those into tokens should be the same regardless of the fact that these bitstreams are for media files and not text.
+**Relative U-probe accessibility versus cumulative decoder cost** — both axes are 0–100%, independently normalized per codec setting. Off-scale observations are annotated, not discarded.
 
-3- Once the preliminary testing is done, we can proceed to train the full TaMtD ViT model on a larger dataset of compressed media files, ensuring that it can effectively decode and extract semantic information from the bitstreams. Using regular VLM evaluation methods like zero shot classification, context retrieval, visual question answering, captioning etc, we can compare the quality of this model to regular vlms.
+[![Relative neural utility versus decoder cost](docs/research/figures/relative-utility-vs-decode-cost.svg)](docs/research/ta-mtd-research-report.md)
 
-Expectations:
+**[Full research synthesis: all numerical tables, stage charts, controls, limitations and future program](docs/research/ta-mtd-research-report.md)**
 
-- If this works, and the final model can effectively decode and read from the full bitstreams, this could be great news for video comprehension since it would cut out the need for frame sampling, and allow for much more in depth video comprehension since the model would have access to the full video instead of just a few sampled frames
+Additional figures: [relative accuracy frontier](docs/research/figures/relative-accuracy-vs-decode-cost.svg) · [PBC entropy-wrapper control](docs/research/figures/pbc-entropy-wrapper-control.svg) · [matched codecs](docs/research/figures/matched-codec-accessibility.svg) · [raw/RGB bitrate sweep](docs/research/figures/bitrate-vs-raw-and-rgb.svg) · [decode bottlenecks](docs/research/figures/decoder-bottlenecks.svg).
+
+## Evidence base
+
+The 256×256 Imagenette experiment uses **13,394 aligned images** (8,522 train, 947 validation, 3,925 test) with JPEG, WebP, AVIF, JPEG XL and PBC; phases through 4.8 instrument raw, structured and decoded representations. The byte-model comparison holds the ByteStreamCNN architecture/seed fixed, but **different architectures** are used for structured and RGB stages. Reported stage costs come from different historical calibration groups, and 0% for raw bytes means zero *decoder operation*, not zero input ingestion/inference. Results are empirical properties of the tested probes and implementations, not a proven universal compression law.
+
+Original artifacts: [Phase 4.5B](results/Phase%204.5B%20Analysis/), [Phase 4.7](results/Phase%204.7%20Standard%20Codec%20Stages/), [Phase 4.8](results/Phase%204.8%20Extreme%20Compression/). The report links the complete CSV/JSON evidence.
+
+## Planned work
+
+**Next:** H.264 video V0/V1 feasibility. Build a small fixed motion-sensitive video benchmark; validate GOP/frame/timestamp and decoder output alignment; measure demux, NAL parsing, accessible motion/residual structure, YUV and RGB extraction **on the same streams**. Decoder-exported motion vectors are not assumed to be available before reconstruction.
+
+**Then:** train compact motion/syntax/keyframe probes with matched decoded-frame baselines; optimize any promising extraction path; measure **end-to-end** accuracy, latency, throughput, host/GPU memory and token budget before considering a pinned Qwen VLM benchmark or structured-input student.
+
+Detailed criteria: [future work in the synthesis](docs/research/ta-mtd-research-report.md#8-planned-future-work) · [video track research plan](docs/Video%20Track%20Research%20Plan.md).
+
+**Current status:** image results consolidated through Phase 4.8. Video stage feasibility next.
