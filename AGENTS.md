@@ -19,6 +19,8 @@ The long-term idea of learning directly from compressed media remains the motiva
 
 ## Current repository state
 
+The image research track is complete through Phase 4.8. Start from the [research archive](docs/research/Research%20Archive.md) and [consolidated research report](docs/research/ta-mtd-research-report.md), not the historical phase instructions below. Current video planning is recorded in [Video Handoff](docs/research/Video%20Handoff.md) and [Video Track Research Plan](docs/Video%20Track%20Research%20Plan.md). New experiments require an explicit task direction.
+
 The early exploratory stage is recorded under:
 
 `results/Early Testing/`
@@ -112,9 +114,9 @@ PBC should be evaluated prominently in the extreme-compression regime. JPEG q1-q
 
 ---
 
-# Phase 1 — 256x256 codec characterization
+# Phase 1 — 256x256 codec characterization (completed)
 
-This is the **next implementation task**.
+This phase is complete. Retain the following specification as historical methodology, not as an instruction to rerun the sweep.
 
 Do not train a new neural architecture before this benchmark exists.
 
@@ -224,7 +226,7 @@ Do not overwrite `results/Early Testing/`.
 
 ---
 
-# Phase 2 — staged / partial decoding benchmarks
+# Phase 2 — staged / partial decoding benchmarks (completed)
 
 Once the 256x256 codec operating points are known, instrument codecs with useful intermediate representations.
 
@@ -311,7 +313,7 @@ Do **not** spend excessive time reverse-engineering internal representations thr
 
 ---
 
-# Phase 3 — neural accessibility benchmark
+# Phase 3 — neural accessibility benchmark (completed)
 
 Only after Phase 1 establishes sensible operating points.
 
@@ -450,37 +452,6 @@ Use a separate directory for the new 256x256 benchmark.
 
 ---
 
-# Immediate implementation order
+# Current status and next direction
 
-Follow this order unless the user explicitly redirects the project:
-
-1. Build the 256x256 natural-image codec benchmark harness.
-2. Integrate/verify JPEG, WebP, AVIF, JXL, PNG, and PBC adapters.
-3. Run a small 100-250 image rate-distortion/timing calibration sweep.
-4. Generate tables/plots and choose matched operating points.
-5. Instrument staged PBC decoding.
-6. Expose/timestamp JPEG quantized-DCT coefficient extraction.
-7. Benchmark raw/intermediate/RGB representations with small models.
-8. Produce the accuracy-preprocessing frontier.
-9. Only then decide whether stronger byte models, ByteFormer, reconstruction, video, or VLM experiments are justified.
-
----
-
-# First next step
-
-The first concrete task is:
-
-> **Implement and run a 256x256 natural-image codec characterization sweep on approximately 100-250 images.**
-
-Do not start new model training before this is complete.
-
-Expected engineering time is roughly a few hours if codec bindings are already available. AVIF/JXL setup and PBC runtime are the main likely sources of delay.
-
-The immediate output should be enough to answer:
-
-- What bpp ranges do the PBC presets actually occupy at 256x256?
-- Which JPEG/WebP/AVIF/JXL settings are genuinely comparable by rate or distortion?
-- How large are the decode-latency differences?
-- Which codec operating points should be carried into the neural benchmark?
-
-Once those are known, the project can proceed without repeating the 32x32 operating-point mistake.
+Phases 1–4.8, including the corrected Phase 4.7 analysis, are documented in `docs/research/`. The next proposed track is limited to H.264 V0/V1 data, demux, and syntax feasibility as described in `docs/research/Video Handoff.md`. Do not infer approval for video training, VLM inference, or cloud work from this status note.

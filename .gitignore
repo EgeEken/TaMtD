@@ -4,6 +4,8 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .pdm-python
+.venv*/
+.uv-cache/
 
 # MacOS
 .DS_Store
@@ -18,3 +20,5 @@ results/Codec Benchmark/sources/*.png
 results/Codec Benchmark/visual_comparison_grid.png
 *.pt
 tmp/
+results/**/logs/
+results/**/test_tmp/
