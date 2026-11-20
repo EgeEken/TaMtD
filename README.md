@@ -2,7 +2,7 @@
 
 This project is to examine the effects of different codec architectures on neural accessibility. 
 
-### TLDR: There is a strong negative correlation between codec efficiency (how good the codec is at compressing visuals while retaining information) and neural accessibility (how good is a compute-bounded vision model at understand visuals through said compression). So compressed domain visual understanding, especially raw bytestream based approaches may be a dead end for practical application purposes. However differences in codec architectures have significant impact on this effect, so a potential research line of developing codecs specifically around retained visual understanding is still on the table.
+### TLDR: There is a strong negative correlation between codec efficiency (how good the codec is at compressing visuals while retaining information) and neural accessibility (how good can a compute-bounded vision model get at understanding visuals after said compression). So compressed domain visual understanding, especially raw bytestream based approaches may be a dead end for practical application purposes. However differences in codec architectures have significant impact on this effect, so a potential research line of developing codecs specifically around retained visual understanding is still on the table.
 
 ### Other main findings so far:
 
