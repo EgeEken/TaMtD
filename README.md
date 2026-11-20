@@ -6,9 +6,9 @@ This project is to examine the effects of different codec architectures on neura
 
 ### Other main findings so far:
 
-- Different codec architectures gradually reveal visual information differently in ways not strictly related to their compression efficiency or , as multi-stage decoding ablations showed.
+- Different codec architectures gradually reveal visual information differently in ways not strictly related to their compression efficiency, as multi-stage decoding experiments showed.
 - Partial decoding usually* doesn't offer any significant strengths, damages to visual understanding outweigh gains in decode speed.
-- *Entropy decoding as an exception can provide significant neural accessibility at a very small temporal cost IF the codec architecture is designed appropriately for it
+- *Entropy decoding as an exception can provide significant neural accessibility at a very small temporal cost IF the codec architecture is designed appropriately for it (pbc was a good counterexample to the "dead end" hypothesis, although it suffers from very weak RD in the tested low resolution images, i'd love to run a more proper experiment on larger images where the architecture difference matters more, but i do not have the budget for that)
 
 ---
 
