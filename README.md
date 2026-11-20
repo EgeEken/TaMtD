@@ -1,5 +1,19 @@
 # TaMtD — Teach a Model to Decode
 
+This project is to examine the effects of different codec architectures on neural accessibility. 
+
+### TLDR: There is a strong negative correlation between codec efficiency (how good the codec is at compressing visuals while retaining information) and neural accessibility (how good is a compute-bounded vision model at understand visuals through said compression). So compressed domain visual understanding, especially raw bytestream based approaches may be a dead end for practical application purposes. However differences in codec architectures have significant impact on this effect, so a potential research line of developing codecs specifically around retained visual understanding is still on the table.
+
+### Other main findings so far:
+
+- Different codec architectures gradually reveal visual information differently in ways not strictly related to their compression efficiency or , as multi-stage decoding ablations showed.
+- Partial decoding usually* doesn't offer any significant strengths, damages to visual understanding outweigh gains in decode speed.
+- *Entropy decoding as an exception can provide significant neural accessibility at a very small temporal cost IF the codec architecture is designed appropriately for it
+
+---
+
+## Provisional AI summary/documentation while i continue work on this and other projects, i'll get back to this and prepare a proper hand made readme eventually.
+
 **Measuring neural semantic accessibility versus cumulative preprocessing cost across image and video codecs.**
 
 TaMtD studies the representations between entropy-coded file bytes and fully decoded RGB frames. The goal is not to show that neural networks can learn to decode; it is to establish **which codec stages expose usable task information, at what cost, and whether any compressed-domain approach is competitive with conventional decoding and vision encoding**.
